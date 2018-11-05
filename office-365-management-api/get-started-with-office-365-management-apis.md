@@ -1,0 +1,458 @@
+---
+ms.TocTitle: Get started with Office 365 Management APIs
+title: Начало работы с API управления Office 365
+description: API используют Azure AD, чтобы предоставлять службы проверки подлинности, с помощью которых вы можете давать приложениям права доступа к этим службам.
+ms.ContentId: 74137c9a-29e0-b588-6122-26f4d2c5e3fc
+ms.topic: reference (API)
+ms.date: 09/05/2018
+ms.openlocfilehash: 87abfbe89f60710dc6c9981fa57bde4238790b1f
+ms.sourcegitcommit: 525c0d0e78cc44ea8cb6a4bdce1858cb4ef91d57
+ms.translationtype: HT
+ms.contentlocale: ru-RU
+ms.lasthandoff: 10/27/2018
+ms.locfileid: "25834922"
+---
+# <a name="get-started-with-office-365-management-apis"></a><span data-ttu-id="5b438-103">Начало работы с API управления Office 365</span><span class="sxs-lookup"><span data-stu-id="5b438-103">Get started with Office 365 APIs powered by Microsoft Graph</span></span>
+
+<span data-ttu-id="5b438-104">При создании приложения, которое нуждается в доступе к таким защищенным службам, как интерфейсы API управления Office 365, вам необходимо обеспечить возможность сообщать службе о наличии у приложения права на доступ к ней.</span><span class="sxs-lookup"><span data-stu-id="5b438-104">When you create an application that needs access to the Office 365 API services, you need to provide a way to let the service know your application has rights to access it.</span></span> <span data-ttu-id="5b438-105">API управления Office 365 используют Azure AD, чтобы предоставлять службы проверки подлинности, с помощью которых вы можете давать приложениям права доступа к этим службам.</span><span class="sxs-lookup"><span data-stu-id="5b438-105">The Office 365 APIs use Azure AD to provide authentication services that you can use to grant rights for the application to access those services.</span></span> 
+
+<span data-ttu-id="5b438-106">Этот процесс делится на четыре основных этапа.</span><span class="sxs-lookup"><span data-stu-id="5b438-106">There are four key steps:</span></span>
+
+1. <span data-ttu-id="5b438-107">**Регистрация приложения в Azure AD.**</span><span class="sxs-lookup"><span data-stu-id="5b438-107">\*\*\*\* Register your web application with Azure AD</span></span> <span data-ttu-id="5b438-108">Чтобы ваше приложение имело доступ к API управления Office 365, вам необходимо зарегистрировать приложение в Azure AD.</span><span class="sxs-lookup"><span data-stu-id="5b438-108">To allow your application access to the Office 365 APIs, you need to register your application with Azure AD.</span></span> <span data-ttu-id="5b438-109">Это позволяет создать удостоверение для приложения b задать уровни разрешений, необходимые ему для доступа к API.</span><span class="sxs-lookup"><span data-stu-id="5b438-109">This allows you to establish an identity for your application and specify the permission levels it needs to access the APIs.</span></span>
+    
+2. <span data-ttu-id="5b438-110">**Получение согласия администратора клиента Office 365.**</span><span class="sxs-lookup"><span data-stu-id="5b438-110">**Get Office 365 tenant admin consent**.</span></span> <span data-ttu-id="5b438-111">Администратор клиента Office 365 должен явно дать согласие, чтобы приложение могло получать доступ к данным клиента при помощи API управления Office 365.</span><span class="sxs-lookup"><span data-stu-id="5b438-111">An Office 365 tenant admin must explicitly grant consent to allow your application to access their tenant data by means of the Office 365 Management APIs.</span></span> <span data-ttu-id="5b438-112">Процесс получения согласия проходит в браузере, поэтому администратору клиента необходимо войти в **пользовательский интерфейс согласия Azure AD** и просмотреть разрешения доступа, которые запрашивает приложение, а затем подтвердить или отклонить запрос.</span><span class="sxs-lookup"><span data-stu-id="5b438-112">The consent process is a browser-based experience that requires the tenant admin to sign in to the **Azure AD consent UI** and review the access permissions that your application is requesting, and then either grant or deny the request.</span></span> <span data-ttu-id="5b438-113">После предоставления согласия пользовательский интерфейс перенаправляет пользователя обратно в приложение с помощью кода авторизации в URL-адресе.</span><span class="sxs-lookup"><span data-stu-id="5b438-113">After consent is granted, the UI redirects the user back to your application with an authorization code in the URL.</span></span> <span data-ttu-id="5b438-114">Приложение отправляет вызов между службами к Azure AD, чтобы обменять этот код авторизации на маркер доступа, содержащий сведения об администраторе клиента и вашем приложении.</span><span class="sxs-lookup"><span data-stu-id="5b438-114">Your application makes a service-to-service call to Azure AD to exchange this authorization code for an access token, which contains information about both the tenant admin and your application.</span></span> <span data-ttu-id="5b438-115">ИД клиента необходимо извлечь из маркера доступа и сохранить для последующего использования.</span><span class="sxs-lookup"><span data-stu-id="5b438-115">The tenant ID must be extracted from the access token and stored for future use.</span></span>
+    
+3. <span data-ttu-id="5b438-116">**Запросы маркеров доступа из Azure AD.**</span><span class="sxs-lookup"><span data-stu-id="5b438-116">\*\*\*\* Request and acquire an access token from Azure AD</span></span> <span data-ttu-id="5b438-117">Используя учетные данные приложения, настроенные в Azure AD, приложение регулярно запрашивает дополнительные маркеры доступа для согласившегося клиента, а дальнейшее участие администратора клиента не требуется.</span><span class="sxs-lookup"><span data-stu-id="5b438-117">Using your application's credentials as configured in Azure AD, your application requests additional access tokens for a consented tenant on an ongoing basis, without the need for further tenant admin interaction.</span></span> <span data-ttu-id="5b438-118">Эти маркеры доступа называются маркерами только для приложений, потому что они не содержат сведения об администраторе клиента.</span><span class="sxs-lookup"><span data-stu-id="5b438-118">These access tokens are called app-only tokens because they do not include information about the tenant admin.</span></span>
+    
+4. <span data-ttu-id="5b438-119">**Вызов API управления Office 365.**</span><span class="sxs-lookup"><span data-stu-id="5b438-119">**Call the Office 365 Management APIs**.</span></span> <span data-ttu-id="5b438-120">Маркеры доступа только для приложений передаются интерфейсам API управления Office 365, чтобы выполнить проверку подлинности и авторизацию приложения.</span><span class="sxs-lookup"><span data-stu-id="5b438-120">The app-only access tokens are passed to the Office 365 Management APIs to authenticate and authorize your application.</span></span>
+    
+<span data-ttu-id="5b438-121">На приведенной ниже схеме показана последовательность предоставления согласия и запросов маркеров доступа.</span><span class="sxs-lookup"><span data-stu-id="5b438-121">The following diagram shows the sequence of consent and access token requests.</span></span>
+
+
+![Поток автоматизации запуска API-интерфейсов управления](images/authorization-flow.png)
+
+
+## <a name="register-your-application-in-azure-ad"></a><span data-ttu-id="5b438-123">Регистрация приложения в Azure AD</span><span class="sxs-lookup"><span data-stu-id="5b438-123">Register your web application with Azure AD</span></span>
+
+<span data-ttu-id="5b438-124">API управления Office 365 используют Azure AD для обеспечения безопасной аутентификации данных клиента Office 365.</span><span class="sxs-lookup"><span data-stu-id="5b438-124">The Office 365 API services use Azure AD to provide secure authentication to users' Office 365 data.</span></span> <span data-ttu-id="5b438-125">Чтобы получить доступ к интерфейсам API управления Office 365, необходимо зарегистрировать приложение в Azure AD, а в рамках настройки указать уровни разрешений, необходимые приложению для доступа к API.</span><span class="sxs-lookup"><span data-stu-id="5b438-125">To access the Office 365 Management APIs, you need to register your app in Azure AD, and as part of the configuration, you will specify the permission levels your app needs to access the APIs.</span></span>
+
+
+### <a name="prerequisites"></a><span data-ttu-id="5b438-126">Предварительные требования</span><span class="sxs-lookup"><span data-stu-id="5b438-126">Prerequisites</span></span>
+
+<span data-ttu-id="5b438-127">Чтобы зарегистрировать приложение в Azure AD, вам необходимы подписка на Office 365 и подписка Azure, связанная с подпиской на Office 365.</span><span class="sxs-lookup"><span data-stu-id="5b438-127">To register your app in Azure AD, you need a subscription to Office 365 and a subscription to Azure that has been associated with your Office 365 subscription.</span></span> <span data-ttu-id="5b438-128">Для начала вы можете использовать пробные подписки на Office 365 и Azure.</span><span class="sxs-lookup"><span data-stu-id="5b438-128">You can use trial subscriptions to both Office 365 and Azure to get started.</span></span> <span data-ttu-id="5b438-129">Дополнительные сведения см. в статье [Вопросы и ответы о программе для разработчиков Office 365](https://docs.microsoft.com/ru-RU/office/developer-program/office-365-developer-program).</span><span class="sxs-lookup"><span data-stu-id="5b438-129">For more information, see [Join the Office 365 Developer Program](https://docs.microsoft.com/ru-RU/office/developer-program/office-365-developer-program).</span></span>
+
+
+### <a name="use-the-azure-management-portal-to-register-your-application-in-azure-ad"></a><span data-ttu-id="5b438-130">Регистрация приложения в Azure AD с помощью портала управления Azure</span><span class="sxs-lookup"><span data-stu-id="5b438-130">Use the Azure Management Portal to register your application in Azure AD</span></span>
+
+<span data-ttu-id="5b438-131">Подготовив клиент Майкрософт с подходящими подписками, вы можете зарегистрировать приложение в Azure AD.</span><span class="sxs-lookup"><span data-stu-id="5b438-131">After you have a Microsoft tenant with the proper subscriptions, you can register your application in Azure AD.</span></span>
+
+1. <span data-ttu-id="5b438-132">Войдите на [портал управления Azure](https://manage.windowsazure.com/), используя учетные данные клиента, у которого есть нужная вам подписка на Office 365.</span><span class="sxs-lookup"><span data-stu-id="5b438-132">Sign into the [Azure management portal](https://manage.windowsazure.com/), using the credential of your Microsoft tenant that has the subscription to Office 365 you wish to use.</span></span> <span data-ttu-id="5b438-133">Вы также можете получить доступ к порталу управления Azure по ссылке в левой области навигации на [портале администрирования Office](https://portal.office.com/).</span><span class="sxs-lookup"><span data-stu-id="5b438-133">You can also access the Azure Management Portal via a link that appears in the left navigation pane in the [Office admin portal](https://portal.office.com/).</span></span>
+    
+2. <span data-ttu-id="5b438-134">В области навигации слева выберите Active Directory (1).</span><span class="sxs-lookup"><span data-stu-id="5b438-134">In the left navigation panel, choose Active Directory (1).</span></span> <span data-ttu-id="5b438-135">Убедитесь, что выбрана вкладка "Каталог" (2), и выберите имя каталога (3).</span><span class="sxs-lookup"><span data-stu-id="5b438-135">Make sure the Directory tab is selected, and then click on the directory name.</span></span>
+    
+   ![Страница регистрации Office 365](images/o365-sign-up-page.png)
+    
+    
+3. <span data-ttu-id="5b438-137">На странице каталога выберите **Приложения**.</span><span class="sxs-lookup"><span data-stu-id="5b438-137">On the directory page, select Applications.</span></span> <span data-ttu-id="5b438-138">В Azure AD появится список приложений, установленных в клиенте.</span><span class="sxs-lookup"><span data-stu-id="5b438-138">Azure AD displays a list of the applications currently installed in your tenancy.</span></span>
+    
+4. <span data-ttu-id="5b438-139">Нажмите кнопку **Добавить**.</span><span class="sxs-lookup"><span data-stu-id="5b438-139">Choose **Add**.</span></span>
+    
+   ![Страница администрирования Office 365](images/o365-admin-page.png)
+    
+    
+5. <span data-ttu-id="5b438-141">Нажмите **Добавить приложение, разрабатываемое моей организацией**.</span><span class="sxs-lookup"><span data-stu-id="5b438-141">On the dialog that opens, choose  **Add an application my organization is developing**.</span></span>
+    
+6. <span data-ttu-id="5b438-142">Введите **имя** приложения и выберите **тип** "Веб-приложение и/или веб-API".</span><span class="sxs-lookup"><span data-stu-id="5b438-142">Enter the **NAME** of your application and specify the **Type** as WEB APPLICATION AND/OR WEB API.</span></span>
+    
+7. <span data-ttu-id="5b438-143">Укажите соответствующие свойства приложения:</span><span class="sxs-lookup"><span data-stu-id="5b438-143">Enter the appropriate App properties:</span></span>
+    
+   - <span data-ttu-id="5b438-144">**URL-адрес для входа.**</span><span class="sxs-lookup"><span data-stu-id="5b438-144">Sign-on URL</span></span> <span data-ttu-id="5b438-145">URL-адрес, по которому пользователи могут входить и использовать приложение.</span><span class="sxs-lookup"><span data-stu-id="5b438-145">The Sign-on URL is the address of a web page where users can sign in and use your app.</span></span> <span data-ttu-id="5b438-146">При необходимости его можно изменить позже.</span><span class="sxs-lookup"><span data-stu-id="5b438-146">You can change this later as needed.</span></span>
+    
+   - <span data-ttu-id="5b438-147">**URI кода приложения.**</span><span class="sxs-lookup"><span data-stu-id="5b438-147">App ID URI</span></span> <span data-ttu-id="5b438-148">Универсальный код ресурса (URI), используемый в качестве уникального логического идентификатора приложения.</span><span class="sxs-lookup"><span data-stu-id="5b438-148">The URI used as a unique logical identifier for your app.</span></span> <span data-ttu-id="5b438-149">URI должен относиться к проверенному личному домену внешнего пользователя, чтобы предоставить приложению доступ к его данным в Windows Azure AD.</span><span class="sxs-lookup"><span data-stu-id="5b438-149">The URI must be in a verified custom domain for an external user to grant your app access to their data in Windows Azure AD.</span></span> <span data-ttu-id="5b438-150">Например, если ваш клиент Майкрософт — **contoso.onmicrosoft.com**, то URI кода приложения будет **https://app.contoso.onmicrosoft.com**.</span><span class="sxs-lookup"><span data-stu-id="5b438-150">For example, if your Microsoft tenant is **contoso.onmicrosoft.com**, the APP ID URI could be **https://app.contoso.onmicrosoft.com**.</span></span>
+    
+8. <span data-ttu-id="5b438-151">Теперь ваше приложение зарегистрировано в Azure AD, и ему назначен идентификатор клиента.</span><span class="sxs-lookup"><span data-stu-id="5b438-151">Your app is now registered with Azure AD, and has been assigned a client ID.</span></span> <span data-ttu-id="5b438-152">Однако осталось настроить еще несколько важных аспектов приложения.</span><span class="sxs-lookup"><span data-stu-id="5b438-152">However, there are several important aspects of your app left to configure.</span></span>
+    
+
+### <a name="configure-your-application-properties-in-azure-ad"></a><span data-ttu-id="5b438-153">Настройка свойств приложения в Azure AD</span><span class="sxs-lookup"><span data-stu-id="5b438-153">Configure your application properties in Azure AD</span></span>
+
+<span data-ttu-id="5b438-154">Теперь, когда приложение зарегистрировано, необходимо указать несколько важных свойств, определяющих, как приложение работает в Azure AD и как администраторы клиентов разрешают приложению получать доступ к их данным с помощью API управления Office 365.</span><span class="sxs-lookup"><span data-stu-id="5b438-154">Now that your application is registered, there are several important properties you must specify that determine how your application functions within Azure AD and how tenant admins will grant consent to allow your application to access their data by using the Office 365 Management APIs.</span></span>
+
+<span data-ttu-id="5b438-155">Дополнительные сведения о настройке приложений Azure AD в целом см. в статье [Объекты приложения и субъекта-службы в Azure Active Directory](https://docs.microsoft.com/ru-RU/azure/active-directory/develop/active-directory-application-objects).</span><span class="sxs-lookup"><span data-stu-id="5b438-155">For more information about Azure AD application configuration in general, see [Application Object Properties](https://docs.microsoft.com/ru-RU/azure/active-directory/develop/active-directory-application-objects).</span></span>
+
+
+1. <span data-ttu-id="5b438-156">**Идентификатор клиента.**</span><span class="sxs-lookup"><span data-stu-id="5b438-156">Client ID</span></span> <span data-ttu-id="5b438-157">Это значение автоматически создается службой Azure AD.</span><span class="sxs-lookup"><span data-stu-id="5b438-157">This value is automatically generated by Azure AD.</span></span> <span data-ttu-id="5b438-158">Затем приложение будет использовать это значение, запрашивая согласие у администраторов клиентов и маркеры только для приложений из службы Azure AD.</span><span class="sxs-lookup"><span data-stu-id="5b438-158">Your application will use this value when requesting consent from tenant admins and when requesting app-only tokens from Azure AD.</span></span>
+    
+2. <span data-ttu-id="5b438-159">**Приложение является мультитенантным.**</span><span class="sxs-lookup"><span data-stu-id="5b438-159">**APPLICATION IS MULTI-TENANT**.</span></span> <span data-ttu-id="5b438-160">Для этого свойства необходимо задать значение **Да**, чтобы администраторы клиентов могли разрешать приложению доступ к своим данным с помощью API управления Office 365.</span><span class="sxs-lookup"><span data-stu-id="5b438-160">This property must be set to **YES** to allow tenant admins to grant consent to your app to access their data by using the Office 365 Management APIs.</span></span> <span data-ttu-id="5b438-161">Если для этого свойства выбрано значение **Нет**, то приложение сможет получать доступ только к данным вашего клиента.</span><span class="sxs-lookup"><span data-stu-id="5b438-161">If this property is set to **NO**, your application will only be able to access your own tenant's data.</span></span>
+    
+3. <span data-ttu-id="5b438-162">**URL-адрес ответа.**</span><span class="sxs-lookup"><span data-stu-id="5b438-162">Reply URL</span></span> <span data-ttu-id="5b438-163">Это URL-адрес, на который перенаправляется администратор клиента, после того как приложению дается согласие на доступ к данным с помощью API управления Office 365.</span><span class="sxs-lookup"><span data-stu-id="5b438-163">This is the URL that a tenant admin will be redirected to after granting consent to allow your application to access their data by using the Office 365 Management APIs.</span></span> <span data-ttu-id="5b438-164">При необходимости можно задать несколько URL-адресов ответа.</span><span class="sxs-lookup"><span data-stu-id="5b438-164">You can configure multiple reply URLs as needed.</span></span> <span data-ttu-id="5b438-165">Azure автоматически задает первый в соответствии с URL-адресом для входа, указанным при создании приложения, но при необходимости это значение можно изменить.</span><span class="sxs-lookup"><span data-stu-id="5b438-165">Azure automatically sets the first one to match the sign-on URL you specified when you created the application, but you can change this value as needed.</span></span>
+    
+<span data-ttu-id="5b438-166">Не забывайте нажимать кнопку **Сохранить** после внесения каких-либо изменений в эти свойства.</span><span class="sxs-lookup"><span data-stu-id="5b438-166">Be sure to choose **Save** after making any changes to these properties.</span></span>
+
+
+### <a name="generate-a-new-key-for-your-application"></a><span data-ttu-id="5b438-167">Создание нового ключа для приложения</span><span class="sxs-lookup"><span data-stu-id="5b438-167">Generate a new app secret for your web application</span></span>
+
+<span data-ttu-id="5b438-168">Ключи, также называемые секретами клиентов, используются при обмене кода авторизации на маркер доступа.</span><span class="sxs-lookup"><span data-stu-id="5b438-168">Keys, also known as client secrets, are used when exchanging an authorization code for an access token.</span></span>
+
+
+1. <span data-ttu-id="5b438-169">На портале управления Azure выберите свое приложение и нажмите **Настройка** в верхнем меню.</span><span class="sxs-lookup"><span data-stu-id="5b438-169">In the Azure Management Portal, select your application and choose **Configure** in the top menu.</span></span> <span data-ttu-id="5b438-170">Прокрутите вниз до строки **ключи**.</span><span class="sxs-lookup"><span data-stu-id="5b438-170">Scroll down to **keys**.</span></span>
+    
+2. <span data-ttu-id="5b438-171">Выберите длительность для ключа и нажмите кнопку **Сохранить**.</span><span class="sxs-lookup"><span data-stu-id="5b438-171">Select the duration for your key, and choose **Save**.</span></span>
+    
+   ![Страница подписки Azure](images/azure-subscription-page.png)
+    
+    
+3. <span data-ttu-id="5b438-173">Azure показывает секрет приложения только после его сохранения.</span><span class="sxs-lookup"><span data-stu-id="5b438-173">Azure displays the app secret only after saving it.</span></span> <span data-ttu-id="5b438-174">Нажмите значок буфера обмена, чтобы скопировать секрет клиента.</span><span class="sxs-lookup"><span data-stu-id="5b438-174">Click the Clipboard icon to copy the client secret to the Clipboard.</span></span>
+    
+   ![Страница портала Azure](images/azure-portal-page.png)
+
+   > [!IMPORTANT] 
+   > <span data-ttu-id="5b438-176">Azure показывает секрет клиента только в момент его создания.</span><span class="sxs-lookup"><span data-stu-id="5b438-176">Important Azure only displays the client secret at the time you initially generate it.</span></span> <span data-ttu-id="5b438-177">Вернуться на эту страницу и получить секрет клиента позже будет невозможно.</span><span class="sxs-lookup"><span data-stu-id="5b438-177">You cannot navigate back to this page and retrieve the client secret later.</span></span>
+
+### <a name="configure-an-x509-certificate-to-enable-service-to-service-calls"></a><span data-ttu-id="5b438-178">Настройка сертификата X.509 для поддержки вызовов между службами</span><span class="sxs-lookup"><span data-stu-id="5b438-178">Configure an X.509 certificate to enable service-to-service calls</span></span>
+
+<span data-ttu-id="5b438-179">Приложение, работающее в фоновом режиме, например управляющая программа или служба, может использовать учетные данные клиента, чтобы запрашивать маркеры доступа только для приложений без постоянных запросов согласия от администратора клиента после предоставления первоначального согласия.</span><span class="sxs-lookup"><span data-stu-id="5b438-179">An application that is running in the background, such as a daemon or service, can use client credentials to request app-only access tokens without repeatedly requesting consent from the tenant admin after initial consent is granted.</span></span> 
+
+<span data-ttu-id="5b438-180">Дополнительные сведения см. в статье [Вызовы между службами с использованием учетных данных клиентов](https://msdn.microsoft.com/ru-RU/library/azure/dn645543.aspx).</span><span class="sxs-lookup"><span data-stu-id="5b438-180">For more information, see [Service to Service Calls Using Client Credentials](https://msdn.microsoft.com/ru-RU/library/azure/dn645543.aspx).</span></span>
+
+<span data-ttu-id="5b438-181">Необходимо настроить сертификат X.509 для приложения, который будет использоваться в качестве учетных данных клиента при запрашивании маркеров доступа только для приложений из Azure AD.</span><span class="sxs-lookup"><span data-stu-id="5b438-181">You must configure an X.509 certificate with your application to be used as client credentials when requesting app-only access tokens from Azure AD.</span></span> <span data-ttu-id="5b438-182">Этот процесс состоит из двух этапов:</span><span class="sxs-lookup"><span data-stu-id="5b438-182">There are two main components to the IRM migration process:</span></span>
+
+- <span data-ttu-id="5b438-183">Получение сертификата X.509.</span><span class="sxs-lookup"><span data-stu-id="5b438-183">Obtain an X.509 certificate.</span></span> <span data-ttu-id="5b438-184">Вы можете использовать сертификат, выданный доверенным центром сертификации, или самозаверяющий сертификат.</span><span class="sxs-lookup"><span data-stu-id="5b438-184">You can use a self-signed certificate or a certificate issued by publicly trusted certificate authority.</span></span>
+    
+- <span data-ttu-id="5b438-185">Измените манифест приложения, включающий отпечаток и открытый ключ сертификата.</span><span class="sxs-lookup"><span data-stu-id="5b438-185">Modify your application manifest to include the thumbprint and public key of your certificate.</span></span>
+    
+<span data-ttu-id="5b438-186">В приведенных ниже инструкциях показано, как использовать Visual Studio или средство _makecert_ из пакета Windows SDK, чтобы создать самозаверяющий сертификат и экспортировать открытый ключ в файл с кодировкой base64.</span><span class="sxs-lookup"><span data-stu-id="5b438-186">The following instructions show you how to use the Visual Studio or Windows SDK _makecert_ tool to generate a self-signed certificate and export the public key to a base64-encoded file.</span></span>
+
+
+1. <span data-ttu-id="5b438-187">В командной строке выполните указанную ниже команду.</span><span class="sxs-lookup"><span data-stu-id="5b438-187">On the command line, run the following command:</span></span>
+    
+   ```
+    makecert -r -pe -n "CN=MyCompanyName MyAppName Cert" -b 03/15/2015 -e 03/15/2017 -ss my -len 2048
+   ```
+
+   > [!NOTE] 
+   > <span data-ttu-id="5b438-188">Создавая сертификат X.509, убедитесь, что длина ключа составляет как минимум 2048.</span><span class="sxs-lookup"><span data-stu-id="5b438-188">When you are generating the X.509 certificate, make sure the key length is at least 2048.</span></span> <span data-ttu-id="5b438-189">Ключи с меньшей длиной не принимаются как допустимые.</span><span class="sxs-lookup"><span data-stu-id="5b438-189">Shorter key length are not accepted as valid keys.</span></span>
+
+2. <span data-ttu-id="5b438-190">Откройте оснастку MMC для сертификатов и подключитесь к своей учетной записи пользователя.</span><span class="sxs-lookup"><span data-stu-id="5b438-190">Open the Certificates management console snap-in and connect to your user account.</span></span> 
+    
+3. <span data-ttu-id="5b438-191">Найдите новый сертификат в папке "Личные" и экспортируйте открытый ключ в файл с кодировкой base64 (например, mycompanyname.cer).</span><span class="sxs-lookup"><span data-stu-id="5b438-191">Find the new certificate in the Personal folder and export the public key to a base64-encoded file (for example, mycompanyname.cer).</span></span> <span data-ttu-id="5b438-192">Приложение будет использовать этот сертификат для связи с Azure AD, поэтому необходимо также сохранить доступ к открытому ключу.</span><span class="sxs-lookup"><span data-stu-id="5b438-192">Your application will use this certificate to communicate with Azure AD, so make sure you retain access to the private key as well.</span></span>
+    
+   > [!NOTE] 
+   > <span data-ttu-id="5b438-193">Вы можете использовать Windows PowerShell, чтобы извлечь отпечаток и открытый ключ с кодировкой base64.</span><span class="sxs-lookup"><span data-stu-id="5b438-193">You can use Windows PowerShell to extract the thumbprint and base64-encoded public key.</span></span> <span data-ttu-id="5b438-194">Другие платформы предоставляют подобные средства для получения свойств сертификатов.</span><span class="sxs-lookup"><span data-stu-id="5b438-194">Other platforms provide similar tools to retrieve properties of certificates.</span></span>
+
+4. <span data-ttu-id="5b438-195">В командной строке Windows PowerShell введите и выполните указанные команды.</span><span class="sxs-lookup"><span data-stu-id="5b438-195">From the Windows PowerShell prompt, type and run the following cmdlets:</span></span>
+    
+   ```powershell
+    $cer = New-Object System.Security.Cryptography.X509Certificates.X509Certificate2
+    $cer.Import("mycer.cer")
+    $bin = $cer.GetRawCertData()
+    $base64Value = [System.Convert]::ToBase64String($bin)
+    $bin = $cer.GetCertHash()
+    $base64Thumbprint = [System.Convert]::ToBase64String($bin)
+    $keyid = [System.Guid]::NewGuid().ToString()
+   ```
+
+5. <span data-ttu-id="5b438-196">Сохраните значения `$base64Thumbprint`, `$base64Value` и `$keyid` для использования при обновлении манифеста приложения на последующих этапах.</span><span class="sxs-lookup"><span data-stu-id="5b438-196">Store the values for `$base64Thumbprint`, `$base64Value`, and `$keyid` to be used when you update your application manifest in the next set of steps.</span></span>
+    
+   <span data-ttu-id="5b438-197">Теперь необходимо обновить манифест приложения в Azure AD, используя извлеченные из сертификата значения и созданный идентификатор ключа.</span><span class="sxs-lookup"><span data-stu-id="5b438-197">Using the values extracted from the certificate and the generated key ID, you must now update your application manifest in Azure AD.</span></span>
+    
+6. <span data-ttu-id="5b438-198">На портале управления Azure выберите свое приложение и нажмите **Настройка** в верхнем меню.</span><span class="sxs-lookup"><span data-stu-id="5b438-198">In the Azure Management Portal, select your application and choose **Configure** in the top menu.</span></span>
+    
+7. <span data-ttu-id="5b438-199">На панели команд нажмите **Управление манифестом** и выберите команду **Скачать манифест**.</span><span class="sxs-lookup"><span data-stu-id="5b438-199">In the command bar, choose **Manage manifest**, and then choose **Download Manifest**.</span></span>
+    
+   ![Экран сертификата командной строки](images/command-line-certificate-display.png)
+    
+    
+8. <span data-ttu-id="5b438-201">Откройте загруженный манифест для редактирования и замените пустое свойство KeyCredentials на следующий код JSON:</span><span class="sxs-lookup"><span data-stu-id="5b438-201">Open the downloaded file for editing and replace the empty KeyCredentials property with the following JSON:</span></span>
+    
+   ```json
+      "keyCredentials": [
+        {
+            "customKeyIdentifier" : "$base64Thumbprint_from_above",
+            "keyId": "$keyid_from_above",
+            "type": "AsymmetricX509Cert",
+            "usage": "Verify",
+            "value": "$base64Value_from_above"
+        }
+    ],
+   ```
+
+
+   > [!NOTE] 
+   > <span data-ttu-id="5b438-202">Свойство [KeyCredentials](https://msdn.microsoft.com/library/azure/ad/graph/api/entity-and-complex-type-reference#KeyCredentialType) представляет собой коллекцию, что позволяет отправлять несколько сертификатов X.509 для сценариев переключения или удалять сертификаты с целью компромисса.</span><span class="sxs-lookup"><span data-stu-id="5b438-202">The [KeyCredentials](https://msdn.microsoft.com/library/azure/ad/graph/api/entity-and-complex-type-reference#KeyCredentialType) property is a collection, making it possible to upload multiple X.509 certificates for rollover scenarios or delete certificates for compromise scenarios.</span></span>
+
+9. <span data-ttu-id="5b438-203">Сохраните изменения и отправьте обновленный манифест, выбрав элемент **Управление манифестом** на панели команд, нажав **Отправить манифест** и выбрав обновленный файл манифеста.</span><span class="sxs-lookup"><span data-stu-id="5b438-203">Save your changes, and upload the updated app manifest file by clicking **Manage manifest** in the command bar, selecting **Upload manifest**, browsing to your updated manifest file and then selecting it.</span></span>
+    
+
+### <a name="specify-the-permissions-your-app-requires-to-access-the-office-365-management-apis"></a><span data-ttu-id="5b438-204">Указание разрешений, необходимых приложению для доступа к API управления Office 365</span><span class="sxs-lookup"><span data-stu-id="5b438-204">Specify the permissions your app requires to access the Office 365 Management APIs</span></span>
+
+<span data-ttu-id="5b438-205">Наконец, вам нужно точно указать, какие разрешения требует ваше приложение от API управления Office 365.</span><span class="sxs-lookup"><span data-stu-id="5b438-205">Finally, you'll need to specify exactly what permissions your app requires of the Office 365 APIs.</span></span> <span data-ttu-id="5b438-206">Для этого следует предоставить приложению доступ к API управления Office 365, а затем задать нужные разрешения.</span><span class="sxs-lookup"><span data-stu-id="5b438-206">To do so, you add access to the Office 365 service containing the API you require to your app, and then specify the permission(s) you need from the APIs in that service.</span></span>
+
+
+1. <span data-ttu-id="5b438-207">На портале управления Azure выберите свое приложение и нажмите **Настройка** в верхнем меню.</span><span class="sxs-lookup"><span data-stu-id="5b438-207">In the Azure Management Portal, select your application and choose **Configure** in the top menu.</span></span> <span data-ttu-id="5b438-208">Прокрутите вниз до раздела **Разрешения для других приложений** и нажмите **Добавить приложение**.</span><span class="sxs-lookup"><span data-stu-id="5b438-208">Scroll down to the **permissions to other applications** section and click the **Add application** button.</span></span>
+    
+   ![Страница Azure AD](images/azure-ad-page.png)
+    
+    
+2. <span data-ttu-id="5b438-210">Выберите **API управления Office 365** (1), чтобы этот пункт появился в столбце **Выбрано** (2), а затем установите флажок в правом нижней углу (3), чтобы сохранить выбор, и вернитесь на главную страницу конфигурации для приложения.</span><span class="sxs-lookup"><span data-stu-id="5b438-210">Select the **Office 365 Management APIs** (1) so that it appears in the **Selected** column (2), and then select the check mark in the lower right (3) to save your selection and return to the main configuration page for your application.</span></span>
+    
+   ![Страница приложений Azure AD](images/azure-ad-apps-page.png)
+    
+    
+3. <span data-ttu-id="5b438-212">Теперь API управления Office отображаются в списке приложений, для которого приложению требуются разрешения.</span><span class="sxs-lookup"><span data-stu-id="5b438-212">The Office Management APIs now appear in the list of applications to which your application requires permissions.</span></span> <span data-ttu-id="5b438-213">В разделах **Разрешения приложения** и **Делегированные разрешения** выберите разрешения, необходимые приложению.</span><span class="sxs-lookup"><span data-stu-id="5b438-213">Under both **Application Permissions** and **Delegated Permissions**, select the permissions your application requires.</span></span> <span data-ttu-id="5b438-214">Дополнительные сведения о каждом разрешении представлены в справочнике по определенному API.</span><span class="sxs-lookup"><span data-stu-id="5b438-214">Refer to the specific API reference for more details about each permission.</span></span>  
+
+   > [!NOTE] 
+   > <span data-ttu-id="5b438-215">В настоящее время существует четыре неиспользуемых разрешения, связанных с отчетами об активности и аналитикой угроз, которые будут удалены в будущем.</span><span class="sxs-lookup"><span data-stu-id="5b438-215">There are currently four unused permissions related to activity reports and threat intelligence that will be removed in the future.</span></span> <span data-ttu-id="5b438-216">Не выбирайте никакие из этих разрешений, так как в них нет необходимости.</span><span class="sxs-lookup"><span data-stu-id="5b438-216">Do not select any of these permissions because they are unnecessary.</span></span>
+    
+   ![Диалоговое окно добавления приложения](images/add-an-application-dialog.png)
+    
+    
+4. <span data-ttu-id="5b438-218">Нажмите кнопку **Сохранить**, чтобы сохранить конфигурацию.</span><span class="sxs-lookup"><span data-stu-id="5b438-218">Choose **Save** to save the rule.</span></span>
+    
+
+## <a name="get-office-365-tenant-admin-consent"></a><span data-ttu-id="5b438-219">Получение согласия администратора клиента Office 365</span><span class="sxs-lookup"><span data-stu-id="5b438-219">Get Office 365 tenant admin consent</span></span>
+
+<span data-ttu-id="5b438-220">Теперь, когда для приложения настроены разрешения, необходимые для использования API управления Office 365, администратор клиента должен явно предоставить приложению эти разрешения, чтобы получать доступ к данным клиента с помощью интерфейсов API.</span><span class="sxs-lookup"><span data-stu-id="5b438-220">Now that your application is configured with the permissions it needs to use the Office 365 Management APIs, a tenant admin must explicitly grant your application these permissions in order to access their tenant's data by using the APIs.</span></span> <span data-ttu-id="5b438-221">Чтобы дать согласие, администратор клиента должен войти в Azure AD, используя указанный ниже специальный URL-адрес, и просмотреть запрашиваемые приложением разрешения.</span><span class="sxs-lookup"><span data-stu-id="5b438-221">To grant consent, the tenant admin must sign in to Azure AD by using the following specially constructed URL, where they can review your application's requested permissions.</span></span> <span data-ttu-id="5b438-222">Это действие не требуется при использовании API для доступа к данным из собственного клиента.</span><span class="sxs-lookup"><span data-stu-id="5b438-222">This step is not required when using the APIs to access data from your own tenant.</span></span>
+
+
+```http
+https://login.windows.net/common/oauth2/authorize?response_type=code&resource=https%3A%2F%2Fmanage.office.com&client_id={your_client_id}&redirect_uri={your_redirect_url }
+```
+
+<span data-ttu-id="5b438-223">URL-адрес перенаправления должен совпадать с одним из URL-адресов, заданных для приложения в Azure AD, или быть его дочерним путем.</span><span class="sxs-lookup"><span data-stu-id="5b438-223">The redirect URL must match or be a sub-path under one of the Reply URLs configured for your application in Azure AD.</span></span>
+
+<span data-ttu-id="5b438-224">Пример:</span><span class="sxs-lookup"><span data-stu-id="5b438-224">For example:</span></span>
+
+```http
+https://login.windows.net/common/oauth2/authorize?response_type=code&resource=https%3A%2F%2Fmanage.office.com&client_id=2d4d11a2-f814-46a7-890a-274a72a7309e&redirect_uri=http%3A%2F%2Fwww.mycompany.com%2Fmyapp%2F
+```
+
+<span data-ttu-id="5b438-225">Вы можете тестировать URL-адрес согласия, вставив его в браузере и выполнив вход с использованием учетных данных администратора Office 365 для того клиента, который использовался при регистрации приложения.</span><span class="sxs-lookup"><span data-stu-id="5b438-225">You can test the consent URL by pasting it into a browser and signing in using the credentials of an Office 365 admin for a tenant other than the tenant that you used to register the application.</span></span> <span data-ttu-id="5b438-226">Вы увидите запрос на предоставление приложению разрешения на использование API управления Office.</span><span class="sxs-lookup"><span data-stu-id="5b438-226">You will see the request to grant your application permission to use the Office Management APIs.</span></span>
+
+
+![Страница добавленного приложения в Azure AD](images/azure-ad-app-added-page.png)
+
+<span data-ttu-id="5b438-228">Нажав кнопку **Принять**, вы перейдете на указанную страницу, а в строке запроса будет указан код.</span><span class="sxs-lookup"><span data-stu-id="5b438-228">After choosing **Accept**, you are redirected to the specified page, and there will be a code in the query string.</span></span> 
+
+<span data-ttu-id="5b438-229">Пример:</span><span class="sxs-lookup"><span data-stu-id="5b438-229">For example:</span></span>
+
+```http
+http://www.mycompany.com/myapp/?code=AAABAAAAvPM1KaPlrEqdFSB...
+```
+
+<span data-ttu-id="5b438-230">Приложение использует этот код авторизации, чтобы получить из Azure AD маркер доступа, из которого затем можно извлечь идентификатор клиента.</span><span class="sxs-lookup"><span data-stu-id="5b438-230">Your application uses this authorization code to obtain an access token from Azure AD, from which the tenant ID can be extracted.</span></span> <span data-ttu-id="5b438-231">Когда вы получите и сохраните идентификатор клиента, администратору клиента больше не потребуется входить для получения последующих маркеров доступа.</span><span class="sxs-lookup"><span data-stu-id="5b438-231">After you have extracted and stored the tenant ID, you can obtain subsequent access tokens without requiring the tenant admin to sign in.</span></span>
+
+
+## <a name="request-access-tokens-from-azure-ad"></a><span data-ttu-id="5b438-232">Запросы маркеров доступа из Azure AD</span><span class="sxs-lookup"><span data-stu-id="5b438-232">Request and acquire an access token from Azure AD</span></span>
+
+<span data-ttu-id="5b438-233">Запрашивать маркеры доступа из Azure AD можно двумя способами:</span><span class="sxs-lookup"><span data-stu-id="5b438-233">There are two methods for requesting access tokens from Azure AD:</span></span>
+
+- <span data-ttu-id="5b438-234">
+  [Поток предоставления кода авторизации](https://msdn.microsoft.com/en-us/library/azure/dn645542.aspx) включает предоставление явного согласия администратором клиента, в результате чего приложению возвращается код авторизации.</span><span class="sxs-lookup"><span data-stu-id="5b438-234">The [Authorization Code Grant Flow](https://msdn.microsoft.com/en-us/library/azure/dn645542.aspx) involves a tenant admin granting explicit consent, which returns an authorization code to your application.</span></span> <span data-ttu-id="5b438-235">Затем приложение обменивает код авторизации на маркер доступа.</span><span class="sxs-lookup"><span data-stu-id="5b438-235">Your application then exchanges the authorization code for an access token.</span></span> <span data-ttu-id="5b438-236">Этот способ необходим, чтобы получить первоначальное согласие, нужное приложению для доступа к данным клиента с помощью API, а этот первый маркер доступа необходим для получения и хранения идентификатора клиента.</span><span class="sxs-lookup"><span data-stu-id="5b438-236">This method is required to obtain the initial consent that your application needs to access the tenant data by using the API, and this first access token is needed in order to obtain and store the tenant ID.</span></span>
+    
+- <span data-ttu-id="5b438-237">[Поток предоставления учетных данных клиента](https://msdn.microsoft.com/ru-RU/library/azure/dn645543.aspx) позволяет приложению запрашивать последующие маркеры доступа по мере устаревания предыдущих. При этом администратору клиента не требуется выполнять вход и явно предоставлять согласие.</span><span class="sxs-lookup"><span data-stu-id="5b438-237">The [Client Credentials Grant Flow](https://msdn.microsoft.com/ru-RU/library/azure/dn645543.aspx) allows your application to request subsequent access tokens as old ones expire, without requiring the tenant admin to sign in and explicitly grant consent.</span></span> <span data-ttu-id="5b438-238">Этот способ необходимо использовать для приложений, непрерывно работающих в фоновом режиме, вызывая API после предоставления первоначального согласия администратором клиента.</span><span class="sxs-lookup"><span data-stu-id="5b438-238">This method must be used for applications that run continuously in the background calling the APIs once the initial tenant admin consent has been granted.</span></span>
+    
+
+### <a name="request-an-access-token-using-the-authorization-code"></a><span data-ttu-id="5b438-239">Запрос маркера доступа с помощью кода авторизации</span><span class="sxs-lookup"><span data-stu-id="5b438-239">Request an access token using the authorization code</span></span>
+
+<span data-ttu-id="5b438-240">Когда администратор клиента дает согласие, приложение получает код авторизации в качестве параметра строки запроса, когда Azure AD перенаправляет администратора клиента по специальному URL-адресу.</span><span class="sxs-lookup"><span data-stu-id="5b438-240">After a tenant admin grants consent, your application receives an authorization code as a query string parameter when Azure AD redirects the tenant admin to your designated URL.</span></span>
+
+```http
+http://www.mycompany.com/myapp/?code=AAABAAAAvPM1KaPlrEqdFSB...
+```
+
+<span data-ttu-id="5b438-241">Приложение отправляет HTTP-запрос REST POST в Azure AD, чтобы обменять код авторизации на маркер доступа.</span><span class="sxs-lookup"><span data-stu-id="5b438-241">Your application makes an HTTP REST POST to Azure AD to exchange the authorization code for an access token.</span></span> <span data-ttu-id="5b438-242">Так как идентификатор клиента пока не известен, запрос POST будет адресован "общей" конечной точке, идентификатор клиента для которой не включен в URL-адрес:</span><span class="sxs-lookup"><span data-stu-id="5b438-242">Because the tenant ID is not yet known, the POST will be to the "common" endpoint, which does not have the tenant ID embedded in the URL:</span></span>
+
+```http
+https://login.windows.net/common/oauth2/token
+```
+
+<span data-ttu-id="5b438-243">Текст запроса POST содержит следующие данные:</span><span class="sxs-lookup"><span data-stu-id="5b438-243">The body of the POST contains the following:</span></span>
+
+```json
+resource=https%3A%2F%2Fmanage.office.com&amp;client_id=a6099727-6b7b-482c-b509-1df309acc563 &amp;redirect_uri= http%3A%2F%2Fwww.mycompany.com%2Fmyapp%2F &amp;client_secret={your_client_key}&amp;grant_type=authorization_code&amp;code= AAABAAAAvPM1KaPlrEqdFSB...
+```
+
+#### <a name="sample-request"></a><span data-ttu-id="5b438-244">Пример запроса</span><span class="sxs-lookup"><span data-stu-id="5b438-244">Sample request</span></span>
+
+```json
+POST https://login.windows.net/common/oauth2/token HTTP/1.1
+Content-Type: application/x-www-form-urlencoded
+Host: login.windows.net
+Content-Length: 944
+
+resource=https%3A%2F%2Fmanage.office.com&amp;client_id=a6099727-6b7b-482c-b509-1df309acc563 &amp;redirect_uri= http%3A%2F%2Fwww.mycompany.com%2Fmyapp%2F &amp;client_secret={your_client_key}&amp;grant_type=authorization_code&amp;code=AAABAAAAvPM1KaPlrEqdFSB...
+```
+
+<br/>
+
+<span data-ttu-id="5b438-245">Текст отклика будет включать ряд свойств, в том числе маркер доступа.</span><span class="sxs-lookup"><span data-stu-id="5b438-245">The body of the response will include several properties, including the access token.</span></span> 
+
+#### <a name="sample-response"></a><span data-ttu-id="5b438-246">Пример отклика</span><span class="sxs-lookup"><span data-stu-id="5b438-246">Sample response</span></span>
+
+```json
+HTTP/1.1 200 OK
+Content-Type: application/json; charset=utf-8
+Content-Length: 3265
+
+{"expires_in":"3599","token_type":"Bearer","scope":"ActivityFeed.Read ActivityReports.Read ServiceHealth.Read","expires_on":"1438290275","not_before":"1438286375","resource":"https://manage.office.com","access_token":"eyJ0eX...","refresh_token":"AAABAAA...","id_token":"eyJ0eXAi..."}
+```
+
+<span data-ttu-id="5b438-247">Возвращаемый маркер доступа представляет собой токен JWT, содержащий сведения об администраторе, давшем согласие, и приложении, запрашивающем доступ.</span><span class="sxs-lookup"><span data-stu-id="5b438-247">The access token that is returned is a JWT token that includes information about both the admin that granted consent and the application requesting access.</span></span> <span data-ttu-id="5b438-248">Ниже показан пример незакодированного маркера.</span><span class="sxs-lookup"><span data-stu-id="5b438-248">The following code shows an example of a token file.</span></span> <span data-ttu-id="5b438-249">Приложение должно извлечь из этого токена идентификатор клиента tid и сохранить его, чтобы можно было запрашивать дополнительные маркеры доступа по окончании срока действия старых без дальнейшего участия администратора.</span><span class="sxs-lookup"><span data-stu-id="5b438-249">Your application must extract the tenant ID "tid" from this token and store it so that it can be used to request additional access tokens as they expire, without further admin interaction.</span></span>
+
+#### <a name="sample-token"></a><span data-ttu-id="5b438-250">Пример маркера</span><span class="sxs-lookup"><span data-stu-id="5b438-250">Sample token</span></span>
+
+```json
+{
+  "aud": "https://manage.office.com",
+  "iss": "https://sts.windows.net/41463f53-8812-40f4-890f-865bf6e35190/",
+  "iat": 1427246416,
+  "nbf": 1427246416,
+  "exp": 1427250316,
+  "ver": "1.0",
+  "tid": "41463f53-8812-40f4-890f-865bf6e35190",
+  "amr": [
+    "pwd"
+  ],
+  "oid": "1cef1fdb-ff52-48c4-8e4e-dfb5ea83d357",
+  "upn": "admin@contoso.onmicrosoft.com",
+  "puid": "1003BFFD8EC47CA6",
+  "sub": "7XpD5OWAXM1OWmKiVKh1FOkKXV4N3OSRol6mz1pxxhU",
+  "given_name": "John",
+  "family_name": "Doe",
+  "name": "Contoso, Inc.",
+  "unique_name": "admin@contoso.onmicrosoft.com",
+  "appid": "a6099727-6b7b-482c-b509-1df309acc563",
+  "appidacr": "1",
+  "scp": "ActivityFeed.Read ServiceHealth.Read",
+  "acr": "1"
+}
+```
+
+
+### <a name="request-an-access-token-by-using-client-credentials"></a><span data-ttu-id="5b438-251">Запрос маркера доступа с помощью учетных данных клиента</span><span class="sxs-lookup"><span data-stu-id="5b438-251">Request an access token by using client credentials</span></span>
+
+<span data-ttu-id="5b438-252">Узнав идентификатор клиента, приложение может совершать вызовы Azure AD между службами, чтобы запрашивать дополнительные маркеры доступа по мере их устаревания.</span><span class="sxs-lookup"><span data-stu-id="5b438-252">After the tenant ID is known, your application can make service-to-service calls to Azure AD to request additional access tokens as they expire.</span></span> <span data-ttu-id="5b438-253">Эти маркеры содержат сведения только о запрашивающем приложении. В них нет данных об администраторе, который изначально дал согласие.</span><span class="sxs-lookup"><span data-stu-id="5b438-253">These tokens include information only about the requesting application and not about the admin that originally granted consent.</span></span> <span data-ttu-id="5b438-254">Для вызовов между службами требуется, чтобы приложение использовало сертификат X.509 для создания клиентского утверждения в виде токена носителя JWT с кодировкой base64 и подписью SHA256.</span><span class="sxs-lookup"><span data-stu-id="5b438-254">Service-to-service calls require that your application use an X.509 certificate to create client assertion in the form of a base64-encoded, SHA256 signed JWT bearer token.</span></span>
+
+<span data-ttu-id="5b438-255">Во время разработки приложения на платформе .NET можно создавать клиентские утверждения с помощью [библиотеки проверки подлинности Azure AD (ADAL)](https://docs.microsoft.com/ru-RU/azure/active-directory/develop/active-directory-authentication-libraries).</span><span class="sxs-lookup"><span data-stu-id="5b438-255">When you are developing your application in .NET, you can use the [Azure AD Authentication Library (ADAL)](https://docs.microsoft.com/ru-RU/azure/active-directory/develop/active-directory-authentication-libraries) to create client assertions.</span></span> <span data-ttu-id="5b438-256">На других платформах разработки должны быть доступны похожие библиотеки.</span><span class="sxs-lookup"><span data-stu-id="5b438-256">Other development platforms should have similar libraries.</span></span>
+
+<span data-ttu-id="5b438-257">Незакодированный токен JWT состоит из заголовка и полезных данных с указанными ниже свойствами.</span><span class="sxs-lookup"><span data-stu-id="5b438-257">An un-encoded JWT token consists of a header and payload that have the following properties.</span></span>
+
+```json
+HEADER:
+
+{
+  "alg": "RS256",
+  "x5t": "{thumbprint of your X.509 certificate used to sign the token",
+}
+
+PAYLOAD:
+
+{
+  "aud": "https://login.windows.net/{tenantid}/oauth2/token",
+  "iss": "{your app client ID}",
+  "sub": "{your app client ID}"
+  "jti": "{random GUID}",
+  "nbf": {epoch time, before which the token is not valid},
+  "exp": {epoch time, after which the token is not valid},
+}
+
+```
+
+#### <a name="sample-jwt-token"></a><span data-ttu-id="5b438-258">Пример токена JWT</span><span class="sxs-lookup"><span data-stu-id="5b438-258">Sample JWT token</span></span>
+
+
+```json
+HEADER:
+
+{
+  "alg": "RS256",
+  "x5t": "YyfshJC3rPQ-kpGo5dUaiY5t3iU",
+}
+
+PAYLOAD:
+
+{
+  "aud": "https://login.windows.net/41463f53-8812-40f4-890f-865bf6e35190/oauth2/token",
+  "iss": "a6099727-6b7b-482c-b509-1df309acc563",
+  "sub": "a6099727-6b7b-482c-b509-1df309acc563"
+  "jti": "0ce254c4-81b1-4a2e-8436-9a8c3b49dfb9",
+  "nbf": 1427248048,
+  "exp": 1427248648,
+}
+```
+
+<span data-ttu-id="5b438-259">Затем клиентское утверждение передается в Azure AD в составе вызова между службами, чтобы запросить маркер доступа.</span><span class="sxs-lookup"><span data-stu-id="5b438-259">The client assertion is then passed to Azure AD as part of a service-to-service call to request an access token.</span></span> <span data-ttu-id="5b438-260">Запрашивая маркер доступа с помощью учетных данных клиента, используйте запрос HTTP POST к конечной точке определенного клиента, где ранее извлеченный и сохраненный идентификатор клиента внедряется в URL-адрес.</span><span class="sxs-lookup"><span data-stu-id="5b438-260">When using client credentials to request an access token, use an HTTP POST to a tenant-specific endpoint, where the previously extracted and stored tenant ID is embedded in the URL.</span></span>
+
+
+```http
+https://login.windows.net/{tenantid}/oauth2/token
+```
+
+<span data-ttu-id="5b438-261">Текст запроса POST содержит следующие данные:</span><span class="sxs-lookup"><span data-stu-id="5b438-261">The body of the POST contains the following:</span></span>
+
+
+```json
+resource=https%3A%2F%2Fmanage.office.com&amp;client_id={your_app_client_id}&amp;grant_type=client_credentials&amp;client_assertion_type=urn%3Aietf%3Aparams%3Aoauth%3Aclient-assertion-type%3Ajwt-bearer&amp;client_assertion={encoded_signed_JWT_token}
+```
+
+#### <a name="sample-request"></a><span data-ttu-id="5b438-262">Пример запроса</span><span class="sxs-lookup"><span data-stu-id="5b438-262">Sample request</span></span>
+
+```json
+POST https://login.windows.net/41463f53-8812-40f4-890f-865bf6e35190/oauth2/token HTTP/1.1
+Content-Type: application/x-www-form-urlencoded
+Host: login.windows.net
+Content-Length: 994
+
+resource=https%3A%2F%2Fmanage.office.com&amp;client_id= a6099727-6b7b-482c-b509-1df309acc563&amp;grant_type=client_credentials &amp;client_assertion_type=urn%3Aietf%3Aparams%3Aoauth%3Aclient-assertion-type%3Ajwt-bearer&amp;client_assertion=eyJhbGciOiJSUzI1NiIsIng1dCI6Ill5ZnNoSkMzclBRLWtwR281ZFVhaVk1dDNpVSJ9.eyJhdWQiOiJodHRwczpcL1wvbG9naW4ud2luZG93cy5uZXRcLzQxNDYzZjUzLTg4MTItNDBmNC04OTBmLTg2NWJmNmUzNTE5MFwvb2F1dGgyXC90b2tlbiIsImV4cCI6MTQyNzI0ODY0OCwiaXNzIjoiYTYwOTk3MjctNmI3Yi00ODJjLWI1MDktMWRmMzA5YWNjNTYzIiwianRpIjoiMGNlMjU0YzQtODFiMS00YTJlLTg0MzYtOWE4YzNiNDlkZmI5IiwibmJmIjoxNDI3MjQ4MDQ4LCJzdWIiOiJhNjA5OTcyNy02YjdiLTQ4MmMtYjUwOS0xZGYzMDlhY2M1NjMifQ.vfDrmCjiXgoj2JrTkwyOpr-NOeQTzlXQcGlKGNpLLe0oh4Zvjdcim5C7E0UbI3Z2yb9uKQdx9G7GeqS-gVc9kNV_XSSNP4wEQj3iYNKpf_JD2ikUVIWBkOg41BiTuknRJAYOMjiuBE2a6Wyk-vPCs_JMd7Sr-N3LiNZ-TjluuVzWHfok_HWz_wH8AzdoMF3S0HtrjNd9Ld5eI7MVMt4OTpRfh-Syofi7Ow0HN07nKT5FYeC_ThBpGiIoODnMQQtDA2tM7D3D6OlLQRgLfI8ir73PVXWL7V7Zj2RcOiooIeXx38dvuSwYreJYtdphmrDBZ2ehqtduzUZhaHL1iDvLlw
+```
+
+<span data-ttu-id="5b438-263">Отклик будет таким же, как раньше, но свойства токена будут другими, так он не содержит свойства администратора, давшего согласие.</span><span class="sxs-lookup"><span data-stu-id="5b438-263">The response will be the same as before, but the token will not have the same properties, because it does not contain properties of the admin that granted consent.</span></span> 
+
+#### <a name="sample-response"></a><span data-ttu-id="5b438-264">Пример отклика</span><span class="sxs-lookup"><span data-stu-id="5b438-264">Sample response</span></span>
+
+```json
+HTTP/1.1 200 OK
+Content-Type: application/json; charset=utf-8
+Content-Length: 1276
+
+{"token_type":"Bearer","expires_in":"3599","expires_on":"1431659094","not_before":"1431655194","resource":"https://manage.office.com","access_token":"eyJ0eXAiOiJKV1QiL..."}
+```
+
+#### <a name="sample-access-token"></a><span data-ttu-id="5b438-265">Пример маркера доступа</span><span class="sxs-lookup"><span data-stu-id="5b438-265">Sample access token</span></span>
+
+```json
+{
+  "aud": "https://manage.office.com",
+  "iss": "https://sts.windows.net/41463f53-8812-40f4-890f-865bf6e35190/",
+  "iat": 1431655194,
+  "nbf": 1431655194,
+  "exp": 1431659094,
+  "ver": "1.0",
+  "tid": "41463f53-8812-40f4-890f-865bf6e35190",
+  "roles": [
+    "ServiceHealth.Read",
+    "ActivityFeed.Read"
+  ],
+  "oid": "67cb0334-e242-4783-8028-0f39132fb5ad",
+  "sub": "67cb0334-e242-4783-8028-0f39132fb5ad",
+  "idp": "https://sts.windows.net/41463f53-8812-40f4-890f-865bf6e35190/",
+  "appid": "a6099727-6b7b-482c-b509-1df309acc563",
+  "appidacr": "1"
+}
+```
+
+
+## <a name="build-your-app"></a><span data-ttu-id="5b438-266">Создание приложения</span><span class="sxs-lookup"><span data-stu-id="5b438-266">Build your app</span></span>
+
+<span data-ttu-id="5b438-267">Теперь, когда вы зарегистрировали приложение в Azure AD и настроили для него необходимые разрешения, все готово к созданию приложения.</span><span class="sxs-lookup"><span data-stu-id="5b438-267">Now that you have registered your app in Azure AD and configured it with the necessary permissions, you're ready to build your app.</span></span> <span data-ttu-id="5b438-268">Ниже указаны некоторые ключевые аспекты, которые следует учитывать при проектировании и создании приложения.</span><span class="sxs-lookup"><span data-stu-id="5b438-268">The following are some of the key aspects to consider when designing and building your app:</span></span>
+
+- <span data-ttu-id="5b438-269">**Предоставление согласия.**</span><span class="sxs-lookup"><span data-stu-id="5b438-269">**The consent experience**.</span></span> <span data-ttu-id="5b438-270">Чтобы получить согласие от клиента, необходимо направить его в браузере на веб-сайт Azure AD, используя описанный ранее специальный URL-адрес. Вам необходим веб-сайт, на который Azure AD перенаправит администратора после предоставления согласия.</span><span class="sxs-lookup"><span data-stu-id="5b438-270">To obtain consent from your customers, you must direct them in a browser to the Azure AD website, using the specially constructed URL described previously, and you must have a website to which Azure AD will redirect the admin once they grant consent.</span></span> <span data-ttu-id="5b438-271">Этот сайт должен извлекать код авторизации из URL-адреса и запрашивать с его помощью маркер доступа, из которого можно получить идентификатор клиента.</span><span class="sxs-lookup"><span data-stu-id="5b438-271">This website must extract the authorization code from the URL and use it to request an access token from which it can obtain the tenant ID.</span></span>
+    
+- <span data-ttu-id="5b438-272">**Сохранение идентификатора клиента в системе.**</span><span class="sxs-lookup"><span data-stu-id="5b438-272">**Store the tenant ID in your system**.</span></span> <span data-ttu-id="5b438-273">Это потребуется при запрашивании маркеров доступа из Azure AD и вызове API управления Office.</span><span class="sxs-lookup"><span data-stu-id="5b438-273">This will be needed when requesting access tokens from Azure AD and when calling the Office Management APIs.</span></span>
+    
+- <span data-ttu-id="5b438-274">**Управление маркерами доступа.**</span><span class="sxs-lookup"><span data-stu-id="5b438-274">**Managing access tokens**.</span></span> <span data-ttu-id="5b438-275">Вам потребуется компонент, который запрашивает и контролирует маркеры доступа по мере необходимости.</span><span class="sxs-lookup"><span data-stu-id="5b438-275">You will need a component that requests and manages access tokens as needed.</span></span> <span data-ttu-id="5b438-276">Если приложение периодически вызывает интерфейсы API, оно может получать маркеры по требованию, а если оно непрерывно вызывает API для получения данных, можно запрашивать маркеры с определенным интервалом (например, каждые 45 минут).</span><span class="sxs-lookup"><span data-stu-id="5b438-276">If your app calls the APIs periodically, it can request tokens on demand, or if it calls the APIs continuously to retrieve data, it can request tokens at regular intervals (for example, every 45 minutes).</span></span>
+    
+- <span data-ttu-id="5b438-277">**Реализуйте прослушиватель веб-перехватчика** в соответствии с потребностями используемого API.</span><span class="sxs-lookup"><span data-stu-id="5b438-277">**Implement a webhook listener** as needed by the particular API you are using.</span></span>
+    
+- <span data-ttu-id="5b438-278">**Извлечение и хранение данных.**</span><span class="sxs-lookup"><span data-stu-id="5b438-278">**Data retrieval and storage**.</span></span> <span data-ttu-id="5b438-279">Вам потребуется компонент, который получает данные для каждого клиента либо путем постоянного опроса, либо в ответ на уведомления веб-перехватчиков в зависимости от конкретного API.</span><span class="sxs-lookup"><span data-stu-id="5b438-279">You'll need a component that retrieves data for each tenant, either by using continuous polling or in response to webhook notifications, depending on the particular API you are using.</span></span>
+    
