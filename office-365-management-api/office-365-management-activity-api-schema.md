@@ -5,12 +5,12 @@ description: 'Схема API действий управления Office 365 �
 ms.ContentId: 1c2bf08c-4f3b-26c0-e1b2-90b190f641f5
 ms.topic: reference (API)
 ms.date: ''
-ms.openlocfilehash: 13d964eb7665c70719b9310c880974b7eea6c530
-ms.sourcegitcommit: 0d3abd151e8970b84735eea975792ae930de6995
+ms.openlocfilehash: e9a7c47f10c3926f7fd681db6a11bb74cc034226
+ms.sourcegitcommit: a5a60b603acd9a17d7717420e377d5760e08c7da
 ms.translationtype: HT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 11/08/2018
-ms.locfileid: "26215304"
+ms.lasthandoff: 12/12/2018
+ms.locfileid: "27240654"
 ---
 # <a name="office-365-management-activity-api-schema"></a>Схема API действий управления Office 365
  
@@ -52,6 +52,7 @@ ms.locfileid: "26215304"
 |[Схема надстроек Microsoft Teams](#microsoft-teams-add-ons-schema)|Дополняет схему Microsoft Teams свойствами, характерными для всех надстроек Microsoft Teams.|
 |[Схема параметров Microsoft Teams](#microsoft-teams-settings-schema)|Дополняет схему Microsoft Teams свойствами, характерными для всех событий изменения параметров Microsoft Teams.|
 |[Схема Office 365 Advanced Threat Protection и Threat Intelligence](#office-365-advanced-threat-protection-and-threat-intelligence-schema)|Дополняет общую схему свойствами, характерными для данных Office 365 Advanced Threat Protection и Threat Intelligence.|
+|[Схема Power BI](#power-bi-schema)|Дополняет общую схему свойствами, характерными для всех событий Power BI.|
 
 ## <a name="common-schema"></a>Общая схема
 
@@ -94,16 +95,21 @@ ms.locfileid: "26215304"
 |15|AzureActiveDirectoryStsLogon|События входа в службу маркеров безопасности в Azure Active Directory.|
 |18|SecurityComplianceCenterEOPCmdlet|Действия администратора из Центра безопасности и соответствия требованиям.|
 |20|PowerBIAudit|События Power BI.|
-|22|Yammer|События Yammer|
+|21|CRM|События Microsoft CRM.|
+|22|Yammer|События Yammer.|
+|23|SkypeForBusinessCmdlets|События Skype для бизнеса.|
 |24|Discovery|События для действий обнаружения электронных данных, выполняемых при поиске контента и управлении обращениями для обнаружения электронных данных в Центре безопасности и соответствия требованиям.|
 |25|MicrosoftTeams|События из Microsoft Teams.|
 |26|MicrosoftTeamsAddOns|События из надстроек Microsoft Teams.|
 |27|MicrosoftTeamsSettingsOperation|Изменения параметров из Microsoft Teams.|
-|28|ThreatIntelligence|События Office 365 Advanced Threat Protection и Threat Intelligence.|
+|28|ThreatIntelligence|События фишинга и вредоносных программ из Exchange Online Protection и Office 365 Advanced Threat Protection.|
 |30|MicrosoftFlow|События Microsoft Flow.|
 |32|MicrosoftStream|События Microsoft Stream.|
 |35|Project|События Microsoft Project.|
+|36|SharepointListOperation|События списка SharePoint.|
 |40|SecurityComplianceAlerts|Сигналы оповещений по безопасности и соответствию требованиям.|
+|41|ThreatIntelligenceUrl|События времени блокировки безопасных ссылок и переопределения блокировки из Office 365 Advanced Threat Protection.|
+|47|ThreatIntelligenceAtpContent|События фишинга и вредоносных программ для файлов в SharePoint, OneDrive для бизнеса и Microsoft Teams из Office 365 Advanced Threat Protection.|
 
 ### <a name="enum-user-type---type-edmint32"></a>Enum: User Type; Type: Edm.Int32
 
@@ -1116,9 +1122,34 @@ ms.locfileid: "26215304"
 |URL|Edm.String|Да|URL-адрес, который щелкнул пользователь.|
 |UserIp|Edm.String|Да|IP-адрес пользователя, который щелкнул URL-адрес. IP-адрес отображается в формате адреса IPv4 или IPv6.|
 
+## <a name="power-bi-schema"></a>Схема Power BI
 
+Эта схема используется в событиях Power BI, перечисленных в статье [Поиск в журнале аудита в Центре защиты Office 365](/power-bi/service-admin-auditing#activities-audited-by-power-bi).
 
+|**Параметры**|**Тип**|**Обязательный?**|**Описание**|
+|:-----|:-----|:-----|:-----|
+| AppName               | Edm.String Term="Microsoft.Office.Audit.Schema.PIIFlag" Bool="true"                            |  Нет  | Имя приложения, в котором возникло событие. |
+| DashboardName         | Edm.String Term="Microsoft.Office.Audit.Schema.PIIFlag" Bool="true"                            |  Нет  | Имя информационной панели, в которой возникло событие. |
+| DataClassification    | Edm.String Term="Microsoft.Office.Audit.Schema.PIIFlag" Bool="true"                            |  Нет  | [Классификация данных](/power-bi/service-data-classification) (при наличии) для информационной панели, в которой возникло событие. |
+| DatasetName           | Edm.String Term="Microsoft.Office.Audit.Schema.PIIFlag" Bool="true"                            |  Нет  | Имя набора данных, в котором возникло событие. |
+| MembershipInformation | Collection([MembershipInformationType](#MembershipInformationType))   Term="Microsoft.Office.Audit.Schema.PIIFlag" Bool="true" |  Нет  | Сведения об участниках группы. |
+| OrgAppPermission      | Edm.String Term="Microsoft.Office.Audit.Schema.PIIFlag" Bool="true"                            |  Нет  | Список разрешений для приложения организации (всей организации, определенных пользователей или определенных групп). |
+| ReportName            | Edm.String Term="Microsoft.Office.Audit.Schema.PIIFlag" Bool="true"                            |  Нет  | Имя отчета, в котором возникло событие. |
+| SharingInformation    | Collection([SharingInformationType](#SharingInformationType))   Term="Microsoft.Office.Audit.Schema.PIIFlag" Bool="true"    |  Нет  | Сведения о пользователе, которому отправлено приглашение к совместному использованию. |
+| SwitchState           | Edm.String Term="Microsoft.Office.Audit.Schema.PIIFlag" Bool="true"                            |  Нет  | Сведения о состоянии различных параметров уровня клиента. |
+| WorkSpaceName         | Edm.String Term="Microsoft.Office.Audit.Schema.PIIFlag" Bool="true"                            |  Нет  | Имя рабочей области, в которой возникло событие. |
 
+### <a name="membershipinformationtype-complex-type"></a>Сложный тип MembershipInformationType
 
+|**Параметры**|**Тип**|**Обязательный?**|**Описание**|
+|:-----|:-----|:-----|:-----|
+| MemberEmail | Edm.String Term="Microsoft.Office.Audit.Schema.PIIFlag" Bool="true" |  Нет  | Адрес электронной почты группы. |
+| Status      | Edm.String Term="Microsoft.Office.Audit.Schema.PIIFlag" Bool="true" |  Нет  | В настоящее время не заполняется. |
 
+### <a name="sharinginformationtype-complex-type"></a>Сложный тип SharingInformationType
 
+|**Параметры**|**Тип**|**Обязательный?**|**Описание**|
+|:-----|:-----|:-----|:-----|
+| RecipientEmail    | Edm.String Term="Microsoft.Office.Audit.Schema.PIIFlag" Bool="true" |  Нет  | Электронный адрес получателя приглашения к совместному использованию. |
+| RecipientName    | Edm.String Term="Microsoft.Office.Audit.Schema.PIIFlag" Bool="true" |  Нет  | Имя получателя приглашения к совместному использованию. |
+| ResharePermission | Edm.String Term="Microsoft.Office.Audit.Schema.PIIFlag" Bool="true" |  Нет  | Разрешение, предоставляемое получателю. |
