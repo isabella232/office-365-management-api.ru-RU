@@ -5,12 +5,13 @@ description: 'Этот API используется для доступа к с�
 ms.ContentId: d0b9341a-b205-5442-1c20-8fb56407351d
 ms.topic: reference (API)
 ms.date: 09/05/2018
-ms.openlocfilehash: cde34da7377c5d4820d6ca62dd3affe806eda229
-ms.sourcegitcommit: 525c0d0e78cc44ea8cb6a4bdce1858cb4ef91d57
+localization_priority: Priority
+ms.openlocfilehash: dc231a4fb19be7ac0e9248d5f4d709681ff0abfa
+ms.sourcegitcommit: 358bfe9553eabbe837fda1d73cd1d1a83bcb427e
 ms.translationtype: HT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 10/27/2018
-ms.locfileid: "25834921"
+ms.lasthandoff: 01/15/2019
+ms.locfileid: "28014310"
 ---
 # <a name="office-365-service-communications-api-reference-preview"></a>Справочник по API сообщений о службах Office 365 (предварительная версия)
 
@@ -380,7 +381,7 @@ Authorization: Bearer {AAD_Bearer_JWT_Token}
 |**Параметр запроса**|$select|Выбор подмножества свойств.|
 ||$top|Выбор максимального количества результатов (используемое по умолчанию и максимальное значение: $top=100).|
 ||$skip|Пропуск определенного количества результатов (значение по умолчанию: $skip=0).|
-|**Отклик**|Список объектов Message.|Объект Message содержит свойства Id (String), StartTime (DateTimeOffset), EndTime (DateTimeOffset), Status (String), Messages (список объектов MessagHistory), LastUpdatedTime (DateTimeOffset), Workload (String), WorkloadDisplayName (String), Feature (String), FeatureDisplayName (String), MessageType (Enum, значение по умолчанию: all).<br/><br/>Объект MessageHistory содержит свойства PublishedTime (DateTimeOffset), MessageText (String).|
+|**Отклик**|Список объектов Message.|Объект Message содержит свойства Id (String), StartTime (DateTimeOffset), EndTime (DateTimeOffset), Status (String), Messages (список объектов MessageHistory), LastUpdatedTime (DateTimeOffset), Workload (String), WorkloadDisplayName (String), Feature (String), FeatureDisplayName (String), MessageType (Enum, значение по умолчанию: all).<br/><br/>Объект MessageHistory содержит свойства PublishedTime (DateTimeOffset), MessageText (String).|
 
 #### <a name="sample-request"></a>Пример запроса
 
