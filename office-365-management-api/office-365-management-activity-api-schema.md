@@ -6,12 +6,12 @@ ms.ContentId: 1c2bf08c-4f3b-26c0-e1b2-90b190f641f5
 ms.topic: reference (API)
 ms.date: ''
 localization_priority: Priority
-ms.openlocfilehash: a8e8fdab103bcee6a5ea8de56dc91c45c1c20b43
-ms.sourcegitcommit: 358bfe9553eabbe837fda1d73cd1d1a83bcb427e
+ms.openlocfilehash: 6fa95b7134bd5bb8ac6a8f07c87df747ae086a81
+ms.sourcegitcommit: 55264094d1ebc2f9968b2d29d5982b1ba4e29118
 ms.translationtype: HT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 01/15/2019
-ms.locfileid: "28014338"
+ms.lasthandoff: 02/04/2019
+ms.locfileid: "29735245"
 ---
 # <a name="office-365-management-activity-api-schema"></a>Схема API действий управления Office 365
  
@@ -1053,18 +1053,20 @@ ms.locfileid: "28014338"
 
 ## <a name="office-365-advanced-threat-protection-and-threat-intelligence-schema"></a>Схема Office 365 Advanced Threat Protection и Threat Intelligence
 
-События Office 365 Advanced Threat Protection (ATP) и Threat Intelligence доступны для клиентов Office 365, у которых есть подписка на ATP, Threat Intelligence или план E5. Каждого событие в веб-канале ATP и Threat Intelligence соответствует следующим действиям, которые были расценены как содержащие угрозу:
+События Office 365 Advanced Threat Protection (ATP) и защиты от угроз доступны для клиентов Office 365, у которых есть подписка ATP, защита от угроз или E5. Каждого событие в веб-канале ATP и Threat Intelligence соответствует следующим действиям, которые были расценены как содержащие угрозу:
 
 - Пользователь отправил или получил электронное сообщение в пределах организации. Угроза обнаруживается при доставке, а также с помощью функции [Автоматическая очистка](https://support.office.com/ru-RU/article/Zero-hour-auto-purge-protection-against-spam-and-malware-96deb75f-64e8-4c10-b570-84c99c674e15). 
 
 - Пользователь щелкнул URL-адреса в пределах организации, которые были расценены как вредоносные функцией защиты [Безопасные ссылки Office 365 ATP](https://docs.microsoft.com/office365/securitycompliance/atp-safe-links) в момент выбора.  
+
+- Файл в SharePoint Online, OneDrive для бизнеса или Microsoft Teams, который был признан вредоносным защитой [Office 365 ATP](https://docs.microsoft.com/ru-RU/office365/securitycompliance/atp-for-spo-odb-and-teams).  
 
 ### <a name="email-message-events"></a>События, связанные с электронными сообщениями
 
 |**Параметры**|**Тип**|**Обязательный?**|**Описание**|
 |:-----|:-----|:-----|:-----|
 |AttachmentData|Collection(Self.[AttachmentData](#AttachmentData))|Нет|Данные о вложениях в сообщение, активировавшее событие.|
-|DetectionType|Self.[DetectionType](#DetectionType)|Да|Тип обнаружения.|
+|DetectionType|Edm.String|Да|Тип обнаружения (например, **В тексте** — обнаружены во время доставки; **Отложенный** — обнаружены после доставки; **ZAP** — сообщения, удаленные с помощью функции [автоматическая защита](https://support.office.com/ru-RU/article/Zero-hour-auto-purge-protection-against-spam-and-malware-96deb75f-64e8-4c10-b570-84c99c674e15)). Как правило, события для типа обнаружения ZAP предшествуют сообщению с типом обнаружения **Отложенный**.|
 |DetectionMethod|Edm.String|Да|Метод или технология, используемая Office 365 ATP для обнаружения.|
 |InternetMessageId|Edm.String|Да|Идентификатор интернет-сообщения.|
 |NetworkMessageId|Edm.String|Да|Идентификатор сетевого сообщения Exchange Online.|
@@ -1074,17 +1076,8 @@ ms.locfileid: "28014338"
 |SenderIp|Edm.String|Да|IP-адрес, с которого отправлено сообщение Office 365. IP-адрес отображается в формате адреса IPv4 или IPv6.|
 |Subject|Edm.String|Да|Строка темы сообщения.|
 |Verdict|Edm.String|Да|Заключение о сообщении.|
-
-### <a name="enum-detectiontype---type-edmint32"></a>Enum: DetectionType; Type: Edm.Int32
-
-#### <a name="detectiontype"></a>DetectionType
-
-|**Значение**|**Имя элемента**|**Описание**|
-|:-----|:-----|:-----|
-|0|Inline|Угроза обнаружена при доставке.|
-|1|Delayed|Угроза обнаружена после доставки.|
-|2|ZAP|Сообщения удалены функцией [Автоматическая очистка](https://support.office.com/ru-RU/article/Zero-hour-auto-purge-protection-against-spam-and-malware-96deb75f-64e8-4c10-b570-84c99c674e15). Как правило, перед событиями обнаружения такого типа отображается сообщение с типом обнаружения Delayed.|
-
+|MessageTime|Edm.Date|Да|Дата и время указаны в соответствии со всемирным координированным временем (UTC) и отражают момент получения или отправки электронного сообщения.|
+|EventDeepLink|Edm.String|Да|Глубокая ссылка на событие электронной почты в проводнике или в отчете в реальном времени в Центр безопасности и соответствия требованиям Office 365.|
 
 ### <a name="attachmentdata-complex-type"></a>Сложный тип AttachmentData
 
@@ -1115,13 +1108,62 @@ ms.locfileid: "28014338"
 |**Параметры**|**Тип**|**Обязательный?**|**Описание**|
 |:-----|:-----|:-----|:-----|
 |UserId|Edm.String|Да|Идентификатор (например, электронный адрес) пользователя, который щелкнул URL-адрес.|
-|AppName|Edm.String|Да|Служба Office 365, из которой щелкнули URL-адрес (например, "Почта").|
-|Blocked|Edm.Boolean|Да|Имеет значение true, если после щелчка URL-адрес заблокирован функцией защиты [Безопасные ссылки Office 365 ATP](https://docs.microsoft.com/office365/securitycompliance/atp-safe-links).|
+|AppName|Edm.String|Да|Служба Office 365, из которой был выполнено нажатие URL-адреса (например, "Почта").|
+|Заблокировано|Edm.Boolean|Да|Имеет значение true, если после щелчка URL-адрес заблокирован функцией защиты [Безопасные ссылки Office 365 ATP](https://docs.microsoft.com/office365/securitycompliance/atp-safe-links).|
 |ClickedThrough|Edm.Boolean|Да|Имеет значение true, если пользователь все-таки щелкнул URL-адрес (переопределил блокировку), руководствуясь политиками организации для функции защиты [Безопасные ссылки Office 365 ATP](https://docs.microsoft.com/office365/securitycompliance/atp-safe-links).|
-|SourceId|Edm.String|Да|Идентификатор службы Office 365, с использованием которого щелкнули URL-адрес (например, идентификатор для службы "Почта" называется "идентификатором сетевого сообщения Exchange Online").|
+|SourceId|Edm.String|Да|Идентификатор службы Office 365, с использованием которого было выполнено нажатие URL-адреса (например, идентификатор для службы "Почта" называется "идентификатором сетевого сообщения Exchange Online").|
 |TimeOfClick|Edm.Date|Да|Дата и время щелчка URL-адреса в формате UTC.|
 |URL|Edm.String|Да|URL-адрес, который щелкнул пользователь.|
 |UserIp|Edm.String|Да|IP-адрес пользователя, который щелкнул URL-адрес. IP-адрес отображается в формате адреса IPv4 или IPv6.|
+
+### <a name="enum-urlclickaction---type-edmint32"></a>Перечисление: URLClickAction - Type: Edm.Int32
+
+#### <a name="urlclickaction"></a>URLClickAction
+
+|**Значение**|**Имя элемента**|**Описание**|
+|:-----|:-----|:-----|
+|0|Нет|Нажатий не обнаружено.|
+|1|Разрешено|Пользователю разрешено перейдите к URL-адресу пользователя (так как URL-адрес считается надежным по данным инструмента [Безопасные ссылки Office 365 ATP](https://docs.microsoft.com/office365/securitycompliance/atp-safe-links)).|
+|2|Blockpage|Пользователю запрещен доступ к URL-адресу на основании инструмента [Безопасные ссылки Office 365 ATP](https://docs.microsoft.com/office365/securitycompliance/atp-safe-links).|
+|3|PendingDetonationPage|Пользователю открывается ожидающая "детонации" страница на основании инструмента [Безопасные ссылки Office 365 ATP](https://docs.microsoft.com/office365/securitycompliance/atp-safe-links).|
+|4|BlockPageOverride|Пользователю запрещен переход к URL-адресу с помощью [безопасных ссылок Office 365 ATP](https://docs.microsoft.com/office365/securitycompliance/atp-safe-links); однако пользователь форсирует преодоление блокировки, чтобы перейти к URL-адресу.|
+|5|PendingDetonationPageOverride|Пользователя открывается страница "детонации" на основании инструмента [Безопасные ссылки Office 365 ATP](https://docs.microsoft.com/office365/securitycompliance/atp-safe-links); однако пользователь форсирует преодоление блокировки, чтобы перейти к URL-адресу.|
+
+
+### <a name="file-events"></a>События файлов
+
+|**Параметры**|**Тип**|**Обязательный?**|**Описание**|
+|:-----|:-----|:-----|:-----|
+|FileData|Self.[FileData](#FileData)|Да|Данные о файле, запускающем событие.|
+|SourceWorkload|Self.[SourceWorkload](#SourceWorkload)|Да|Рабочая нагрузка или служба, где данный файл был найден (например, SharePoint Online, OneDrive для бизнеса или Microsoft Teams)
+|DetectionMethod|Edm.String|Да|Метод или технология, используемая Office 365 ATP для обнаружения.|
+|LastModifiedDate|Edm.Date|Да|Дата и время в формате UTC, когда файл был создан или изменен в последний раз.|
+|LastModifiedBy|Edm.String|Да|Идентификатор (например, адрес электронной почты) для пользователя, который создал или выполнил последнее изменение файла.|
+|EventDeepLink|Edm.String|Да|Глубокая ссылка на файл события в проводнике или отчетах, подготавливаемых в режиме реального времени в Центре безопасности и соответствия требованиям.|
+
+### <a name="filedata-complex-type"></a>Сложный тип FileData
+
+#### <a name="filedata"></a>FileData
+
+|**Параметры**|**Тип**|**Обязательный?**|**Описание**|
+|:-----|:-----|:-----|:-----|
+|Documentid|Edm.String|Да|Уникальный идентификатор для файла в SharePoint, OneDrive или Microsoft Teams.|
+|FileName|Edm.String|Да|Имя файла, запускающего событие.|
+|FilePath|Edm.String|Да|Путь (расположение) файла в SharePoint, OneDrive или Microsoft Teams.|
+|FileVerdict||Self.[FileVerdict](#FileVerdict)|Да|Заключение о вредоносности файла.|
+|MalwareFamily|Edm.String|Нет|Тип вредоносности файла.|
+|SHA256|Edm.String|Да|Хэш файла SHA256.|
+|FileSize|Edm.String|Да|Размер файла в байтах.|
+
+### <a name="enum-sourceworkload---type-edmint32"></a>Enum: SourceWorkload - Type: Edm.Int32
+
+#### <a name="sourceworkload"></a>SourceWorkload
+
+|**Значение**|**Имя элемента**|
+|:-----|:-----|
+|0|SharePoint Online|
+|1|OneDrive для бизнеса|
+|2|Microsoft Teams|
 
 ## <a name="power-bi-schema"></a>Схема Power BI
 
