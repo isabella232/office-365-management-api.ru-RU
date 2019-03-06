@@ -6,12 +6,12 @@ ms.ContentId: 1c2bf08c-4f3b-26c0-e1b2-90b190f641f5
 ms.topic: reference (API)
 ms.date: ''
 localization_priority: Priority
-ms.openlocfilehash: 6fa95b7134bd5bb8ac6a8f07c87df747ae086a81
-ms.sourcegitcommit: 55264094d1ebc2f9968b2d29d5982b1ba4e29118
+ms.openlocfilehash: 72392671dccec43b70684bbde6f53ac926b8d06e
+ms.sourcegitcommit: 95a3313d95b79a2164008d32c4a4f03bf873a23c
 ms.translationtype: HT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 02/04/2019
-ms.locfileid: "29735245"
+ms.lasthandoff: 03/05/2019
+ms.locfileid: "30379197"
 ---
 # <a name="office-365-management-activity-api-schema"></a>Схема API действий управления Office 365
  
@@ -108,9 +108,13 @@ ms.locfileid: "29735245"
 |32|MicrosoftStream|События Microsoft Stream.|
 |35|Project|События Microsoft Project.|
 |36|SharepointListOperation|События списка SharePoint.|
+|38|DataGovernance|Событиях, связанные с политиками хранения и метками хранения в Центре безопасности и соответствия требованиям|
 |40|SecurityComplianceAlerts|Сигналы оповещений по безопасности и соответствию требованиям.|
 |41|ThreatIntelligenceUrl|События времени блокировки безопасных ссылок и переопределения блокировки из Office 365 Advanced Threat Protection.|
+|44|WorkplaceAnalytics|События Workplace Analytics|
+|45|PowerAppsApp|События приложения PowerApps.|
 |47|ThreatIntelligenceAtpContent|События фишинга и вредоносных программ для файлов в SharePoint, OneDrive для бизнеса и Microsoft Teams из Office 365 Advanced Threat Protection.|
+||||
 
 ### <a name="enum-user-type---type-edmint32"></a>Enum: User Type; Type: Edm.Int32
 
