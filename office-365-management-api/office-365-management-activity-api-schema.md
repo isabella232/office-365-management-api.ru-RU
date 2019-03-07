@@ -6,12 +6,12 @@ ms.ContentId: 1c2bf08c-4f3b-26c0-e1b2-90b190f641f5
 ms.topic: reference (API)
 ms.date: ''
 localization_priority: Priority
-ms.openlocfilehash: 72392671dccec43b70684bbde6f53ac926b8d06e
-ms.sourcegitcommit: 95a3313d95b79a2164008d32c4a4f03bf873a23c
+ms.openlocfilehash: de6a841339690c483ed58e38e0b691b00fadab4d
+ms.sourcegitcommit: b030dc1b7ca46280191dd2f54c8179795657d792
 ms.translationtype: HT
 ms.contentlocale: ru-RU
 ms.lasthandoff: 03/05/2019
-ms.locfileid: "30379197"
+ms.locfileid: "30409080"
 ---
 # <a name="office-365-management-activity-api-schema"></a>Схема API действий управления Office 365
  
@@ -1069,7 +1069,7 @@ ms.locfileid: "30379197"
 
 |**Параметры**|**Тип**|**Обязательный?**|**Описание**|
 |:-----|:-----|:-----|:-----|
-|AttachmentData|Collection(Self.[AttachmentData](#AttachmentData))|Нет|Данные о вложениях в сообщение, активировавшее событие.|
+|AttachmentData|Collection(Self.[AttachmentData](#attachmentdata)|Нет|Данные о вложениях в сообщение, активировавшее событие.|
 |DetectionType|Edm.String|Да|Тип обнаружения (например, **В тексте** — обнаружены во время доставки; **Отложенный** — обнаружены после доставки; **ZAP** — сообщения, удаленные с помощью функции [автоматическая защита](https://support.office.com/ru-RU/article/Zero-hour-auto-purge-protection-against-spam-and-malware-96deb75f-64e8-4c10-b570-84c99c674e15)). Как правило, события для типа обнаружения ZAP предшествуют сообщению с типом обнаружения **Отложенный**.|
 |DetectionMethod|Edm.String|Да|Метод или технология, используемая Office 365 ATP для обнаружения.|
 |InternetMessageId|Edm.String|Да|Идентификатор интернет-сообщения.|
@@ -1091,7 +1091,7 @@ ms.locfileid: "30379197"
 |:-----|:-----|:-----|:-----|
 |FileName|Edm.String|Да|Имя вложенного файла.|
 |FileType|Edm.String|Да|Тип вложенного файла.|
-|FileVerdict|Self.[FileVerdict](#FileVerdict)|Да|Заключение о вредоносности файла.|
+|FileVerdict|Self.[FileVerdict](#fileverdict)|Да|Заключение о вредоносности файла.|
 |MalwareFamily|Edm.String|Нет|Тип вредоносности файла.|
 |SHA256|Edm.String|Да|Хэш SHA256 файла.|
 
@@ -1112,9 +1112,8 @@ ms.locfileid: "30379197"
 |**Параметры**|**Тип**|**Обязательный?**|**Описание**|
 |:-----|:-----|:-----|:-----|
 |UserId|Edm.String|Да|Идентификатор (например, электронный адрес) пользователя, который щелкнул URL-адрес.|
-|AppName|Edm.String|Да|Служба Office 365, из которой был выполнено нажатие URL-адреса (например, "Почта").|
-|Заблокировано|Edm.Boolean|Да|Имеет значение true, если после щелчка URL-адрес заблокирован функцией защиты [Безопасные ссылки Office 365 ATP](https://docs.microsoft.com/office365/securitycompliance/atp-safe-links).|
-|ClickedThrough|Edm.Boolean|Да|Имеет значение true, если пользователь все-таки щелкнул URL-адрес (переопределил блокировку), руководствуясь политиками организации для функции защиты [Безопасные ссылки Office 365 ATP](https://docs.microsoft.com/office365/securitycompliance/atp-safe-links).|
+|AppName|Edm.String|Да|Служба Office 365, из которой щелкнули URL-адрес (например, "Почта").|
+|URLClickAction|Self.[URLClickAction](#urlclickaction)|Да|Действие щелчка для URL-адреса на основе политик организации для [безопасных ссылок Office 365 ATP](https://docs.microsoft.com/office365/securitycompliance/atp-safe-links).|
 |SourceId|Edm.String|Да|Идентификатор службы Office 365, с использованием которого было выполнено нажатие URL-адреса (например, идентификатор для службы "Почта" называется "идентификатором сетевого сообщения Exchange Online").|
 |TimeOfClick|Edm.Date|Да|Дата и время щелчка URL-адреса в формате UTC.|
 |URL|Edm.String|Да|URL-адрес, который щелкнул пользователь.|
@@ -1138,8 +1137,8 @@ ms.locfileid: "30379197"
 
 |**Параметры**|**Тип**|**Обязательный?**|**Описание**|
 |:-----|:-----|:-----|:-----|
-|FileData|Self.[FileData](#FileData)|Да|Данные о файле, запускающем событие.|
-|SourceWorkload|Self.[SourceWorkload](#SourceWorkload)|Да|Рабочая нагрузка или служба, где данный файл был найден (например, SharePoint Online, OneDrive для бизнеса или Microsoft Teams)
+|FileData|Self.[FileData](#filedata)|Да|Данные о файле, запускающем событие.|
+|SourceWorkload|Self.[SourceWorkload](#sourceworkload)|Да|Рабочая нагрузка или служба, где данный файл был найден (например, SharePoint Online, OneDrive для бизнеса или Microsoft Teams)
 |DetectionMethod|Edm.String|Да|Метод или технология, используемая Office 365 ATP для обнаружения.|
 |LastModifiedDate|Edm.Date|Да|Дата и время в формате UTC, когда файл был создан или изменен в последний раз.|
 |LastModifiedBy|Edm.String|Да|Идентификатор (например, адрес электронной почты) для пользователя, который создал или выполнил последнее изменение файла.|
@@ -1154,7 +1153,7 @@ ms.locfileid: "30379197"
 |Documentid|Edm.String|Да|Уникальный идентификатор для файла в SharePoint, OneDrive или Microsoft Teams.|
 |FileName|Edm.String|Да|Имя файла, запускающего событие.|
 |FilePath|Edm.String|Да|Путь (расположение) файла в SharePoint, OneDrive или Microsoft Teams.|
-|FileVerdict||Self.[FileVerdict](#FileVerdict)|Да|Заключение о вредоносности файла.|
+|FileVerdict|Self.[FileVerdict](#fileverdict)|Да|Заключение о вредоносности файла.|
 |MalwareFamily|Edm.String|Нет|Тип вредоносности файла.|
 |SHA256|Edm.String|Да|Хэш файла SHA256.|
 |FileSize|Edm.String|Да|Размер файла в байтах.|
