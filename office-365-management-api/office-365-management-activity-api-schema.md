@@ -6,12 +6,12 @@ ms.ContentId: 1c2bf08c-4f3b-26c0-e1b2-90b190f641f5
 ms.topic: reference (API)
 ms.date: ''
 localization_priority: Priority
-ms.openlocfilehash: de6a841339690c483ed58e38e0b691b00fadab4d
-ms.sourcegitcommit: b030dc1b7ca46280191dd2f54c8179795657d792
+ms.openlocfilehash: 41018718dd5890c5c628672828a2dd365a6bebe3
+ms.sourcegitcommit: c6a3d440a1ecc8f8f0b00b3fdd8e41127514a6f6
 ms.translationtype: HT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 03/05/2019
-ms.locfileid: "30409080"
+ms.lasthandoff: 03/07/2019
+ms.locfileid: "30458530"
 ---
 # <a name="office-365-management-activity-api-schema"></a>Схема API действий управления Office 365
  
@@ -54,6 +54,8 @@ ms.locfileid: "30409080"
 |[Схема параметров Microsoft Teams](#microsoft-teams-settings-schema)|Дополняет схему Microsoft Teams свойствами, характерными для всех событий изменения параметров Microsoft Teams.|
 |[Схема Office 365 Advanced Threat Protection и Threat Intelligence](#office-365-advanced-threat-protection-and-threat-intelligence-schema)|Дополняет общую схему свойствами, характерными для данных Office 365 Advanced Threat Protection и Threat Intelligence.|
 |[Схема Power BI](#power-bi-schema)|Дополняет общую схему свойствами, характерными для всех событий Power BI.|
+|[Рабочая аналитика](#workplace-analytics-schema)|Дополняет общую схему свойствами, характерными для всех событий службы "Рабочая аналитика (Майкрософт)".|
+|||
 
 ## <a name="common-schema"></a>Общая схема
 
@@ -963,8 +965,6 @@ ms.locfileid: "30409080"
 
 ## <a name="data-center-security-base-schema"></a>Базовая схема безопасности центра обработки данных
 
-
-
 |**Параметры**|**Тип**|**Обязательный?**|**Описание**|
 |:-----|:-----|:-----|:-----|
 |DataCenterSecurityEventType|Self.[DataCenterSecurityEventType](#datacentersecurityeventtype)|Да|Тип события dmdlet в Lock Box.|
@@ -1199,3 +1199,14 @@ ms.locfileid: "30409080"
 | RecipientEmail    | Edm.String Term="Microsoft.Office.Audit.Schema.PIIFlag" Bool="true" |  Нет  | Электронный адрес получателя приглашения к совместному использованию. |
 | RecipientName    | Edm.String Term="Microsoft.Office.Audit.Schema.PIIFlag" Bool="true" |  Нет  | Имя получателя приглашения к совместному использованию. |
 | ResharePermission | Edm.String Term="Microsoft.Office.Audit.Schema.PIIFlag" Bool="true" |  Нет  | Разрешение, предоставляемое получателю. |
+
+## <a name="workplace-analytics-schema"></a>Схема службы "Рабочая аналитика"
+
+Эта схема используется в событиях службы "Рабочая аналитика", перечисленных в статье [Поиск в журнале аудита в Центре безопасности и соответствия требованиям Office 365](https://docs.microsoft.com/office365/securitycompliance/search-the-audit-log-in-security-and-compliance#microsoft-workplace-analytics-activities).
+
+| **Параметры**     | **Тип**            | **Обязательный?** | **Описание**|
+|:------------------ | :------------------ | :--------------|:--------------|
+| WpaUserRole        | Edm.String | Нет     | Роль пользователя, выполнившего действие, в службе "Рабочая аналитика".                                                                                            |
+| ModifiedProperties | Коллекция (Common.ModifiedProperty) | Нет | Это свойство включает имя, а также новое и предыдущее значения измененного свойства.|
+| OperationDetails   | Коллекция (Common.NameValuePair)    | Нет | Список расширенных свойств для измененного параметра. Каждое свойство будет включать значения **Name** и **Value**.|
+||||
