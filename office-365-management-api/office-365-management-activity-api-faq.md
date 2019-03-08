@@ -4,14 +4,14 @@ title: 'Вопросы и ответы: API действий управлени�
 description: 'Вопросы и ответы: использование API действий управления Office 365'
 ms.ContentId: ''
 ms.topic: reference (API)
-ms.date: 09/21/2018
+ms.date: ''
 localization_priority: Priority
-ms.openlocfilehash: 8e341def7bc3a4f71eee23bc04d01e11d1390e1d
-ms.sourcegitcommit: 358bfe9553eabbe837fda1d73cd1d1a83bcb427e
+ms.openlocfilehash: 8954be1b9076eb2a6f640ee96cc2b612addcabc0
+ms.sourcegitcommit: c6a3d440a1ecc8f8f0b00b3fdd8e41127514a6f6
 ms.translationtype: HT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 01/15/2019
-ms.locfileid: "28014289"
+ms.lasthandoff: 03/07/2019
+ms.locfileid: "30458516"
 ---
 # <a name="office-365-management-activity-api-frequently-asked-questions"></a>Вопросы и ответы: API действий управления Office 365
 
@@ -55,3 +55,6 @@ ms.locfileid: "28014289"
 
 Нет. Чтобы получать записи через API действий управления, необходимо включить аудит для своей организации.
 
+#### <a name="why-are-targetupdatedproperties-no-longer-in-extendedproperties-in-the-audit-logs-for-azure-active-directory-activities"></a>Почему TargetUpdatedProperties больше не находятся в свойстве ExtendedProperties в журналах аудита для действий Azure Active Directory?
+
+TargetUpdatedProperties отображались в объекте ExtendedProperties. Однако они были удалены из свойства ExtendedProperties и теперь будут отображаться в свойстве ModifiedProperties.
