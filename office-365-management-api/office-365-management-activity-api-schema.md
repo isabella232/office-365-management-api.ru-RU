@@ -6,12 +6,12 @@ ms.ContentId: 1c2bf08c-4f3b-26c0-e1b2-90b190f641f5
 ms.topic: reference (API)
 ms.date: ''
 localization_priority: Priority
-ms.openlocfilehash: 41018718dd5890c5c628672828a2dd365a6bebe3
-ms.sourcegitcommit: c6a3d440a1ecc8f8f0b00b3fdd8e41127514a6f6
+ms.openlocfilehash: 4604bd0aec3856b377a24d758a0961e8da1d9bf6
+ms.sourcegitcommit: 338c5c61687bc15ade48ecbae80d7f477640b68f
 ms.translationtype: HT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 03/07/2019
-ms.locfileid: "30458530"
+ms.lasthandoff: 03/14/2019
+ms.locfileid: "30575979"
 ---
 # <a name="office-365-management-activity-api-schema"></a>Схема API действий управления Office 365
  
@@ -52,7 +52,7 @@ ms.locfileid: "30458530"
 |[Схема Microsoft Teams](#microsoft-teams-schema)|Дополняет общую схему свойствами, характерными для всех событий Microsoft Teams.|
 |[Схема надстроек Microsoft Teams](#microsoft-teams-add-ons-schema)|Дополняет схему Microsoft Teams свойствами, характерными для всех надстроек Microsoft Teams.|
 |[Схема параметров Microsoft Teams](#microsoft-teams-settings-schema)|Дополняет схему Microsoft Teams свойствами, характерными для всех событий изменения параметров Microsoft Teams.|
-|[Схема Office 365 Advanced Threat Protection и Threat Intelligence](#office-365-advanced-threat-protection-and-threat-intelligence-schema)|Дополняет общую схему свойствами, характерными для данных Office 365 Advanced Threat Protection и Threat Intelligence.|
+|[Схема Office 365 Advanced Threat Protection и Threat Investigation and Response](#office-365-advanced-threat-protection-and-threat-investigation-and-response-schema)|Дополняет общую схему свойствами, характерными для данных Office 365 Advanced Threat Protection и Threat Investigation and Response.|
 |[Схема Power BI](#power-bi-schema)|Дополняет общую схему свойствами, характерными для всех событий Power BI.|
 |[Рабочая аналитика](#workplace-analytics-schema)|Дополняет общую схему свойствами, характерными для всех событий службы "Рабочая аналитика (Майкрософт)".|
 |||
@@ -1055,21 +1055,24 @@ ms.locfileid: "30458530"
 |ModifiedProperty|Common.ModifiedProperty|Нет|Измененное свойство. Этот параметр будет содержать значения **Name**, **OldValue** и **NewValue** свойства.|
 |ExtendedProperties|Collection(Common.NameValuePair)|Нет|Список расширенных свойств для параметра, в который вносятся изменения. Каждое свойство будет включать значения **Name** и **Value**.|
 
-## <a name="office-365-advanced-threat-protection-and-threat-intelligence-schema"></a>Схема Office 365 Advanced Threat Protection и Threat Intelligence
+## <a name="office-365-advanced-threat-protection-and-threat-investigation-and-response-schema"></a>Схема Office 365 Advanced Threat Protection и Threat Investigation and Response
 
-События Office 365 Advanced Threat Protection (ATP) и защиты от угроз доступны для клиентов Office 365, у которых есть подписка ATP, защита от угроз или E5. Каждого событие в веб-канале ATP и Threat Intelligence соответствует следующим действиям, которые были расценены как содержащие угрозу:
+События Office 365 Advanced Threat Protection и Threat Investigation and Response доступны для клиентов Office 365, у которых есть подписка на Office 365 Advanced Threat Protection (план 1), Office 365 Advanced Threat Protection (план 2) или E5. Каждое событие в веб-канале Office 365 ATP соответствует указанным ниже действиям, которые были расценены как содержащие угрозу:
 
 - Пользователь отправил или получил электронное сообщение в пределах организации. Угроза обнаруживается при доставке, а также с помощью функции [Автоматическая очистка](https://support.office.com/ru-RU/article/Zero-hour-auto-purge-protection-against-spam-and-malware-96deb75f-64e8-4c10-b570-84c99c674e15). 
 
 - Пользователь щелкнул URL-адреса в пределах организации, которые были расценены как вредоносные функцией защиты [Безопасные ссылки Office 365 ATP](https://docs.microsoft.com/office365/securitycompliance/atp-safe-links) в момент выбора.  
 
-- Файл в SharePoint Online, OneDrive для бизнеса или Microsoft Teams, который был признан вредоносным защитой [Office 365 ATP](https://docs.microsoft.com/ru-RU/office365/securitycompliance/atp-for-spo-odb-and-teams).  
+- Файл в SharePoint Online, OneDrive для бизнеса или Microsoft Teams, который был признан вредоносным защитой [Office 365 ATP](https://docs.microsoft.com/ru-RU/office365/securitycompliance/atp-for-spo-odb-and-teams).
+
+> [!NOTE]
+> Службы Office 365 Advanced Threat Protection и Office 365 Threat Invesitgation and Response (прежнее название — Office 365 Threat Intelligence) теперь входят в состав Office 365 Advanced Threat Protection (план 2) с дополнительными возможностями защиты от угроз. Дополнительные сведения см. на страницах [Планы и цены Office 365 ATP](https://products.office.com/exchange/advance-threat-protection) и [Описание службы Office 365 ATP](https://docs.microsoft.com/office365/servicedescriptions/office-365-advanced-threat-protection-service-description).
 
 ### <a name="email-message-events"></a>События, связанные с электронными сообщениями
 
 |**Параметры**|**Тип**|**Обязательный?**|**Описание**|
 |:-----|:-----|:-----|:-----|
-|AttachmentData|Collection(Self.[AttachmentData](#attachmentdata)|Нет|Данные о вложениях в сообщение, активировавшее событие.|
+|AttachmentData|Collection(Self.[AttachmentData](#attachmentdata))|Нет|Данные о вложениях в сообщение, активировавшее событие.|
 |DetectionType|Edm.String|Да|Тип обнаружения (например, **В тексте** — обнаружены во время доставки; **Отложенный** — обнаружены после доставки; **ZAP** — сообщения, удаленные с помощью функции [автоматическая защита](https://support.office.com/ru-RU/article/Zero-hour-auto-purge-protection-against-spam-and-malware-96deb75f-64e8-4c10-b570-84c99c674e15)). Как правило, события для типа обнаружения ZAP предшествуют сообщению с типом обнаружения **Отложенный**.|
 |DetectionMethod|Edm.String|Да|Метод или технология, используемая Office 365 ATP для обнаружения.|
 |InternetMessageId|Edm.String|Да|Идентификатор интернет-сообщения.|
