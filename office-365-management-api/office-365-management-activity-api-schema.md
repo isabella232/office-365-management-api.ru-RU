@@ -6,12 +6,12 @@ ms.ContentId: 1c2bf08c-4f3b-26c0-e1b2-90b190f641f5
 ms.topic: reference (API)
 ms.date: ''
 localization_priority: Priority
-ms.openlocfilehash: 580fc44cacea81bcc046bb16d434a309485bab77
-ms.sourcegitcommit: 336f901a6ed8eb75d99baa4af37d838aeec905c6
+ms.openlocfilehash: 567e17ca3dc701be6cb499f3bf36bcaba8912146
+ms.sourcegitcommit: 2a256e01834388711ba8c438a891c228877588a4
 ms.translationtype: HT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 04/26/2019
-ms.locfileid: "33311396"
+ms.lasthandoff: 05/17/2019
+ms.locfileid: "34106168"
 ---
 # <a name="office-365-management-activity-api-schema"></a>Схема API действий управления Office 365
  
@@ -40,7 +40,7 @@ ms.locfileid: "33311396"
 |[Схема почтовых ящиков Exchange](#exchange-mailbox-schema)|Дополняет общую схему свойствами, характерными для всех данных аудита почтовых ящиков Exchange.|
 |[Базовая схема Azure Active Directory](#azure-active-directory-base-schema)|Дополняет общую схему свойствами, характерными для всех данных аудита Azure Active Directory.|
 |[Схема входа в учетную запись Azure Active Directory](#azure-active-directory-account-logon-schema)|Дополняет базовую схему Azure Active Directory свойствами, характерными для всех событий входа в Azure Active Directory.|
-|[Схема входа в службу маркеров безопасности Azure Active Directory](#azure-active-directory-sts-logon-schema)|Дополняет базовую схему Azure Active Directory свойствами, характерными для всех событий входа в службу маркеров безопасности Azure Active Directory.|
+|[Защищенная схема входа в службу маркеров безопасности Azure Active Directory](#azure-active-directory-secure-token-service-sts-logon-schema)|Дополняет базовую схему Azure Active Directory свойствами, характерными для всех событий входа в службу маркеров безопасности Azure Active Directory.|
 |[Схема Azure Active Directory](#azure-active-directory-schema)|Дополняет общую схему свойствами, характерными для всех данных аудита Azure Active Directory.|
 |[Схема защиты от потери данных](#dlp-schema)|Дополняет общую схему свойствами, характерными для событий, связанных с защитой от потери данных.|
 |[Схема Центра безопасности и соответствия требованиям](#security-and-compliance-center-schema)|Дополняет общую схему свойствами, характерными для всех событий, связанных с Центром безопасности и соответствия требованиям.|
@@ -70,8 +70,8 @@ ms.locfileid: "33311396"
 |OrganizationId|Edm.Guid|Да|GUID клиента Office 365 вашей организации. Это значение неизменно для вашей организации независимо от того, в какой службе Office 365 оно наблюдается.|
 |UserType|Self.[UserType](#user-type)|Да|Тип пользователя, который выполнил операцию. Сведения о типах пользователей см. в таблице [UserType](#user-type).|
 |UserKey|Edm.String|Да|Альтернативный идентификатор пользователя, указываемый в свойстве UserId. Например, это свойство заполняется уникальным идентификатором паспорта (PUID) для событий, выполненных пользователями в SharePoint, OneDrive для бизнеса и Exchange. Это свойство может иметь такое же значение, что и свойство UserID для событий, которые происходят в других службах и системных учетных записях.|
-|Workload|Edm.String|Нет|Служба Office 365, в которой произошло действие в строке Workload. Вот возможные значения этого свойства:<ul xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:mtps="http://msdn2.microsoft.com/mtps" xmlns:mshelp="http://msdn.microsoft.com/mshelp" xmlns:ddue="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:msxsl="urn:schemas-microsoft-com:xslt"><li><p>Exchange;</p></li><li><p>SharePoint;</p></li><li><p>OneDrive;</p></li><li><p>Azure Active Directory;</p></li><li><p>SecurityComplianceCenter;</p></li><li><p>Sway;</p></li><li><p>ThreatIntelligence.</p></li></ul>|
-|ResultStatus|Edm.String|Нет|Указывает, успешно ли выполнено действие (указанное в свойстве Operation). Возможные значения: **Succeeded**, **PartiallySucceeded** или **Failed**. Для действий администратора Exchange этот параметр может иметь значение **True** или **False**.|
+|Workload|Edm.String|Нет|Служба Office 365, в которой было выполнено действие. 
+|ResultStatus|Edm.String|Нет|Указывает, успешно ли выполнено действие (указанное в свойстве Operation). Возможные значения: **Succeeded**, **PartiallySucceeded** или **Failed**. Для действий администратора Exchange этот параметр может иметь значение **True** или **False**.<br/><br/>**Внимание!** Различные рабочие нагрузки могут перезаписывать значение свойства ResultStatus. Например, для событий входа в службу маркеров безопасности Azure Active Directory значение **Succeeded** свойства ResultStatus указывает, что успешно осуществлена только операция HTTP. Это не означает, что вход выполнен успешно. Чтобы определить, выполнен ли вход успешно, см. свойство LogonError в [схеме входа в службу маркеров безопасности Azure Active Directory](#azure-active-directory-secure-token-service-sts-logon-schema). При сбое входа значение этого свойства будет содержать причину неудачной попытки входа. |
 |ObjectId|Edm.string|Нет|Для действий SharePoint и OneDrive для бизнеса этот параметр указывает на полное имя пути к файлу или папке, к которым получает доступ пользователь. Что касается ведения журнала аудита действий администратора Exchange, это имя объекта, измененного командлетом.|
 |UserId|Edm.string|Да|Имя участника-пользователя, который выполнил действие (указанное в свойстве Operation), приведшее к добавлению записи в журнал (например, `my_name@my_domain_name`). Обратите внимание, что сюда также включаются записи о действиях, выполненных в системных учетных записях (таких как SHAREPOINT\system или NT AUTHORITY\SYSTEM).|
 |ClientIP|Edm.String|Да|IP-адрес устройства, которое использовалось при регистрации действия в журнале. IP-адрес отображается в формате адреса IPv4 или IPv6.|
@@ -107,6 +107,7 @@ ms.locfileid: "33311396"
 |27|MicrosoftTeamsSettingsOperation|Изменения параметров из Microsoft Teams.|
 |28|ThreatIntelligence|События фишинга и вредоносных программ из Exchange Online Protection и Office 365 Advanced Threat Protection.|
 |30|MicrosoftFlow|События Microsoft Flow.|
+|31|AeD|События Advanced eDiscovery.|
 |32|MicrosoftStream|События Microsoft Stream.|
 |35|Project|События Microsoft Project.|
 |36|SharepointListOperation|События списка SharePoint.|
@@ -116,6 +117,8 @@ ms.locfileid: "33311396"
 |44|WorkplaceAnalytics|События Workplace Analytics|
 |45|PowerAppsApp|События приложения PowerApps.|
 |47|ThreatIntelligenceAtpContent|События фишинга и вредоносных программ для файлов в SharePoint, OneDrive для бизнеса и Microsoft Teams из Office 365 Advanced Threat Protection.|
+|54|SharePointListItemOperation|События списка SharePoint.|
+|55|SharePointContentTypeOperation|События типа контента списка SharePoint.|
 ||||
 
 ### <a name="enum-user-type---type-edmint32"></a>Enum: User Type; Type: Edm.Int32
@@ -332,7 +335,7 @@ ms.locfileid: "33311396"
 |TimesheetRejected|Пользователь отклоняет расписание в Project Web App.|
 |TimesheetSaved|Пользователь сохраняет расписание в Project Web App.|
 |TimesheetSubmitted|Пользователь отправляет расписание состояния в Project Web App.|
-|UnmanagedSyncClientBlocked|Пользователь пытается установить отношение синхронизации с сайтом SharePoint или OneDrive для бизнеса с компьютера, который не входит в домен вашей организации или входит в домен, который не добавлен в список доменов (так называемый список надежных получателей), который позволяет получить доступ к библиотекам документов в вашей организации. Отношение синхронизации запрещено, поэтому с компьютера пользователя не разрешается синхронизировать, скачивать или передавать файлы в библиотеке документов. Дополнительные сведения об этой функции см. в статье [Использование командлетов Windows PowerShell для включения синхронизации OneDrive для доменов, включенных в список надежных получателей](https://docs.microsoft.com/en-us/powershell/module/sharepoint-online/index?view=sharepoint-ps).|
+|UnmanagedSyncClientBlocked|Пользователь пытается установить отношение синхронизации с сайтом SharePoint или OneDrive для бизнеса с компьютера, который не входит в домен вашей организации или входит в домен, который не добавлен в список доменов (так называемый список надежных получателей), который позволяет получить доступ к библиотекам документов в вашей организации. Отношение синхронизации запрещено, поэтому с компьютера пользователя не разрешается синхронизировать, скачивать или передавать файлы в библиотеке документов. Дополнительные сведения об этой функции см. в статье [Использование командлетов Windows PowerShell для включения синхронизации OneDrive для доменов, включенных в список надежных получателей](https://docs.microsoft.com/ru-RU/powershell/module/sharepoint-online/index?view=sharepoint-ps).|
 |UpdateSSOApplication*|В службе Secure Store обновлено конечное приложение.|
 |UserAddedToGroup*|Администратор или владелец сайта добавляет пользователя в группу на сайте SharePoint или OneDrive для бизнеса. При добавлении в группу пользователю предоставляются назначенные ей разрешения. |
 |UserRemovedFromGroup*|Администратор или владелец сайта удаляет пользователя из группы на сайте SharePoint или OneDrive для бизнеса. После удаления пользователь лишается разрешений, назначенных группе. |
@@ -346,7 +349,7 @@ ms.locfileid: "33311396"
 
 ## <a name="sharepoint-file-operations"></a>Операции с файлами SharePoint
 
-Эта схема используется в связанных с файлами событиях SharePoint, перечисленных в разделе "Действия с файлами и папками" статьи [Поиск в журнале аудита в Центре защиты Office 365](https://support.office.com/en-us/article/Search-the-audit-log-in-the-Office-365-Security-Compliance-Center-0d4d0f35-390b-4518-800e-0c7ec95e946c?ui=en-US&amp;rs=en-US&amp;ad=US).
+Эта схема используется в связанных с файлами событиях SharePoint, перечисленных в разделе "Действия с файлами и папками" статьи [Поиск в журнале аудита в Центре защиты Office 365](https://support.office.com/ru-RU/article/Search-the-audit-log-in-the-Office-365-Security-Compliance-Center-0d4d0f35-390b-4518-800e-0c7ec95e946c?ui=en-US&amp;rs=en-US&amp;ad=US).
 
 
 
@@ -366,7 +369,7 @@ ms.locfileid: "33311396"
 
 ## <a name="sharepoint-sharing-schema"></a>Схема общего доступа SharePoint
 
- События SharePoint, связанные с общим доступом к файлам. Они отличаются от событий, связанных с файлами и папками, так как пользователь выполняет действие, которое определенным образом влияет на другого пользователя. Дополнительные сведения о схеме общего доступа в SharePoint см. в статье [Использование аудита общего доступа в журнале аудита Office 365](https://support.office.com/en-us/article/Use-sharing-auditing-in-the-Office-365-audit-log-50bbf89f-7870-4c2a-ae14-42635e0cfc01?ui=en-US&amp;rs=en-US&amp;ad=US).
+ События SharePoint, связанные с общим доступом к файлам. Они отличаются от событий, связанных с файлами и папками, так как пользователь выполняет действие, которое определенным образом влияет на другого пользователя. Дополнительные сведения о схеме общего доступа в SharePoint см. в статье [Использование аудита общего доступа в журнале аудита Office 365](https://support.office.com/ru-RU/article/Use-sharing-auditing-in-the-Office-365-audit-log-50bbf89f-7870-4c2a-ae14-42635e0cfc01?ui=en-US&amp;rs=en-US&amp;ad=US).
 
 
 
@@ -379,7 +382,7 @@ ms.locfileid: "33311396"
 
 ## <a name="sharepoint-schema"></a>Схема SharePoint
 
-Эта схема используется в событиях SharePoint, перечисленных в статье [Поиск в журнале аудита в Центре защиты Office 365](https://support.office.com/en-us/article/Search-the-audit-log-in-the-Office-365-Security-Compliance-Center-0d4d0f35-390b-4518-800e-0c7ec95e946c?ui=en-US&amp;rs=en-US&amp;ad=US) (за исключением событий, связанных с файлами и папками).
+Эта схема используется в событиях SharePoint, перечисленных в статье [Поиск в журнале аудита в Центре защиты Office 365](https://support.office.com/ru-RU/article/Search-the-audit-log-in-the-Office-365-Security-Compliance-Center-0d4d0f35-390b-4518-800e-0c7ec95e946c?ui=en-US&amp;rs=en-US&amp;ad=US) (за исключением событий, связанных с файлами и папками).
 
 
 
@@ -701,9 +704,7 @@ ms.locfileid: "33311396"
 |UPN|Имя участника-пользователя.|
 
 
-## <a name="azure-active-directory-sts-logon-schema"></a>Схема входа в службу маркеров безопасности Azure Active Directory
-
-
+## <a name="azure-active-directory-secure-token-service-sts-logon-schema"></a>Схема входа в службу маркеров безопасности Azure Active Directory
 
 |**Параметры**|**Тип**|**Обязательный?**|**Описание**|
 |:-----|:-----|:-----|:-----|
@@ -723,8 +724,6 @@ ms.locfileid: "33311396"
 
 - DlpInfo. Эти события выполняются только в SharePoint Online и OneDrive для бизнеса и указывают на то, что обнаружено ложное срабатывание, но действие не отменено.
 
-
-
 |**Параметры**|**Тип**|**Обязательный**|**Описание**|
 |:-----|:-----|:-----|:-----|
 |SharePointMetaData|Self.[SharePointMetadata](#sharepointmetadata-complex-type)|Нет|Описывает метаданные документа в SharePoint или OneDrive для бизнеса, содержащего конфиденциальные сведения.|
@@ -732,9 +731,6 @@ ms.locfileid: "33311396"
 |ExceptionInfo|Edm.String|Нет|Указывает на причины, по которым политика больше не применяется, а также возможные сведения о ложных срабатываниях и переопределениях, обнаруженных пользователем.|
 |PolicyDetails|Collection(Self.[PolicyDetails](#policydetails-complex-type))|Да|Сведения об 1 или нескольких политиках, активировавших событие защиты от потери данных.|
 |SensitiveInfoDetectionIsIncluded|Boolean|Да|Указывает, содержит ли событие значение типа конфиденциальных данных и окружающий контекст из исходного контента. Для доступа к конфиденциальным данным требуется разрешение "Чтение событий политики защиты от потери данных, в том числе конфиденциальных сведений" в Azure Active Directory.|
-
-
-
 
 ### <a name="sharepointmetadata-complex-type"></a>Сложный тип SharePointMetadata
 
@@ -864,7 +860,7 @@ ms.locfileid: "33311396"
 
 ## <a name="yammer-schema"></a>Схема Yammer
 
-Эта схема используется в событиях Yammer, перечисленных в статье [Поиск в журнале аудита в Центре защиты Office 365](https://support.office.com/en-us/article/Search-the-audit-log-in-the-Office-365-Security-Compliance-Center-0d4d0f35-390b-4518-800e-0c7ec95e946c?ui=en-US&amp;rs=en-US&amp;ad=US).
+Эта схема используется в событиях Yammer, перечисленных в статье [Поиск в журнале аудита в Центре защиты Office 365](https://support.office.com/ru-RU/article/Search-the-audit-log-in-the-Office-365-Security-Compliance-Center-0d4d0f35-390b-4518-800e-0c7ec95e946c?ui=en-US&amp;rs=en-US&amp;ad=US).
 
 |**Параметры**|**Тип**|**Обязательный**|**Описание**|
 |:-----|:-----|:-----|:-----|
@@ -883,7 +879,7 @@ ms.locfileid: "33311396"
 
 ## <a name="sway-schema"></a>Схема Sway
 
-Эта схема используется в событиях Sway, перечисленных в статье [Поиск в журнале аудита в Центре защиты Office 365](https://support.office.com/en-us/article/Search-the-audit-log-in-the-Office-365-Security-Compliance-Center-0d4d0f35-390b-4518-800e-0c7ec95e946c?ui=en-US&amp;rs=en-US&amp;ad=US) (за исключением событий, связанных с файлами и папками).
+Эта схема используется в событиях Sway, перечисленных в статье [Поиск в журнале аудита в Центре защиты Office 365](https://support.office.com/ru-RU/article/Search-the-audit-log-in-the-Office-365-Security-Compliance-Center-0d4d0f35-390b-4518-800e-0c7ec95e946c?ui=en-US&amp;rs=en-US&amp;ad=US) (за исключением событий, связанных с файлами и папками).
 
 |**Параметр**|**Тип**|**Обязательный?**|**Описание**|
 |:-----|:-----|:-----|:-----|
@@ -1003,7 +999,7 @@ ms.locfileid: "33311396"
 |:-----|:-----|:-----|:-----|
 |MessageId|Edm.String|Нет|Идентификатор сообщения чата или канала.|
 |MeetupId|Edm.String|Нет|Идентификатор запланированного или незапланированного собрания.|
-|Members|Collection(Self.[MicrosoftTeamsMember](#MicrosoftTeamsMember-complex-type))|Нет|Список пользователей в группе.|
+|Members|Collection(Self.[MicrosoftTeamsMember](#microsoftteamsmember-complex-type))|Нет|Список пользователей в группе.|
 |TeamName|Edm.String|Нет|Имя группы, для которой выполняется аудит.|
 |TeamGuid|Edm.Guid|Нет|Уникальный идентификатор группы, для которой выполняется аудит.|
 |ChannelName|Edm.String|Нет|Имя канала, для которого выполняется аудит.|
@@ -1181,10 +1177,10 @@ ms.locfileid: "33311396"
 | DashboardName         | Edm.String Term="Microsoft.Office.Audit.Schema.PIIFlag" Bool="true"                            |  Нет  | Имя информационной панели, в которой возникло событие. |
 | DataClassification    | Edm.String Term="Microsoft.Office.Audit.Schema.PIIFlag" Bool="true"                            |  Нет  | [Классификация данных](/power-bi/service-data-classification) (при наличии) для информационной панели, в которой возникло событие. |
 | DatasetName           | Edm.String Term="Microsoft.Office.Audit.Schema.PIIFlag" Bool="true"                            |  Нет  | Имя набора данных, в котором возникло событие. |
-| MembershipInformation | Collection([MembershipInformationType](#MembershipInformationType))   Term="Microsoft.Office.Audit.Schema.PIIFlag" Bool="true" |  Нет  | Сведения об участниках группы. |
+| MembershipInformation | Collection([MembershipInformationType](#membershipinformationtype-complex-type))   Term="Microsoft.Office.Audit.Schema.PIIFlag" Bool="true" |  Нет  | Сведения об участниках группы. |
 | OrgAppPermission      | Edm.String Term="Microsoft.Office.Audit.Schema.PIIFlag" Bool="true"                            |  Нет  | Список разрешений для приложения организации (всей организации, определенных пользователей или определенных групп). |
 | ReportName            | Edm.String Term="Microsoft.Office.Audit.Schema.PIIFlag" Bool="true"                            |  Нет  | Имя отчета, в котором возникло событие. |
-| SharingInformation    | Collection([SharingInformationType](#SharingInformationType))   Term="Microsoft.Office.Audit.Schema.PIIFlag" Bool="true"    |  Нет  | Сведения о пользователе, которому отправлено приглашение к совместному использованию. |
+| SharingInformation    | Collection([SharingInformationType](#sharinginformationtype-complex-type))   Term="Microsoft.Office.Audit.Schema.PIIFlag" Bool="true"    |  Нет  | Сведения о пользователе, которому отправлено приглашение к совместному использованию. |
 | SwitchState           | Edm.String Term="Microsoft.Office.Audit.Schema.PIIFlag" Bool="true"                            |  Нет  | Сведения о состоянии различных параметров уровня клиента. |
 | WorkSpaceName         | Edm.String Term="Microsoft.Office.Audit.Schema.PIIFlag" Bool="true"                            |  Нет  | Имя рабочей области, в которой возникло событие. |
 

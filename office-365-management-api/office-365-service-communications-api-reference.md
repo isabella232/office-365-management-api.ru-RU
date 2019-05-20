@@ -1,17 +1,17 @@
 ---
-ms.TocTitle: Office 365 Service Communications API reference (preview)
+ms.TocTitle: Office 365 Service Communications API reference (Preview)
 title: Справочник по API сообщений о службах Office 365 (предварительная версия)
 description: 'Этот API используется для доступа к следующим данным: список служб, текущее состояние, изменения состояния, сообщения.'
 ms.ContentId: d0b9341a-b205-5442-1c20-8fb56407351d
 ms.topic: reference (API)
 ms.date: ''
 localization_priority: Priority
-ms.openlocfilehash: 9b38c4ee73f18bf10c7fa7cbb5b323740dfb5a7e
-ms.sourcegitcommit: 336f901a6ed8eb75d99baa4af37d838aeec905c6
+ms.openlocfilehash: 728cf632baa1f4a45b626677b1da862438562d90
+ms.sourcegitcommit: 490310e2718a7f9d827c945a78e940d936d15386
 ms.translationtype: HT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 04/28/2019
-ms.locfileid: "33440054"
+ms.lasthandoff: 05/16/2019
+ms.locfileid: "34102313"
 ---
 # <a name="office-365-service-communications-api-reference-preview"></a>Справочник по API сообщений о службах Office 365 (предварительная версия)
 
@@ -142,6 +142,9 @@ Authorization: Bearer {AAD_Bearer_JWT_Token}
 ## <a name="get-current-status"></a>Получение текущего состояния
 
 Возвращает состояние службы за предыдущие 24 часа.
+
+> [!NOTE] 
+> Отклик службы будет содержать состояние за 24 часа c момента выполнения запроса. Возвращаемое значение StatusDate или StatusTime точно соответствует моменту времени 24 часа назад. 
 
 ||Служба|Описание|
 |:-----|:-----|:-----|
