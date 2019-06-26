@@ -6,12 +6,12 @@ ms.ContentId: d0b9341a-b205-5442-1c20-8fb56407351d
 ms.topic: reference (API)
 ms.date: ''
 localization_priority: Priority
-ms.openlocfilehash: 728cf632baa1f4a45b626677b1da862438562d90
-ms.sourcegitcommit: 490310e2718a7f9d827c945a78e940d936d15386
+ms.openlocfilehash: 1790baa6c941900a18488f338b02fc83a9b29a8b
+ms.sourcegitcommit: efd3dcdb3d190ca7b0f22a671867f0aede5d46c2
 ms.translationtype: HT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 05/16/2019
-ms.locfileid: "34102313"
+ms.lasthandoff: 06/25/2019
+ms.locfileid: "35226967"
 ---
 # <a name="office-365-service-communications-api-reference-preview"></a>Справочник по API сообщений о службах Office 365 (предварительная версия)
 
@@ -144,7 +144,7 @@ Authorization: Bearer {AAD_Bearer_JWT_Token}
 Возвращает состояние службы за предыдущие 24 часа.
 
 > [!NOTE] 
-> Отклик службы будет содержать состояние за 24 часа c момента выполнения запроса. Возвращаемое значение StatusDate или StatusTime точно соответствует моменту времени 24 часа назад. 
+> Отклик службы будет содержать состояние и все инциденты за предыдущие 24 часа. Возвращаемое значение StatusDate или StatusTime точно соответствует моменту времени 24 часа назад. 
 
 ||Служба|Описание|
 |:-----|:-----|:-----|
