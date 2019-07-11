@@ -6,12 +6,12 @@ ms.ContentId: 1c2bf08c-4f3b-26c0-e1b2-90b190f641f5
 ms.topic: reference (API)
 ms.date: ''
 localization_priority: Priority
-ms.openlocfilehash: c42f22fa1c4d07c25ed15bad7225f35c298075ff
-ms.sourcegitcommit: efa2f49c46a4dc2a296d0ecc510a8153f51c535b
+ms.openlocfilehash: 012d2951c12b5da0b5767ff3edd2dd7fb64fd695
+ms.sourcegitcommit: 1345cb6bd688ee7ca4320b073eacdf614dae9b08
 ms.translationtype: HT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 06/06/2019
-ms.locfileid: "34741222"
+ms.lasthandoff: 07/09/2019
+ms.locfileid: "35601532"
 ---
 # <a name="office-365-management-activity-api-schema"></a>Схема API действий управления Office 365
  
@@ -103,8 +103,6 @@ ms.locfileid: "34741222"
 |23|SkypeForBusinessCmdlets|События Skype для бизнеса.|
 |24|Discovery|События для действий обнаружения электронных данных, выполняемых при поиске контента и управлении обращениями для обнаружения электронных данных в Центре безопасности и соответствия требованиям.|
 |25|MicrosoftTeams|События из Microsoft Teams.|
-|26|MicrosoftTeamsAddOns|События из надстроек Microsoft Teams.|
-|27|MicrosoftTeamsSettingsOperation|Изменения параметров из Microsoft Teams.|
 |28|ThreatIntelligence|События фишинга и вредоносных программ из Exchange Online Protection и Office 365 Advanced Threat Protection.|
 |30|MicrosoftFlow|События Microsoft Flow.|
 |31|AeD|События Advanced eDiscovery.|
@@ -751,7 +749,7 @@ ms.locfileid: "34741222"
 
 ### <a name="exchangemetadata-complex-type"></a>Сложный тип ExchangeMetadata
 
-|**Параметры**|**Тип**|**Обязательный?**|**Описание**|
+|**Parameters**|**Тип**|**Обязательный?**|**Описание**|
 |:-----|:-----|:-----|:-----|
 |MessageID|Edm.String|Да|Идентификатор электронного сообщения, активировавшего событие.|
 |From|Edm.String|Да|Пользователь, который отправил сообщение.|
@@ -961,7 +959,7 @@ ms.locfileid: "34741222"
 
 ## <a name="data-center-security-base-schema"></a>Базовая схема безопасности центра обработки данных
 
-|**Параметры**|**Тип**|**Обязательный?**|**Описание**|
+|**Parameters**|**Тип**|**Обязательный?**|**Описание**|
 |:-----|:-----|:-----|:-----|
 |DataCenterSecurityEventType|Self.[DataCenterSecurityEventType](#datacentersecurityeventtype)|Да|Тип события dmdlet в Lock Box.|
 
