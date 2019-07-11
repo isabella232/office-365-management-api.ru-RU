@@ -6,12 +6,12 @@ ms.ContentId: 1c2bf08c-4f3b-26c0-e1b2-90b190f641f5
 ms.topic: reference (API)
 ms.date: ''
 localization_priority: Priority
-ms.openlocfilehash: 012d2951c12b5da0b5767ff3edd2dd7fb64fd695
-ms.sourcegitcommit: 1345cb6bd688ee7ca4320b073eacdf614dae9b08
+ms.openlocfilehash: 49ffb697575a63bce7a7eee8e539a30c733772a5
+ms.sourcegitcommit: c4674653f99c77b64115f8547f9e410dea3408f9
 ms.translationtype: HT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 07/09/2019
-ms.locfileid: "35601532"
+ms.lasthandoff: 07/10/2019
+ms.locfileid: "35613587"
 ---
 # <a name="office-365-management-activity-api-schema"></a>Схема API действий управления Office 365
  
@@ -50,8 +50,6 @@ ms.locfileid: "35601532"
 |[Базовая схема безопасности центра обработки данных](#data-center-security-base-schema)|Дополняет общую схему свойствами, характерными для всех данных аудита безопасности центра обработки данных.|
 |[Схема командлетов для обеспечения безопасности центра обработки данных](#data-center-security-cmdlet-schema)|Дополняет базовую схему безопасности центра обработки данных свойствами, характерными для всех данных аудита командлетов для обеспечения безопасности центра обработки данных.|
 |[Схема Microsoft Teams](#microsoft-teams-schema)|Дополняет общую схему свойствами, характерными для всех событий Microsoft Teams.|
-|[Схема надстроек Microsoft Teams](#microsoft-teams-add-ons-schema)|Дополняет схему Microsoft Teams свойствами, характерными для всех надстроек Microsoft Teams.|
-|[Схема параметров Microsoft Teams](#microsoft-teams-settings-schema)|Дополняет схему Microsoft Teams свойствами, характерными для всех событий изменения параметров Microsoft Teams.|
 |[Схема Office 365 Advanced Threat Protection и Threat Investigation and Response](#office-365-advanced-threat-protection-and-threat-investigation-and-response-schema)|Дополняет общую схему свойствами, характерными для данных Office 365 Advanced Threat Protection и Threat Investigation and Response.|
 |[Схема Power BI](#power-bi-schema)|Дополняет общую схему свойствами, характерными для всех событий Power BI.|
 |[Рабочая аналитика](#workplace-analytics-schema)|Дополняет общую схему свойствами, характерными для всех событий службы "Рабочая аналитика (Майкрософт)".|
@@ -76,6 +74,7 @@ ms.locfileid: "35601532"
 |UserId|Edm.string|Да|Имя участника-пользователя, который выполнил действие (указанное в свойстве Operation), приведшее к добавлению записи в журнал (например, `my_name@my_domain_name`). Обратите внимание, что сюда также включаются записи о действиях, выполненных в системных учетных записях (таких как SHAREPOINT\system или NT AUTHORITY\SYSTEM).|
 |ClientIP|Edm.String|Да|IP-адрес устройства, которое использовалось при регистрации действия в журнале. IP-адрес отображается в формате адреса IPv4 или IPv6.|
 |Scope|Self.[AuditLogScope](#auditlogscope)|Нет|Создано ли это событие в размещенной службе Office 365 или на локальном сервере? Возможные значения: **online** и **onprem**. Обратите внимание, что сейчас данные о событиях отправляются с локального сервера в Office 365 только SharePoint.|
+|||||
 
 ### <a name="enum-auditlogrecordtype---type-edmint32"></a>Enum: AuditLogRecordType; Type: Edm.Int32
 
@@ -132,6 +131,7 @@ ms.locfileid: "35601532"
 |4|System|Системная учетная запись.|
 |5|Application|Приложение.|
 |6|ServicePrincipal|Субъект-служба.|
+||||
 
 > [!NOTE] 
 > Тип пользователя указывается только для операций Exchange. Он не задается для операций SharePoint. 
@@ -144,6 +144,7 @@ ms.locfileid: "35601532"
 |:-----|:-----|:-----|
 |0|Online|Это событие создано в размещенной службе Office 365.|
 |1|Onprem|Это событие создано на локальном сервере.|
+||||
 
 
 ## <a name="sharepoint-base-schema"></a>Базовая схема SharePoint
@@ -157,7 +158,7 @@ ms.locfileid: "35601532"
 |UserAgent|Edm.String|Нет|Сведения о клиенте или браузере пользователя. Эту информацию предоставляет клиент или браузер.|
 |MachineDomainInfo|Edm.String Term="Microsoft.Office.Audit.Schema.PIIFlag" Bool="true"|Нет|Сведения об операциях синхронизации устройств. Сообщаются, только если присутствуют в запросе.|
 |MachineId|Edm.String Term="Microsoft.Office.Audit.Schema.PIIFlag" Bool="true"|Нет|Сведения об операциях синхронизации устройств. Сообщаются, только если присутствуют в запросе.|
-
+|||||
 
 ### <a name="enum-itemtype---type-edmint32"></a>Enum: ItemType; Type: Edm.Int32
 
@@ -173,6 +174,7 @@ ms.locfileid: "35601532"
 |8|Tenant|Элемент представляет собой клиент.|
 |9|DocumentLibrary|Элемент представляет собой библиотеку документов.|
 |11|Page|Элемент представляет собой страницу.|
+||||
 
 ### <a name="enum-eventsource---type-edmint32"></a>Enum: EventSource; Type: Edm.Int32
 
@@ -182,6 +184,7 @@ ms.locfileid: "35601532"
 |:-----|:-----|:-----|
 |0|SharePoint|Источник события — SharePoint.|
 |1|ObjectModel|Источник события — ObjectModel.|
+||||
 
 
 ### <a name="enum-sharepointauditoperation---type-edmint32"></a>Enum: SharePointAuditOperation; Type: Edm.Int32
@@ -338,6 +341,7 @@ ms.locfileid: "35601532"
 |UserAddedToGroup*|Администратор или владелец сайта добавляет пользователя в группу на сайте SharePoint или OneDrive для бизнеса. При добавлении в группу пользователю предоставляются назначенные ей разрешения. |
 |UserRemovedFromGroup*|Администратор или владелец сайта удаляет пользователя из группы на сайте SharePoint или OneDrive для бизнеса. После удаления пользователь лишается разрешений, назначенных группе. |
 |WorkflowModified|Пользователь создает, изменяет или удаляет тип корпоративного проекта или этапы либо стадии рабочего процесса в Project Web App.|
+|||||
 
 
 > [!NOTE] 
@@ -362,7 +366,7 @@ ms.locfileid: "35601532"
 |DestinationFileExtension|Edm.String|Нет|Расширение скопированного или перемещенного файла. Это свойство отображается только для событий FileCopied и FileMoved.|
 |UserSharedWith|Edm.String|Нет|Пользователь, которому предоставлен общий доступ к ресурсу.|
 |SharingType|Edm.String|Нет|Тип разрешения на общий доступ, назначенный пользователю, которому предоставлен доступ к ресурсу. На этого пользователя указывает параметр _UserSharedWith_.|
-
+|||||
 
 
 ## <a name="sharepoint-sharing-schema"></a>Схема общего доступа SharePoint
@@ -376,6 +380,7 @@ ms.locfileid: "35601532"
 |TargetUserOrGroupName |Edm.String|Нет|В этом параметре хранится имя участника-пользователя для целевого пользователя или группы, которым предоставлен общий доступ к ресурсу.|
 |TargetUserOrGroupType|Edm.String|Нет|Указывает на тип целевого пользователя или группы: участник, гость, группа или партнер. |
 |EventData|XML code|Нет|Сообщает дополнительные сведения о выполненном действии предоставления общего доступа (например, добавлении пользователя в группу или предоставлении разрешений на правку).|
+|||||
 
 
 ## <a name="sharepoint-schema"></a>Схема SharePoint
@@ -383,13 +388,12 @@ ms.locfileid: "35601532"
 Эта схема используется в событиях SharePoint, перечисленных в статье [Поиск в журнале аудита в Центре защиты Office 365](https://support.office.com/ru-RU/article/Search-the-audit-log-in-the-Office-365-Security-Compliance-Center-0d4d0f35-390b-4518-800e-0c7ec95e946c?ui=en-US&amp;rs=en-US&amp;ad=US) (за исключением событий, связанных с файлами и папками).
 
 
-
 |**Параметр**|**Тип**|**Обязательный?**|**Описание**|
 |:-----|:-----|:-----|:-----|
 |CustomEvent|Edm.String|Нет|Необязательная строка для настраиваемых событий.|
 |EventData|Edm.String|Нет|Необязательные полезные данные для настраиваемых событий.|
 |ModifiedProperties|Collection(ModifiedProperty)|Нет|Это свойство включается для действий администратора, таких как добавление пользователя в качестве участника сайта или члена группы администраторов семейства веб-сайтов. Значение включает имя измененного свойства (например, группы администраторов сайта), новое значение измененного свойства (например, пользователя, добавленного в качестве администратора сайта) и предыдущее значение измененного объекта.|
-
+|||||
 
 ## <a name="project-schema"></a>Схема Project
 
@@ -398,11 +402,11 @@ ms.locfileid: "35601532"
 |Entity|Edm.String|Да| Элемент [ProjectEntity](#project-entity), для которого предназначался аудит.|
 |Action|Edm.String|Да|Выполненное действие [ProjectAction](#project-action).|
 |OnBehalfOfResId|Edm.Guid|Нет|ИД ресурса, от имени которого выполнено действие.|
-
-<a name="project-action"></a>
+|||||
 
 ### <a name="enum-project-action---type-edmint32"></a>Enum: Project Action; Type: Edm.Int32
 
+#### <a name="project-action"></a>Действие Project
 
 |**Имя элемента**|**Описание**|
 |:-----|:-----|
@@ -426,9 +430,11 @@ ms.locfileid: "35601532"
 |Saved|Пользователь сохранил сущность.|
 |Sent|Пользователь отправил сущность.|
 |Submitted|Пользователь отправил сущность для проверки или рабочего процесса.|
+|||||
 
-<a name="project-entity"></a>
 ### <a name="enum-project-entity---type-edmint32"></a>Enum: Project Entity; Type: Edm.Int32
+
+#### <a name="project-entity"></a>Объект Project
 
 |**Имя элемента**|**Описание**|
 |:-----|:-----|
@@ -464,9 +470,9 @@ ms.locfileid: "35601532"
 |View|Представляет определение представления.|
 |WorkflowPhase|Представляет этап в рабочем процессе.|
 |WorkflowStage|Представляет стадию в рабочем процессе.|
+|||||
 
 ## <a name="exchange-admin-schema"></a>Схема администрирования Exchange
-
 
 
 |**Параметры**|**Тип**|**Обязательный**|**Описание**|
@@ -477,10 +483,9 @@ ms.locfileid: "35601532"
 |ExternalAccess|Edm.Boolean|Да|Указывает, кто запустил командлет: пользователь в вашей организации, сотрудник центра данных Майкрософт, учетная запись службы центра данных или полномочный администратор. Значение **False** означает, что командлет был запущен пользователем в вашей организации. Значение **True** значит, что командлет запустили сотрудник центра данных Майкрософт, учетная запись службы центра данных или полномочный администратор.|
 |OriginatingServer|Edm.String|Нет|Имя сервера, с которого выполнен командлет.|
 |OrganizationName|Edm.String|Нет|Имя клиента.|
-
+|||||
 
 ## <a name="exchange-mailbox-schema"></a>Схема почтовых ящиков Exchange
-
 
 
 |**Параметры**|**Тип**|**Обязательный**|**Описание**|
@@ -501,7 +506,7 @@ ms.locfileid: "35601532"
 |ClientMachineName|Edm.String|Нет|Имя компьютера, на котором размещен клиент Outlook.|
 |ClientProcessName|Edm.String|Нет|Почтовый клиент, который использовался для доступа к почтовому ящику. |
 |ClientVersion|Edm.String|Нет|Версия почтового клиента.|
-
+|||||
 
 ### <a name="enum-logontype---type-edmint32"></a>Enum: LogonType; Type: Edm.Int32
 
@@ -517,10 +522,9 @@ ms.locfileid: "35601532"
 |4|SystemService|Учетная запись службы в центре данных Майкрософт.|
 |5|BestAccess|Зарезервировано для внутреннего использования.|
 |6|DelegatedAdmin|Полномочный администратор.|
-
+|||||
 
 ### <a name="exchangemailboxauditgrouprecord-schema"></a>Схема ExchangeMailboxAuditGroupRecord
-
 
 
 |**Параметры**|**Тип**|**Обязательный?**|**Описание**|
@@ -534,11 +538,10 @@ ms.locfileid: "35601532"
 |DestFolder|Self.[ExchangeFolder](#exchangefolder-complex-type)|Нет|Конечная папка для операций, таких как Move.|
 |Folders|Collection(Self.[ExchangeFolder](#exchangefolder-complex-type))|Нет|Сведения об исходных папках, задействованных при операции (например, в случае выбора папок с последующим их удалением).|
 |AffectedItems|Collection(Self.[ExchangeItem](#exchangeitem-complex-type))|Нет|Сведения о каждом элементе в группе.|
-
+|||||
 
 
 ### <a name="exchangemailboxauditrecord-schema"></a>Схема ExchangeMailboxAuditRecord
-
 
 
 |**Параметры**|**Тип**|**Обязательный?**|**Описание**|
@@ -549,7 +552,7 @@ ms.locfileid: "35601532"
 |SendAsUserMailboxGuid|Edm.Guid|Нет|GUID почтового ящика Exchange, к которому получен доступ для отправки электронной почты.|
 |SendOnBehalfOfUserSmtp|Edm.String|Нет|SMTP-адрес пользователя, от имени которого отправляется электронная почта.|
 |SendOnBehalfOfUserMailboxGuid|Edm.Guid|Нет|GUID почтового ящика Exchange, к которому получен доступ для отправки почты от его имени.|
-
+|||||
 
 ### <a name="exchangeitem-complex-type"></a>Сложный тип ExchangeItem
 
@@ -560,20 +563,19 @@ ms.locfileid: "35601532"
 |Subject|Edm.String|Нет|Строка темы сообщения, к которому получен доступ.|
 |ParentFolder|Edm.ExchangeFolder|Нет|Имя папки, в которой расположен элемент.|
 |Attachments|Edm.String|Нет|Список имен и размер файлов всех элементов, вложенных в сообщение.|
+|||||
 
 ### <a name="exchangefolder-complex-type"></a>Сложный тип ExchangeFolder
-
 
 
 |**Параметры**|**Тип**|**Обязательный?**|**Описание**|
 |:-----|:-----|:-----|:-----|
 |Id|Edm.String|Да|Идентификатор хранилища объекта папки.|
 |Path|Edm.String|Нет|Имя папки почтового ящика, где расположено сообщение, к которому получен доступ.|
-
+|||||
 
 
 ## <a name="azure-active-directory-base-schema"></a>Базовая схема Azure Active Directory
-
 
 
 |**Параметры**|**Тип**|**Обязательный?**|**Описание**|
@@ -581,6 +583,7 @@ ms.locfileid: "35601532"
 |AzureActiveDirectoryEventType|Self.[AzureActiveDirectoryEventType](#azureactivedirectoryeventtype)|Да|Тип события Azure AD. |
 |ExtendedProperties|Collection(Common.NameValuePair)|Нет|Расширенные свойства события Azure AD.|
 |ModifiedProperties|Collection(Common.ModifiedProperty)|Нет|Это свойство включено для событий администрирования. Оно включает имя, а также новое и предыдущее значения измененного свойства.|
+|||||
 
 ### <a name="enum-azureactivedirectoryeventtype---type--edmint32"></a>Enum: AzureActiveDirectoryEventType; Type: Edm.Int32
 
@@ -590,9 +593,9 @@ ms.locfileid: "35601532"
 |:-----|:-----|
 |AccountLogon|Событие входа в учетную запись.|
 |AzureApplicationAuditEvent|Событие, связанное с безопасностью приложения Azure.|
+|||||
 
 ## <a name="azure-active-directory-account-logon-schema"></a>Схема входа в учетную запись Azure Active Directory
-
 
 
 |**Параметры**|**Тип**|**Обязательный?**|**Описание**|
@@ -601,11 +604,10 @@ ms.locfileid: "35601532"
 |Client|Edm.String|Нет|Сведения о клиентском устройстве, ОС и браузере устройства, которое использовалось для входа в учетную запись.|
 |LoginStatus|Edm.Int32|Да|Значение этого свойства берется непосредственно из параметра OrgIdLogon.LoginStatus. Различные представляющие интерес ошибки входа можно сопоставить с помощью алгоритмов оповещения.|
 |UserDomain|Edm.String|Да|Сведения об удостоверении клиента (TII).|
-
+|||||
 
 
 ### <a name="enum-credentialtype---type-edmint32"></a>Enum: CredentialType; Type: Edm.Int32
-
 
 
 |**Значение**|**Имя элемента**|**Описание**|
@@ -620,9 +622,9 @@ ms.locfileid: "35601532"
 |14|PasswordIndexCredentialType|Учетные данные пользователя — PasswordIndexCredentialType.|
 |16|Device|Учетные данные пользователя — устройство.|
 |17|ForeignRealmIndex|Учетные данные пользователя — ForeignRealmIndex.|
+|||||
 
 ### <a name="enum-logintype---type-edmint32"></a>Enum: LoginType; Type: Edm.Int32
-
 
 
 |**Значение**|**Имя элемента**|**Описание**|
@@ -631,10 +633,9 @@ ms.locfileid: "35601532"
 |1|InitialAuth|Вход с начальной проверкой подлинности.|
 |2|CookieCopy|Вход с использованием файла cookie.|
 |3|SilentReAuth|Вход с автоматической повторной проверкой подлинности.|
-
+|||||
 
 ### <a name="enum-authenticationmethod---type-edmint32"></a>Enum: AuthenticationMethod; Type: Edm.Int32
-
 
 
 |**Значение**|**Имя элемента**|**Описание**|
@@ -659,11 +660,10 @@ ms.locfileid: "35601532"
 |17|SAML20PostSimpleSign|Способ проверки подлинности — SAML20PostSimpleSign.|
 |18|SAML20Post|Способ проверки подлинности — SAML20Post.|
 |19|OneTimeCode|Способ проверки подлинности — одноразовый код.|
-
+|||||
 
 
 ## <a name="azure-active-directory-schema"></a>Схема Azure Active Directory
-
 
 
 |**Параметры**|**Тип**|**Обязательный?**|**Описание**|
@@ -676,17 +676,16 @@ ms.locfileid: "35601532"
 |SupportTicketId|Edm.String|Нет|Идентификатор запроса в службу поддержки от пользователя для действий от его имени.|
 |Target|Collection(Self.[IdentityTypeValuePair](#complex-type-identitytypevaluepair))|Нет|Пользователь, с которым выполнено действие (определяется свойством Operation).|
 |TargetContextId|Edm.String|Нет|GUID организации, в которую входит целевой пользователь.|
-
-
+|||||
 
 ### <a name="complex-type-identitytypevaluepair"></a>Сложный тип IdentityTypeValuePair
-
 
 
 |**Параметры**|**Тип**|**Обязательный?**|**Описание**|
 |:-----|:-----|:-----|:-----|
 |ИД|Edm.String|Да|Значение удостоверения заданного типа.|
 |Type|Self.IdentityType|Да|Тип удостоверения.|
+|||||
 
 ### <a name="enum-identitytype---type-edmint32"></a>Enum: IdentityType; Type: Edm.Int32
 
@@ -700,6 +699,7 @@ ms.locfileid: "35601532"
 |PUID|Субъект, выполнивший действие аудита, или уникальный идентификатор целевого паспорта.|
 |SPN|Удостоверение субъекта-службы, если действие выполнено в службе Office 365.|
 |UPN|Имя участника-пользователя.|
+|||||
 
 
 ## <a name="azure-active-directory-secure-token-service-sts-logon-schema"></a>Схема входа в службу маркеров безопасности Azure Active Directory
@@ -709,6 +709,7 @@ ms.locfileid: "35601532"
 |ApplicationId|Edm.String|Нет|GUID, который представляет приложение, запрашивающее вход. Отображаемое имя можно просмотреть с помощью API Graph Azure Active Directory.|
 |Client|Edm.String|Нет|Сведения о клиентском устройстве, предоставляемые браузером, с которого выполнен вход.|
 |LogonError|Edm.String|Нет|Содержит сведения о причине неудачной попытки входа.|
+|||||
 
 ## <a name="dlp-schema"></a>Схема защиты от потери данных
 
@@ -729,6 +730,7 @@ ms.locfileid: "35601532"
 |ExceptionInfo|Edm.String|Нет|Указывает на причины, по которым политика больше не применяется, а также возможные сведения о ложных срабатываниях и переопределениях, обнаруженных пользователем.|
 |PolicyDetails|Collection(Self.[PolicyDetails](#policydetails-complex-type))|Да|Сведения об 1 или нескольких политиках, активировавших событие защиты от потери данных.|
 |SensitiveInfoDetectionIsIncluded|Boolean|Да|Указывает, содержит ли событие значение типа конфиденциальных данных и окружающий контекст из исходного контента. Для доступа к конфиденциальным данным требуется разрешение "Чтение событий политики защиты от потери данных, в том числе конфиденциальных сведений" в Azure Active Directory.|
+|||||
 
 ### <a name="sharepointmetadata-complex-type"></a>Сложный тип SharePointMetadata
 
@@ -745,6 +747,7 @@ ms.locfileid: "35601532"
 |DocumentSharer|Edm.String|Да|Пользователь, который последним изменил параметры общего доступа к документу.|
 |UniqueId|Edm.String|Да|GUID, определяющий файл.|
 |LastModifiedTime|Edm.DateTime|Да|Метка времени последнего изменения документа в формате UTC.|
+|||||
 
 
 ### <a name="exchangemetadata-complex-type"></a>Сложный тип ExchangeMetadata
@@ -759,7 +762,7 @@ ms.locfileid: "35601532"
 |Subject|Edm.String|Да|Тема электронного сообщения.|
 |Sent|Edm.DateTime|Да|Время отправки сообщения в формате UTC.|
 |RecipientCount|Edm.Int32|Да|Общее количество все получателей в строках "Кому", "Копия" и "СК" сообщения.|
-
+|||||
 
 ### <a name="policydetails-complex-type"></a>Сложный тип PolicyDetails
 
@@ -768,6 +771,7 @@ ms.locfileid: "35601532"
 |PolicyId|Edm.Guid|Да|GUID политики защиты от потери данных для этого события.|
 |PolicyName|Edm.String|Да|Понятное имя политики защиты от потери данных для этого события.|
 |Rules|Collection(Self.[Rules](#rules-complex-type))|Да|Сведения о правилах в политике, сопоставленных с этим событием.|
+|||||
 
 ### <a name="rules-complex-type"></a>Сложный тип Rules
 
@@ -780,6 +784,7 @@ ms.locfileid: "35601532"
 |Severity|Edm.String|Нет|Серьезность (низкая, средняя или высокая) сопоставленного правила.|
 |RuleMode|Edm.String|Да|Указывает, какое действие назначено для правила защиты от потери данных: "Принудительно", "Аудит и уведомление" или только "Аудит".|
 |ConditionsMatched|Self.[ConditionsMatched](#conditionsmatched-complex-type)|Нет|Сведения об условиях правила, сопоставленных с этим событием.|
+|||||
 
 ### <a name="conditionsmatched-complex-type"></a>Сложный тип ConditionsMatched
 
@@ -788,6 +793,7 @@ ms.locfileid: "35601532"
 |SensitiveInformation|Collection(Self.[SensitiveInformation](#sensitiveinformation-complex-type))|Нет|Сведения о типе обнаруженных конфиденциальных сведений.|
 |DocumentProperties|Collection(NameValuePair)|Нет|Сведения о свойствах документа, активировавших соответствие правилу.|
 |OtherConditions|Collection(NameValuePair)|Нет|Список пар "ключ-значение", описывающих другие сопоставленные условия.|
+|||||
 
 ### <a name="sensitiveinformation-complex-type"></a>Сложный тип SensitiveInformation
 
@@ -797,6 +803,7 @@ ms.locfileid: "35601532"
 |Count|Edm.Int|Да|Количество обнаруженных экземпляров конфиденциальных сведений.|
 |SensitiveType|Edm.Guid|Да|GUID, определяющий тип обнаруженных конфиденциальных данных.|
 |SensitiveInformationDetections|Self.SensitiveInformationDetections|Нет|Массив объектов, которые содержат конфиденциальные данные, с сопоставленным значением и его контекстом.|
+|||||
 
 ### <a name="sensitiveinformationdetections-complex-type"></a>Сложный тип SensitiveInformationDetections 
 Конфиденциальные данные DLP доступны только в API веб-каналов активности для пользователей с разрешениями "Чтение конфиденциальных данных DLP". 
@@ -805,6 +812,7 @@ ms.locfileid: "35601532"
 |:-----|:-----|:-----|:-----|
 |Detections|Collection(Self.Detections)|Да|Массив обнаруженных конфиденциальных сведений. Они включают пары "ключ-значение", где значение соответствует сопоставленному значению (например, значение кредитной карты SSN), и контекст, который представляет собой выдержку из исходного контента, содержащего сопоставленное значение. |
 |ResultsTruncated|Edm.Boolean|Да|Указывает, усекались ли журналы из-за большого количества результатов. |
+|||||
 
 ### <a name="exceptioninfo-complex-type"></a>Сложный тип ExceptionInfo
 
@@ -814,6 +822,7 @@ ms.locfileid: "35601532"
 |FalsePositive|Edm.Boolean|Нет|Указывает, обозначил ли пользователь это событие как ложное срабатывание.|
 |Justification|Edm.String|Нет|Здесь записано указанное пользователем обоснование, если он решил переопределить политику.|
 |Rules|Collection(Edm.Guid)|Нет|Коллекция идентификаторов GUID для каждого правила, которое определено в качестве ложного срабатывании или переопределения либо для которого отменено действие.|
+|||||
 
 ## <a name="security-and-compliance-center-schema"></a>Схема Центра безопасности и соответствия требованиям
 
@@ -827,6 +836,7 @@ ms.locfileid: "35601532"
 |ClientApplication|Edm.String|Нет|Это поле содержит имя приложения, если командлет выполнен с помощью приложения, а не удаленной оболочки PowerShell.|
 |Parameters|Edm.String|Нет|Имена и значения параметров, которые использовались с командлетом и не содержат личных сведений.|
 |NonPiiParameters|Edm.String|Нет|Имена и значения параметров, которые использовались с командлетом и содержат личные сведения. (Это устаревшее поле, которое вскоре будет удалено. Его содержимое будет объединено с полем Parameters.)|
+|||||
 
 ## <a name="security-and-compliance-alerts-schema"></a>Схема оповещений о безопасности и соответствии требованиям
 
@@ -855,6 +865,7 @@ ms.locfileid: "35601532"
 |Data|Edm.String|Нет|Большой двоичный объект с подробными данными оповещения или сущности оповещения.|
 |AlertEntityId|Edm.String|Нет|Идентификатор для сущности оповещения. Этот параметр применяется только для событий AlertEntityGenerated.|
 |EntityType|Edm.String|Нет|Тип оповещения или сущности оповещения. Типы сущностей: <ul xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:mtps="http://msdn2.microsoft.com/mtps" xmlns:mshelp="http://msdn.microsoft.com/mshelp" xmlns:ddue="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:msxsl="urn:schemas-microsoft-com:xslt"><li><p>User</p></li><li><p>Recipients</p></li><li><p>Sender</p></li><li><p>MalwareFamily</p></li></ul>Этот параметр применяется только для событий AlertEntityGenerated.|
+|||||
 
 ## <a name="yammer-schema"></a>Схема Yammer
 
@@ -874,6 +885,7 @@ ms.locfileid: "35601532"
 |TargetUserId|Edm.String|Нет|Электронный адрес целевого пользователя, с которым выполнена операция. Пустое значение, если не касается операции.|
 |TargetYammerUserId|Edm.Int64|Нет|Идентификатор целевого пользователя, с которым выполнена операция.|
 |VersionId|Edm.Int64|Нет|Идентификатор версии файла, с которым выполнена операция.|
+|||||
 
 ## <a name="sway-schema"></a>Схема Sway
 
@@ -888,6 +900,7 @@ ms.locfileid: "35601532"
 |SwayLookupId|Edm.String|Нет|Идентификатор Sway. |
 |SiteUrl|Edm.String|Нет|URL-адрес клиента Sway.|
 |OperationResult|Self.[OperationResult](#operationresult)|Нет|Успешное выполнение или ошибка.|
+|||||
 
 
 ### <a name="enum-objecttype---type-edmint32"></a>Enum: ObjectType; Type Edm.Int32
@@ -899,6 +912,7 @@ ms.locfileid: "35601532"
 |0|Sway|Событие, активированное из клиента Sway.|
 |1|SwayEmbedded|Событие активировано из клиента Sway, внедренного в узел.|
 |2|SwayAdminPortal|Событие активировано из параметров службы Sway на портале администрирования Office 365.|
+|||||
 
 
 ### <a name="enum-operationresult---type-edmint32"></a>Enum: OperationResult; Type Edm.Int32
@@ -909,6 +923,7 @@ ms.locfileid: "35601532"
 |:-----|:-----|:-----|
 |0|Succeeded|Событие успешно завершено.|
 |1|Failed|Событие завершилось ошибкой.|
+|||||
 
 
 ### <a name="enum-endpoint---type-edmint32"></a>Enum: Endpoint; Type Edm.Int32
@@ -921,7 +936,7 @@ ms.locfileid: "35601532"
 |1|SwayIOS|Событие активировано с помощью клиента Sway под управлением iOS.|
 |2|SwayWindows|Событие активировано с помощью клиента Sway под управлением Windows.|
 |3|SwayAndroid|Событие активировано с помощью клиента Sway под управлением Android.|
-
+|||||
 
 
 ### <a name="enum-devicetype---type-edmint32"></a>Enum: DeviceType; Type Edm.Int32
@@ -933,6 +948,7 @@ ms.locfileid: "35601532"
 |0|Desktop|Событие активировано с использованием настольного компьютера.|
 |1|Mobile|Событие активировано с использованием мобильного устройства.|
 |2|Tablet|Событие активировано с использованием планшета.|
+|||||
 
 
 
@@ -956,12 +972,14 @@ ms.locfileid: "35601532"
 |13|ServiceOff|Пользователь отключает клиент Sway для всей организации с помощью Центра администрирования Office 365 (отключен по умолчанию).|
 |14|ExternalSharingOn|Пользователь включает внешний общий доступ для всей организации с помощью Центра администрирования Office 365.|
 |15|ExternalSharingOff|Пользователь отключает внешний общий доступ для всей организации с помощью Центра администрирования Office 365.|
+|||||
 
 ## <a name="data-center-security-base-schema"></a>Базовая схема безопасности центра обработки данных
 
 |**Parameters**|**Тип**|**Обязательный?**|**Описание**|
 |:-----|:-----|:-----|:-----|
 |DataCenterSecurityEventType|Self.[DataCenterSecurityEventType](#datacentersecurityeventtype)|Да|Тип события dmdlet в Lock Box.|
+|||||
 
 ### <a name="enum-datacentersecurityeventtype---type-edmint32"></a>Enum: DataCenterSecurityEventType; Type: Edm.Int32
 
@@ -971,12 +989,10 @@ ms.locfileid: "35601532"
 |**Имя элемента**|**Описание**|
 |:-----|:-----|
 |DataCenterSecurityCmdletAuditEvent|Значение перечисления для события, связанного с типом аудита командлета.|
-
+|||
 
 
 ## <a name="data-center-security-cmdlet-schema"></a>Схема командлетов для обеспечения безопасности центра обработки данных
-
-
 
 |**Параметры**|**Тип**|**Обязательный?**|**Описание**|
 |:-----|:-----|:-----|:-----|
@@ -989,6 +1005,7 @@ ms.locfileid: "35601532"
 |ElevationRole|Edm.String|Нет|Роль, для которой запрошено повышение прав.|
 |ElevationDuration|Edm.Int32|Да|Период, в течение которого было активным повышение прав.|
 |GenericInfo|Edm.String|Нет|Используется для комментариев и других общих сведений.|
+|||||
 
 
 ## <a name="microsoft-teams-schema"></a>Схема Microsoft Teams
@@ -996,12 +1013,22 @@ ms.locfileid: "35601532"
 |**Параметры**|**Тип**|**Обязательный?**|**Описание**|
 |:-----|:-----|:-----|:-----|
 |MessageId|Edm.String|Нет|Идентификатор сообщения чата или канала.|
-|MeetupId|Edm.String|Нет|Идентификатор запланированного или незапланированного собрания.|
 |Members|Collection(Self.[MicrosoftTeamsMember](#microsoftteamsmember-complex-type))|Нет|Список пользователей в группе.|
 |TeamName|Edm.String|Нет|Имя группы, для которой выполняется аудит.|
 |TeamGuid|Edm.Guid|Нет|Уникальный идентификатор группы, для которой выполняется аудит.|
+|ChannelType|Edm.String|Нет|Тип проверяемого канала (стандартный или закрытый).|
 |ChannelName|Edm.String|Нет|Имя канала, для которого выполняется аудит.|
 |ChannelGuid|Edm.Guid|Нет|Уникальный идентификатор канала, для которого выполняется аудит.|
+|ExtraProperties|Collection(Self.[KeyValuePair](#keyvaluepair-complex-type))|Нет|Список дополнительных свойств.|
+|AddOnType|Self.[AddOnType](#addontype)|Нет|Тип надстройки, создавшей это событие.|
+|AddonName|Edm.String|Нет|Имя надстройки, создавшей событие.|
+|AddOnGuid|Edm.Guid|Нет|Уникальный идентификатор надстройки, создавшей событие.|
+|TabType|Edm.String|Нет|Присутствует только для событий вкладок. Тип вкладки, создавшей событие.|
+|Имя|Edm.String|Нет|Присутствует только для событий параметров. Имя измененного параметра.|
+|OldValue|Edm.String|Нет|Присутствует только для событий параметров. Старое значение параметра.|
+|NewValue|Edm.String|Нет|Присутствует только для событий параметров. Новое значение параметра.|
+||||
+
 
 ### <a name="microsoftteamsmember-complex-type"></a>Сложный тип MicrosoftTeamsMember
 
@@ -1010,6 +1037,7 @@ ms.locfileid: "35601532"
 |UPN|Edm.String|Нет|Имя участника-пользователя.|
 |Role|Self.[MemberRoleType](#memberroletype)|Нет|Роль пользователя в группе.|
 |DisplayName|Edm.String|Нет|Отображаемое имя пользователя.|
+|||||
 
 ### <a name="enum-memberroletype---type-edmint32"></a>Enum: MemberRoleType; Type: Edm.Int32
 
@@ -1020,16 +1048,16 @@ ms.locfileid: "35601532"
 |0|Member|Пользователь, который входит в группу.|
 |1|Owner|Владелец группы.|
 |2|Guest|Пользователь, который не входит в группу.|
+||||
 
+### <a name="keyvaluepair-complex-type"></a>Сложный тип KeyValuePair
 
-## <a name="microsoft-teams-add-ons-schema"></a>Схема надстроек Microsoft Teams
-
-|**Параметры**|**Тип**|**Обязательный?**|**Описание**|
+|**Parameters**|**Тип**|**Обязательный?**|**Описание**|
 |:-----|:-----|:-----|:-----|
-|AddOnType|Self.[AddOnType](#addontype)|Нет|Тип надстройки, создавшей это событие.|
-|AddonName|Edm.String|Нет|Имя надстройки, создавшей это событие.|
-|AddOnGuid|Edm.Guid|Нет|Уникальный идентификатор надстройки, создавшей это событие.|
-|TabType|Edm.String|Нет|Тип вкладки, создавшей это событие.|
+|Key|Edm.String|Нет|Ключ в паре "ключ — значение".|
+|Value|Edm.String|Нет|Значение в паре "ключ — значение".|
+|||||
+
 
 ### <a name="enum-addontype---type-edmint32"></a>Enum: AddOnType; Type: Edm.Int32
 
@@ -1040,14 +1068,7 @@ ms.locfileid: "35601532"
 |1|Bot|Программа-робот Microsoft Teams.|
 |2|Connector|Соединитель Microsoft Teams.|
 |3|Tab|Вкладка Microsoft Teams.|
-
-
-## <a name="microsoft-teams-settings-schema"></a>Схема параметров Microsoft Teams
-
-|**Параметры**|**Тип**|**Обязательный?**|**Описание**|
-|:-----|:-----|:-----|:-----|
-|ModifiedProperty|Common.ModifiedProperty|Нет|Измененное свойство. Этот параметр будет содержать значения **Name**, **OldValue** и **NewValue** свойства.|
-|ExtendedProperties|Collection(Common.NameValuePair)|Нет|Список расширенных свойств для параметра, в который вносятся изменения. Каждое свойство будет включать значения **Name** и **Value**.|
+||||
 
 ## <a name="office-365-advanced-threat-protection-and-threat-investigation-and-response-schema"></a>Схема Office 365 Advanced Threat Protection и Threat Investigation and Response
 
@@ -1079,6 +1100,7 @@ ms.locfileid: "35601532"
 |Verdict|Edm.String|Да|Заключение о сообщении.|
 |MessageTime|Edm.Date|Да|Дата и время указаны в соответствии со всемирным координированным временем (UTC) и отражают момент получения или отправки электронного сообщения.|
 |EventDeepLink|Edm.String|Да|Глубокая ссылка на событие электронной почты в проводнике или в отчете в реальном времени в Центр безопасности и соответствия требованиям Office 365.|
+|||||
 
 ### <a name="attachmentdata-complex-type"></a>Сложный тип AttachmentData
 
@@ -1091,6 +1113,7 @@ ms.locfileid: "35601532"
 |FileVerdict|Self.[FileVerdict](#fileverdict)|Да|Заключение о вредоносности файла.|
 |MalwareFamily|Edm.String|Нет|Тип вредоносности файла.|
 |SHA256|Edm.String|Да|Хэш SHA256 файла.|
+|||||
 
 ### <a name="enum-fileverdict---type-edmint32"></a>Enum: FileVerdict; Type: Edm.Int32
 
@@ -1103,6 +1126,7 @@ ms.locfileid: "35601532"
 |–1|Error|Ошибка при сканировании или анализе.|
 |–2|Timeout|Превышено время ожидания при сканировании или анализе.|
 |–3|Pending|Сканирование или анализ не завершены.|
+|||||
 
 ### <a name="url-time-of-click-events"></a>События выбора URL-адреса
 
@@ -1115,6 +1139,7 @@ ms.locfileid: "35601532"
 |TimeOfClick|Edm.Date|Да|Дата и время щелчка URL-адреса в формате UTC.|
 |URL|Edm.String|Да|URL-адрес, который щелкнул пользователь.|
 |UserIp|Edm.String|Да|IP-адрес пользователя, который щелкнул URL-адрес. IP-адрес отображается в формате адреса IPv4 или IPv6.|
+|||||
 
 ### <a name="enum-urlclickaction---type-edmint32"></a>Перечисление: URLClickAction - Type: Edm.Int32
 
@@ -1126,6 +1151,7 @@ ms.locfileid: "35601532"
 |3|PendingDetonationPage|Пользователю открывается ожидающая "детонации" страница на основании инструмента [Безопасные ссылки Office 365 ATP](https://docs.microsoft.com/office365/securitycompliance/atp-safe-links).|
 |4|BlockPageOverride|Пользователю запрещен переход к URL-адресу с помощью [безопасных ссылок Office 365 ATP](https://docs.microsoft.com/office365/securitycompliance/atp-safe-links); однако пользователь форсирует преодоление блокировки, чтобы перейти к URL-адресу.|
 |5|PendingDetonationPageOverride|Пользователя открывается страница "детонации" на основании инструмента [Безопасные ссылки Office 365 ATP](https://docs.microsoft.com/office365/securitycompliance/atp-safe-links); однако пользователь форсирует преодоление блокировки, чтобы перейти к URL-адресу.|
+|||||
 
 
 ### <a name="file-events"></a>События файлов
@@ -1138,6 +1164,7 @@ ms.locfileid: "35601532"
 |LastModifiedDate|Edm.Date|Да|Дата и время в формате UTC, когда файл был создан или изменен в последний раз.|
 |LastModifiedBy|Edm.String|Да|Идентификатор (например, адрес электронной почты) для пользователя, который создал или выполнил последнее изменение файла.|
 |EventDeepLink|Edm.String|Да|Глубокая ссылка на файл события в проводнике или отчетах, подготавливаемых в режиме реального времени в Центре безопасности и соответствия требованиям.|
+|||||
 
 ### <a name="filedata-complex-type"></a>Сложный тип FileData
 
@@ -1152,6 +1179,7 @@ ms.locfileid: "35601532"
 |MalwareFamily|Edm.String|Нет|Тип вредоносности файла.|
 |SHA256|Edm.String|Да|Хэш файла SHA256.|
 |FileSize|Edm.String|Да|Размер файла в байтах.|
+|||||
 
 ### <a name="enum-sourceworkload---type-edmint32"></a>Enum: SourceWorkload - Type: Edm.Int32
 
@@ -1162,6 +1190,7 @@ ms.locfileid: "35601532"
 |0|SharePoint Online|
 |1|OneDrive для бизнеса|
 |2|Microsoft Teams|
+|||||
 
 ## <a name="power-bi-schema"></a>Схема Power BI
 
@@ -1179,6 +1208,7 @@ ms.locfileid: "35601532"
 | SharingInformation    | Collection([SharingInformationType](#sharinginformationtype-complex-type))   Term="Microsoft.Office.Audit.Schema.PIIFlag" Bool="true"    |  Нет  | Сведения о пользователе, которому отправлено приглашение к совместному использованию. |
 | SwitchState           | Edm.String Term="Microsoft.Office.Audit.Schema.PIIFlag" Bool="true"                            |  Нет  | Сведения о состоянии различных параметров уровня клиента. |
 | WorkSpaceName         | Edm.String Term="Microsoft.Office.Audit.Schema.PIIFlag" Bool="true"                            |  Нет  | Имя рабочей области, в которой возникло событие. |
+|||||
 
 ### <a name="membershipinformationtype-complex-type"></a>Сложный тип MembershipInformationType
 
@@ -1186,6 +1216,7 @@ ms.locfileid: "35601532"
 |:-----|:-----|:-----|:-----|
 | MemberEmail | Edm.String Term="Microsoft.Office.Audit.Schema.PIIFlag" Bool="true" |  Нет  | Адрес электронной почты группы. |
 | Status      | Edm.String Term="Microsoft.Office.Audit.Schema.PIIFlag" Bool="true" |  Нет  | В настоящее время не заполняется. |
+|||||
 
 ### <a name="sharinginformationtype-complex-type"></a>Сложный тип SharingInformationType
 
@@ -1194,6 +1225,7 @@ ms.locfileid: "35601532"
 | RecipientEmail    | Edm.String Term="Microsoft.Office.Audit.Schema.PIIFlag" Bool="true" |  Нет  | Электронный адрес получателя приглашения к совместному использованию. |
 | RecipientName    | Edm.String Term="Microsoft.Office.Audit.Schema.PIIFlag" Bool="true" |  Нет  | Имя получателя приглашения к совместному использованию. |
 | ResharePermission | Edm.String Term="Microsoft.Office.Audit.Schema.PIIFlag" Bool="true" |  Нет  | Разрешение, предоставляемое получателю. |
+|||||
 
 ## <a name="workplace-analytics-schema"></a>Схема службы "Рабочая аналитика"
 
