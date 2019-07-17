@@ -6,12 +6,12 @@ ms.ContentId: d0b9341a-b205-5442-1c20-8fb56407351d
 ms.topic: reference (API)
 ms.date: ''
 localization_priority: Priority
-ms.openlocfilehash: 1790baa6c941900a18488f338b02fc83a9b29a8b
-ms.sourcegitcommit: efd3dcdb3d190ca7b0f22a671867f0aede5d46c2
+ms.openlocfilehash: 6b42efe72931875592c87e78aa9c9cdce11a339b
+ms.sourcegitcommit: f823233a1ab116bc83d7ca8cd8ad7c7ea59439fc
 ms.translationtype: HT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 06/25/2019
-ms.locfileid: "35226967"
+ms.lasthandoff: 07/15/2019
+ms.locfileid: "35688174"
 ---
 # <a name="office-365-service-communications-api-reference-preview"></a>Справочник по API сообщений о службах Office 365 (предварительная версия)
 
@@ -77,6 +77,7 @@ Authorization: Bearer {OAuth2 token}
 |**Server**|Сервер, используемый для создания отклика (в целях отладки).|
 |**X-ASPNET-Version**|Версия ASP.Net, используемая на сервере, который создал отклик (в целях отладки).|
 |**X-Powered-By**|Технологии, используемые на сервере, который создал отклик (в целях отладки).|
+|||
 
 <br/>
 
@@ -92,6 +93,7 @@ Authorization: Bearer {OAuth2 token}
 |**Путь**| `/Services`||
 |**Параметр запроса**|$select|Выбор подмножества свойств.|
 |**Отклик**|Список объектов Service|Объект Service содержит свойства Id (String), DisplayName (String) и FeatureNames (список String).|
+||||
 
 #### <a name="sample-request"></a>Пример запроса
 
@@ -135,7 +137,6 @@ Authorization: Bearer {AAD_Bearer_JWT_Token}
         }
     ]
 }
-
 ```
 
 
@@ -144,7 +145,7 @@ Authorization: Bearer {AAD_Bearer_JWT_Token}
 Возвращает состояние службы за предыдущие 24 часа.
 
 > [!NOTE] 
-> Отклик службы будет содержать состояние и все инциденты за предыдущие 24 часа. Возвращаемое значение StatusDate или StatusTime точно соответствует моменту времени 24 часа назад. 
+> Отклик службы будет содержать состояние и все инциденты за предыдущие 24 часа. Возвращаемое значение StatusDate или StatusTime точно соответствует моменту времени 24 часа назад, если отсутствует более актуальное состояние. Если служба получила обновление состояния в течение последних 24 часов, будет возвращено время последнего обновления.
 
 ||Служба|Описание|
 |:-----|:-----|:-----|
@@ -152,6 +153,7 @@ Authorization: Bearer {AAD_Bearer_JWT_Token}
 |**Фильтр**|Workload|Фильтрация по рабочей нагрузке (String, значение по умолчанию: all).|
 |**Параметр запроса**|$select|Выбор подмножества свойств.|
 |**Отклик**|Список объектов WorkloadStatus.|Объект WorkloadStatus содержит свойства Id (String), Workload (String), StatusTime (DateTimeOffset), WorkloadDisplayName (String), Status (String), IncidentIds (список String) и FeatureGroupStatusCollection (список объектов FeatureStatus).<br/><br/>Объект FeatureStatus содержит свойства Feature (String), FeatureGroupDisplayName (String) и FeatureStatus (String).|
+||||
 
 #### <a name="sample-request"></a>Пример запроса
 
@@ -262,9 +264,23 @@ Authorization: Bearer {AAD_Bearer_JWT_Token}
         }
     ]
 }
-
 ```
+#### <a name="status-definitions"></a>Определения состояний
 
+|**Состояние**|**Определение**|
+|:-----|:-----|
+|**Investigating** | Мы знаем о возможной проблеме и собираем дополнительные сведения о ней и ее влиянии. |
+|**ServiceDegradation** | Мы подтвердили, что проблема может повлиять на использование служб или функций. Это состояние может отображаться, если служба работает медленнее, чем обычно, периодически возникают прерывания или если недоступна определенная функция. |
+|**ServiceInterruption** | Вы увидите это состояние, если определено, что проблема влияет на доступ к службе. В этом случае проблема является значительной и ее можно воспроизвести. |
+|**RestoringService** | Причина проблемы определена, мы знаем, как ее решить, и восстанавливаем службу. |
+|**ExtendedRecovery** | Это состояние указывает на то, что работа над восстановлением службы идет, но пройдет некоторое время, прежде чем она станет доступна для всех затронутых систем. Это состояние также отображается, если мы применили временное исправление, чтобы уменьшить влияние проблемы, пока готовится постоянное исправление. |
+|**InvestigationSuspended** | Это состояние отображается, если для дальнейшего исследования необходимы дополнительные сведения. В случае если от вас требуются определенные действия, мы дадим вам знать, какие данные или журналы нам нужны. |
+|**ServiceRestored** | Мы убедились, что проблема была решена, а работоспособность службы восстановлена. Чтобы узнать, в чем было дело, просмотрите сведения о проблеме. |
+|**PostIncidentReportPublished** | Мы опубликовали отчет об инциденте для конкретной проблемы, включающий сведения о причинах и последующие действия, предотвращающие повторное возникновение схожей проблемы. |
+|||
+
+> [!NOTE] 
+> Дополнительные сведения о работоспособности служб Office 365 см. в статье [Проверка работоспособности служб Office 365](https://docs.microsoft.com/office365/enterprise/view-service-health).
 
 ## <a name="get-historical-status"></a>Получение сведений об изменении состояния
 
@@ -277,6 +293,7 @@ Authorization: Bearer {AAD_Bearer_JWT_Token}
 ||StatusTime|Фильтрация по дням после StatusTime (DateTimeOffset, значение по умолчанию: 7 дней для ge CurrentTime).|
 |**Параметр запроса**|$select|Выбор подмножества свойств.|
 |**Отклик**|Список объектов WorkloadStatus.|Объект WorkloadStatus содержит свойства Id (String), Workload (String), StatusTime (DateTimeOffset), WorkloadDisplayName (String), Status (String), IncidentIds (список String) и FeatureGroupStatusCollection (список объектов FeatureStatus).<br/><br/>Объект FeatureStatus содержит свойства Feature (String), FeatureGroupDisplayName (String) и FeatureStatus (String).|
+||||
 
 #### <a name="sample-request"></a>Пример запроса
 
@@ -364,8 +381,6 @@ Authorization: Bearer {AAD_Bearer_JWT_Token}
         }
     ]
 }
-
-
 ```
 
 
@@ -385,6 +400,7 @@ Authorization: Bearer {AAD_Bearer_JWT_Token}
 ||$top|Выбор максимального количества результатов (используемое по умолчанию и максимальное значение: $top=100).|
 ||$skip|Пропуск определенного количества результатов (значение по умолчанию: $skip=0).|
 |**Отклик**|Список объектов Message.|Объект Message содержит свойства Id (String), StartTime (DateTimeOffset), EndTime (DateTimeOffset), Status (String), Messages (список объектов MessageHistory), LastUpdatedTime (DateTimeOffset), Workload (String), WorkloadDisplayName (String), Feature (String), FeatureDisplayName (String), MessageType (Enum, значение по умолчанию: all).<br/><br/>Объект MessageHistory содержит свойства PublishedTime (DateTimeOffset), MessageText (String).|
+||||
 
 #### <a name="sample-request"></a>Пример запроса
 
@@ -451,7 +467,6 @@ Authorization: Bearer {AAD_Bearer_JWT_Token}
         }
     ]
 }
-
 ```
 
 
@@ -468,6 +483,5 @@ Authorization: Bearer {AAD_Bearer_JWT_Token}
         "message": "Retry the request." 
     } 
 }
-
 ```
 
