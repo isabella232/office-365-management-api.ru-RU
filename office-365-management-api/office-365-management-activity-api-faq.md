@@ -6,18 +6,18 @@ ms.ContentId: ''
 ms.topic: reference (API)
 ms.date: ''
 localization_priority: Priority
-ms.openlocfilehash: 8954be1b9076eb2a6f640ee96cc2b612addcabc0
-ms.sourcegitcommit: 5b1eaeb7f262b7b9f7ab30ccb9f10878814153ac
+ms.openlocfilehash: 2abcdd71c75cab011fa8e711832b06d398e3a6ab
+ms.sourcegitcommit: 289cf45903a045630f4b3efba6f03494bf08ab4a
 ms.translationtype: HT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "32223947"
+ms.lasthandoff: 07/17/2019
+ms.locfileid: "35772116"
 ---
 # <a name="office-365-management-activity-api-frequently-asked-questions"></a>Вопросы и ответы: API действий управления Office 365
 
 #### <a name="what-events-are-audited-for-a-specific-office-365-service"></a>В случае каких событий проводится аудит для определенной службы Office 365?
 
-В документации по схеме API действий управления Office 365 приведен полный список событий. Дополнительные сведения см. в статье [Схема API действий управления Office 365](office-365-management-activity-api-schema.md).
+В документации по схеме API действий управления Office 365 приведен полный список событий. Дополнительные сведения см. в статье [Схема API действий управления Office 365](office-365-management-activity-api-schema.md). Кроме того, в статье[Поиск по журналу аудита в Центре безопасности и соответствия требованиям](https://docs.microsoft.com/ru-RU/office365/securitycompliance/search-the-audit-log-in-security-and-compliance#audited-activities) в разделе "Подлежащие аудиту действия" приводится список событий для большинства служб Office 365, которые подлежат аудиту.
 
 #### <a name="how-do-i-onboard-to-the-management-activity-api"></a>Как подключиться к API действий управления?
 
@@ -33,7 +33,7 @@ ms.locfileid: "32223947"
 
 #### <a name="is-it-true-that-mailbox-auditing-in-exchange-online-can-only-be-enabled-by-using-powershell"></a>Аудит почтовых ящиков в Exchange Online действительно можно включить только с помощью PowerShell?
 
-Да. Но мы работаем над тем, чтобы в организации Office 365 был по умолчанию включен аудит всех почтовых ящиков. Дополнительные сведения см. в разделе, посвященном включению аудита почтовых ящиков Exchange по умолчанию, в [блоге Майкрософт о соответствии требованиям, конфиденциальности и безопасности](https://techcommunity.microsoft.com/t5/Security-Privacy-and-Compliance/Exchange-Mailbox-Auditing-will-be-enabled-by-default/ba-p/215171).
+Так было раньше, но с января 2019 г. аудит почтовых ящиков включен по умолчанию для всех организаций, использующих Office 365. Дополнительные сведения см. в статье [Управление аудитом почтовых ящиков](https://docs.microsoft.com/office365/securitycompliance/enable-mailbox-auditing).
 
 #### <a name="are-there-any-differences-in-the-records-that-are-fetched-by-the-management-activity-api-versus-the-records-that-are-returned-by-using-the-audit-log-search-tool-in-the-office-365-security--compliance-center"></a>Есть ли разница между записями, которые получены API действий управления, и записями, которые возвращены средством поиска в журналах аудита, доступным в Центре безопасности и соответствия требованиям Office 365?
 
@@ -57,4 +57,4 @@ ms.locfileid: "32223947"
 
 #### <a name="why-are-targetupdatedproperties-no-longer-in-extendedproperties-in-the-audit-logs-for-azure-active-directory-activities"></a>Почему TargetUpdatedProperties больше не находятся в свойстве ExtendedProperties в журналах аудита для действий Azure Active Directory?
 
-TargetUpdatedProperties отображались в объекте ExtendedProperties. Однако они были удалены из свойства ExtendedProperties и теперь будут отображаться в свойстве ModifiedProperties.
+TargetUpdatedProperties отображались в объекте ExtendedProperties. Однако они были удалены из свойства ExtendedProperties и теперь отображаются в свойстве ModifiedProperties.
