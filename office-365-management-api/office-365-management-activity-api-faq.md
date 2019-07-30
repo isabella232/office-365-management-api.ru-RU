@@ -6,12 +6,12 @@ ms.ContentId: ''
 ms.topic: reference (API)
 ms.date: ''
 localization_priority: Priority
-ms.openlocfilehash: 2abcdd71c75cab011fa8e711832b06d398e3a6ab
-ms.sourcegitcommit: 289cf45903a045630f4b3efba6f03494bf08ab4a
+ms.openlocfilehash: 9083127d1fd3ecf82e5fe778ba1727d22d91017c
+ms.sourcegitcommit: 784b581a699c6d0ab7939ea621d5ecbea71925ea
 ms.translationtype: HT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 07/17/2019
-ms.locfileid: "35772116"
+ms.lasthandoff: 07/29/2019
+ms.locfileid: "35924779"
 ---
 # <a name="office-365-management-activity-api-frequently-asked-questions"></a>Вопросы и ответы: API действий управления Office 365
 
@@ -38,7 +38,11 @@ ms.locfileid: "35772116"
 #### <a name="are-there-any-differences-in-the-records-that-are-fetched-by-the-management-activity-api-versus-the-records-that-are-returned-by-using-the-audit-log-search-tool-in-the-office-365-security--compliance-center"></a>Есть ли разница между записями, которые получены API действий управления, и записями, которые возвращены средством поиска в журналах аудита, доступным в Центре безопасности и соответствия требованиям Office 365?
 
 В обоих случаях возвращаются одни и те же данные. Фильтрация не выполняется. Единственное отличие заключается в том, что с помощью API за один подход можно получить данные за последние 7 дней. При поиске в журнале аудита в Центре безопасности и соответствия требованиям (или при использовании соответствующего командлета [Search-UnifiedAuditLog](https://docs.microsoft.com/powershell/module/exchange/policy-and-compliance-audit/search-unifiedauditlog) в Exchange Online) можно получить данные за последние 90 дней. 
- 
+
+#### <a name="what-happens-if-i-disable-auditing-for-my-office-365-organization-will-i-still-get-events-via-the-management-activity-api"></a>Что произойдет, если я отключу аудит для своей организации Office 365? Буду ли я по-прежнему получать события через API действий управления?
+
+Нет. Чтобы получать записи через API действий управления, необходимо включить единый аудит Office 365 для своей организации. Инструкции см. в статье [Включение и отключение поиска в журнале аудита Office 365](https://docs.microsoft.com/office365/securitycompliance/turn-audit-log-search-on-or-off).
+
 #### <a name="arent-webhook-notifications-more-immediate-after-all-arent-they-event-driven"></a>Разве использование уведомлений веб-перехватчиков не предполагает более быстрое получение результатов? Они же создаются при появлении событий?
 
 Нет. Уведомления веб-перехватчиков не создаются автоматически сразу после появления событий. Нужно создать большой двоичный объект контента. Такое создание можно считать триггером доставки уведомлений. В последнее время период ожидания, предшествующий получению уведомлений, в случае использования веб-перехватчиков был дольше, чем в случае отправки API запросов непосредственно с помощью операции */content*. API действий управления не стоит рассматривать как систему оповещений о событиях безопасности в режиме реального времени. Корпорация Майкрософт предлагает другие продукты для этого. В случае обеспечения безопасности уведомления о событиях, получаемые с помощью API действий управления, больше подходят для определения тенденций использования за длительные периоды.
@@ -50,10 +54,6 @@ ms.locfileid: "35772116"
 #### <a name="im-encountering-a-throttling-error-in-the-management-activity-api-what-should-i-do"></a>У меня возникла ошибка регулирования в API действий управления. Что делать?
 
 Отправьте запрос в [службу поддержки Майкрософт](https://support.office.com/article/contact-support-for-business-products-admin-help-32a17ca7-6fa0-4870-8a8d-e25ba4ccfd4b#ID0EAADAAA=online) на увеличение максимального значения для регулирования, указав для этого коммерческое обоснование. Мы проанализируем запрос и в случае положительного решения увеличим максимальное значение для регулирования.
-
-#### <a name="what-happens-if-i-disable-auditing-for-my-office-365-organization-will-i-still-get-events-via-the-management-activity-api"></a>Что произойдет, если я отключу аудит для своей организации Office 365? Буду ли я по-прежнему получать события через API действий управления?
-
-Нет. Чтобы получать записи через API действий управления, необходимо включить аудит для своей организации.
 
 #### <a name="why-are-targetupdatedproperties-no-longer-in-extendedproperties-in-the-audit-logs-for-azure-active-directory-activities"></a>Почему TargetUpdatedProperties больше не находятся в свойстве ExtendedProperties в журналах аудита для действий Azure Active Directory?
 
