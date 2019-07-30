@@ -6,12 +6,12 @@ ms.ContentId: 52749845-37f8-6076-7ea5-49d9a4055445
 ms.topic: reference (API)
 ms.date: 01/10/2018
 localization_priority: Priority
-ms.openlocfilehash: 727d4e0d58e11887c15188b62d7642be90c1ebc3
-ms.sourcegitcommit: efd3dcdb3d190ca7b0f22a671867f0aede5d46c2
+ms.openlocfilehash: d6cdef5f0445ef0fa551be3080d4ce28595a1e9f
+ms.sourcegitcommit: 784b581a699c6d0ab7939ea621d5ecbea71925ea
 ms.translationtype: HT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 06/25/2019
-ms.locfileid: "35226981"
+ms.lasthandoff: 07/29/2019
+ms.locfileid: "35924828"
 ---
 # <a name="office-365-management-activity-api-reference"></a>Справочник по API действий управления Office 365
 
@@ -21,8 +21,10 @@ API действий управления Office 365 используется д
 
 API действий управления Office 365 — это веб-служба REST, с помощью которой можно разрабатывать решения на любом языке и в любой среде внешнего размещения, поддерживающей сертификаты HTTPS и X.509. Этот API использует службу Azure AD и протокол OAuth2 для проверки подлинности и авторизации. Чтобы получить доступ к API из приложения, необходимо сначала зарегистрировать его в Azure AD и настроить подходящие разрешения. Благодаря этому приложение сможет запрашивать маркеры доступа OAuth2, необходимые для вызова API. Дополнительные сведения см. в статье [Начало работы с интерфейсами API управления Office 365](get-started-with-office-365-management-apis.md).
 
-> [!NOTE] 
-> Сведения о схеме данных, которые возвращает API действий управления Office 365, см. в статье [Схема API действий управления Office 365](office-365-management-activity-api-schema.md).
+Сведения о данных, которые возвращает API действий управления Office 365, см. в статье [Схема API действий управления Office 365](office-365-management-activity-api-schema.md).
+
+> [!IMPORTANT]
+> Чтобы получить доступ к данным с помощью API действий управления Office 365, требуется включить ведение единого журнала аудита для организации Office 365. Это выполняется путем включения журнала аудита Office 365. Инструкции см. в статье [Включение и отключение поиска в журнале аудита Office 365](https://docs.microsoft.com/office365/securitycompliance/turn-audit-log-search-on-or-off).
 
 
 ## <a name="working-with-the-office-365-management-activity-api"></a>Работа с API действий управления Office 365

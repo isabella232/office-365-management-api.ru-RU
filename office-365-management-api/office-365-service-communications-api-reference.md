@@ -6,12 +6,12 @@ ms.ContentId: d0b9341a-b205-5442-1c20-8fb56407351d
 ms.topic: reference (API)
 ms.date: ''
 localization_priority: Priority
-ms.openlocfilehash: 6b42efe72931875592c87e78aa9c9cdce11a339b
-ms.sourcegitcommit: f823233a1ab116bc83d7ca8cd8ad7c7ea59439fc
+ms.openlocfilehash: 986298b87e2583788dca9b11f288743ce5f96b60
+ms.sourcegitcommit: 784b581a699c6d0ab7939ea621d5ecbea71925ea
 ms.translationtype: HT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 07/15/2019
-ms.locfileid: "35688174"
+ms.lasthandoff: 07/29/2019
+ms.locfileid: "35924814"
 ---
 # <a name="office-365-service-communications-api-reference-preview"></a>Справочник по API сообщений о службах Office 365 (предварительная версия)
 
@@ -46,7 +46,7 @@ https://manage.office.com/api/v1.0/{tenant_identifier}/ServiceComms/{operation}
 Authorization: Bearer {OAuth2 token}
 ```
 
-**Заголовки запросов**
+### <a name="request-headers"></a>Заголовки запросов
 
 Ниже показаны поддерживаемые заголовки запросов для всех операций API сообщений о службах Office 365.
 
@@ -58,7 +58,7 @@ Authorization: Bearer {OAuth2 token}
 
 <br/>
 
-**Заголовки откликов**
+### <a name="response-headers"></a>Заголовки откликов
 
 Ниже показаны заголовки откликов, возвращаемые для всех операций API сообщений о службах Office 365.
 
@@ -95,7 +95,7 @@ Authorization: Bearer {OAuth2 token}
 |**Отклик**|Список объектов Service|Объект Service содержит свойства Id (String), DisplayName (String) и FeatureNames (список String).|
 ||||
 
-#### <a name="sample-request"></a>Пример запроса
+### <a name="sample-request"></a>Пример запроса
 
 ```json
 GET https://manage.office.com/api/v1.0/contoso.com/ServiceComms/Services 
@@ -103,7 +103,7 @@ Authorization: Bearer {AAD_Bearer_JWT_Token}
 
 ```
 
-#### <a name="sample-response"></a>Пример отклика
+### <a name="sample-response"></a>Пример отклика
 
 ```json
 {
@@ -145,7 +145,9 @@ Authorization: Bearer {AAD_Bearer_JWT_Token}
 Возвращает состояние службы за предыдущие 24 часа.
 
 > [!NOTE] 
-> Отклик службы будет содержать состояние и все инциденты за предыдущие 24 часа. Возвращаемое значение StatusDate или StatusTime точно соответствует моменту времени 24 часа назад, если отсутствует более актуальное состояние. Если служба получила обновление состояния в течение последних 24 часов, будет возвращено время последнего обновления.
+> Отклик службы будет содержать состояние и все инциденты за предыдущие 24 часа. Возвращаемое значение StatusDate или StatusTime точно соответствует моменту времени 24 часа назад. Чтобы получить последнее обновление для конкретного инцидента, используйте функцию получения сообщений и прочтите значение LastUpdatedTime из записи отклика, соответствующего идентификатору инцидента. <br/>
+
+<br/>
 
 ||Служба|Описание|
 |:-----|:-----|:-----|
@@ -155,14 +157,14 @@ Authorization: Bearer {AAD_Bearer_JWT_Token}
 |**Отклик**|Список объектов WorkloadStatus.|Объект WorkloadStatus содержит свойства Id (String), Workload (String), StatusTime (DateTimeOffset), WorkloadDisplayName (String), Status (String), IncidentIds (список String) и FeatureGroupStatusCollection (список объектов FeatureStatus).<br/><br/>Объект FeatureStatus содержит свойства Feature (String), FeatureGroupDisplayName (String) и FeatureStatus (String).|
 ||||
 
-#### <a name="sample-request"></a>Пример запроса
+### <a name="sample-request"></a>Пример запроса
 
 ```json
 GET https://manage.office.com/api/v1.0/contoso.com/ServiceComms/CurrentStatus
 Authorization: Bearer {AAD_Bearer_JWT_Token}
 ```
 
-#### <a name="sample-response"></a>Пример отклика
+### <a name="sample-response"></a>Пример отклика
 
 ```json
 {
@@ -265,22 +267,23 @@ Authorization: Bearer {AAD_Bearer_JWT_Token}
     ]
 }
 ```
-#### <a name="status-definitions"></a>Определения состояний
 
-|**Состояние**|**Определение**|
-|:-----|:-----|
-|**Investigating** | Мы знаем о возможной проблеме и собираем дополнительные сведения о ней и ее влиянии. |
-|**ServiceDegradation** | Мы подтвердили, что проблема может повлиять на использование служб или функций. Это состояние может отображаться, если служба работает медленнее, чем обычно, периодически возникают прерывания или если недоступна определенная функция. |
-|**ServiceInterruption** | Вы увидите это состояние, если определено, что проблема влияет на доступ к службе. В этом случае проблема является значительной и ее можно воспроизвести. |
-|**RestoringService** | Причина проблемы определена, мы знаем, как ее решить, и восстанавливаем службу. |
-|**ExtendedRecovery** | Это состояние указывает на то, что работа над восстановлением службы идет, но пройдет некоторое время, прежде чем она станет доступна для всех затронутых систем. Это состояние также отображается, если мы применили временное исправление, чтобы уменьшить влияние проблемы, пока готовится постоянное исправление. |
-|**InvestigationSuspended** | Это состояние отображается, если для дальнейшего исследования необходимы дополнительные сведения. В случае если от вас требуются определенные действия, мы дадим вам знать, какие данные или журналы нам нужны. |
-|**ServiceRestored** | Мы убедились, что проблема была решена, а работоспособность службы восстановлена. Чтобы узнать, в чем было дело, просмотрите сведения о проблеме. |
-|**PostIncidentReportPublished** | Мы опубликовали отчет об инциденте для конкретной проблемы, включающий сведения о причинах и последующие действия, предотвращающие повторное возникновение схожей проблемы. |
-|||
+### <a name="status-definitions"></a>Определения состояний
 
-> [!NOTE] 
-> Дополнительные сведения о работоспособности служб Office 365 см. в статье [Проверка работоспособности служб Office 365](https://docs.microsoft.com/office365/enterprise/view-service-health).
+Определения состояний включают следующие значения: 
+
+- Investigating
+- ServiceDegradation
+- ServiceInterruption 
+- RestoringService
+- ExtendedRecovery
+- ServiceRestored
+- PostIncidentReportPublished 
+- VerifyingService
+- ServiceOperational
+
+Актуальный список и описание этих определений состояния см. в статье [Проверка работоспособности служб Office 365](https://docs.microsoft.com/office365/enterprise/view-service-health#status-definitions).
+
 
 ## <a name="get-historical-status"></a>Получение сведений об изменении состояния
 
@@ -295,14 +298,14 @@ Authorization: Bearer {AAD_Bearer_JWT_Token}
 |**Отклик**|Список объектов WorkloadStatus.|Объект WorkloadStatus содержит свойства Id (String), Workload (String), StatusTime (DateTimeOffset), WorkloadDisplayName (String), Status (String), IncidentIds (список String) и FeatureGroupStatusCollection (список объектов FeatureStatus).<br/><br/>Объект FeatureStatus содержит свойства Feature (String), FeatureGroupDisplayName (String) и FeatureStatus (String).|
 ||||
 
-#### <a name="sample-request"></a>Пример запроса
+### <a name="sample-request"></a>Пример запроса
 
 ```json
 GET https://manage.office.com/api/v1.0/contoso.com/ServiceComms/HistoricalStatus
 Authorization: Bearer {AAD_Bearer_JWT_Token}
 ```
 
-#### <a name="sample-response"></a>Пример отклика
+### <a name="sample-response"></a>Пример отклика
 
 ```json
 {
@@ -383,7 +386,6 @@ Authorization: Bearer {AAD_Bearer_JWT_Token}
 }
 ```
 
-
 ## <a name="get-messages"></a>Получение сообщений
 
 Возвращает сообщения о службе за определенный диапазон времени. Используйте фильтр по типу, чтобы просмотреть сообщения об инцидентах обслуживания, плановом обслуживании или из Центра сообщений.
@@ -402,14 +404,14 @@ Authorization: Bearer {AAD_Bearer_JWT_Token}
 |**Отклик**|Список объектов Message.|Объект Message содержит свойства Id (String), StartTime (DateTimeOffset), EndTime (DateTimeOffset), Status (String), Messages (список объектов MessageHistory), LastUpdatedTime (DateTimeOffset), Workload (String), WorkloadDisplayName (String), Feature (String), FeatureDisplayName (String), MessageType (Enum, значение по умолчанию: all).<br/><br/>Объект MessageHistory содержит свойства PublishedTime (DateTimeOffset), MessageText (String).|
 ||||
 
-#### <a name="sample-request"></a>Пример запроса
+### <a name="sample-request"></a>Пример запроса
 
 ```json
 GET https://manage.office.com/api/v1.0/contoso.com/ServiceComms/Messages
 Authorization: Bearer {AAD_Bearer_JWT_Token}
 ```
 
-#### <a name="sample-response"></a>Пример отклика
+### <a name="sample-response"></a>Пример отклика
 
 ```json
 {
@@ -476,7 +478,6 @@ Authorization: Bearer {AAD_Bearer_JWT_Token}
 
 
 ```json
-
 { 
     "error":{ 
         "code":"AF5000.  An internal server error occurred.",
