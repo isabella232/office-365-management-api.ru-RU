@@ -4,14 +4,14 @@ title: Добро пожаловать в API управления Office 365!
 description: API управления Office 365 представляют собой единую платформу расширяемости, позволяющую пользователям и партнерам Office 365 выполнять все задачи управления, включая обеспечение отправки служебных сообщений, безопасности, соответствия требованиям, создания отчетов, а также аудита.
 ms.ContentId: a11a6d30-f6b7-3629-28b6-cbab527d8a5e
 ms.topic: reference (API)
-ms.date: 07/10/2018
+ms.date: ''
 localization_priority: Priority
-ms.openlocfilehash: 0444b343a28f89a56a45f639d3f2374bb82a33d6
-ms.sourcegitcommit: 5b1eaeb7f262b7b9f7ab30ccb9f10878814153ac
+ms.openlocfilehash: c809fd5d86dcd04c075eae27790991340c3460eb
+ms.sourcegitcommit: 37737b849f1b2d0484e626002978b1d4ece2c742
 ms.translationtype: HT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "32223933"
+ms.lasthandoff: 07/30/2019
+ms.locfileid: "35936222"
 ---
 # <a name="welcome-to-office-365-management-apis"></a>Добро пожаловать в API управления Office 365!
 
@@ -29,4 +29,5 @@ API управления Office 365 представляют собой един
 
 ## <a name="see-also"></a>См. также
 
-- [Интерфейсы REST API Office 365](https://docs.microsoft.com/ru-RU/previous-versions/office/office-365-api/how-to/platform-development-overview)
+- 
+  [Интерфейсы REST API Office 365](https://docs.microsoft.com/ru-RU/previous-versions/office/office-365-api/how-to/platform-development-overview)
