@@ -6,12 +6,12 @@ ms.ContentId: 1c2bf08c-4f3b-26c0-e1b2-90b190f641f5
 ms.topic: reference (API)
 ms.date: ''
 localization_priority: Priority
-ms.openlocfilehash: 49ffb697575a63bce7a7eee8e539a30c733772a5
-ms.sourcegitcommit: c4674653f99c77b64115f8547f9e410dea3408f9
+ms.openlocfilehash: 175d18dad57bff0939250cd4ae27c02129d7c0ed
+ms.sourcegitcommit: b9439635542de9db8f9fb8e056b8359d4653aa21
 ms.translationtype: HT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 07/10/2019
-ms.locfileid: "35613587"
+ms.lasthandoff: 08/27/2019
+ms.locfileid: "36643045"
 ---
 # <a name="office-365-management-activity-api-schema"></a>Схема API действий управления Office 365
  
@@ -1094,7 +1094,10 @@ ms.locfileid: "35613587"
 |NetworkMessageId|Edm.String|Да|Идентификатор сетевого сообщения Exchange Online.|
 |P1Sender|Edm.String|Да|Обратный путь к отправителю сообщения.|
 |P2Sender|Edm.String|Да|Отправитель исходного сообщения.|
-|Recipients|Collection(Edm.String)|Да|Массив получателей сообщения.|
+|Политика|Self.[Policy](#policy-type-and-action-type)|Да|Тип политики фильтрации (например, **защита от нежелательной почты** или **защита от фишинга**) и связанный тип действия (например, **Нежелательное сообщение с высокой степенью уверенности**, **Нежелательное сообщение** или **Фишинг**), соответствующие сообщению электронной почты.|
+|Политика|Self.[PolicyAction](#policy-action)|Да|Действие, настроенное в политике фильтрации (например, **Переместить в папку нежелательной почты** или **Поместить на карантин**), соответствующее сообщению электронной почты.|
+|P2Sender|Edm.String|Да|**Отправитель** исходного сообщения.|
+|Получатели|Collection(Edm.String)|Да|Массив получателей сообщения.|
 |SenderIp|Edm.String|Да|IP-адрес, с которого отправлено сообщение Office 365. IP-адрес отображается в формате адреса IPv4 или IPv6.|
 |Subject|Edm.String|Да|Строка темы сообщения.|
 |Verdict|Edm.String|Да|Заключение о сообщении.|
@@ -1128,6 +1131,37 @@ ms.locfileid: "35613587"
 |–3|Pending|Сканирование или анализ не завершены.|
 |||||
 
+### <a name="enum-policy---type-edmint32"></a>Enum: Policy; Type: Edm.Int32
+
+#### <a name="policy-type-and-action-type"></a>Тип политики и тип действия
+
+|**Значение**|**Имя элемента**|**Описание**|
+|:-----|:-----|:-----|
+|1|Anti-spam, HSPM|Действие "Нежелательное сообщение с высокой степенью уверенности" (HSPM) в политике защиты от нежелательной почты.|
+|2|Anti-spam, SPM|Действие "Нежелательное сообщение" (SPM) в политике защиты от нежелательной почты.|
+|3|Anti-spam, Bulk|Групповое действие в политике защиты от нежелательной почты.|
+|4|Anti-spam, PHSH|Действие "Фишинг" (PHSH) в политике защиты от нежелательной почты.|
+|5|Anti-phish, DIMP|Действие подмены домена (DIMP) в политике защиты от фишинга.|
+|6|Anti-phish, UIMP|Действие подмены пользователя (DIMP) в политике защиты от фишинга.|
+|7|Anti-phish, SPOOF|Действие подделки в политике защиты от фишинга.|
+
+
+### <a name="enum-policyaction---type-edmint32"></a>Enum: PolicyAction; Type: Edm.Int32
+
+#### <a name="policy-action"></a>Действие политики
+
+|**Значение**|**Имя элемента**|**Описание**|
+|:-----|:-----|:-----|
+|0|MoveToJMF|Действие политики состоит в перемещении в папку нежелательной почты.|
+|1|AddXHeader|Действие политики состоит в добавлении X-заголовка к сообщению электронной почты.|
+|2|ModifySubject|Действие политики состоит в изменении темы сообщения электронной почты с использованием сведений, указанных в политике фильтрации.|
+|3|Redirect|Действие политики состоит в переадресации сообщения электронной почты на адрес электронной почты, указанный в политике фильтрации.|
+|4|Delete|Действие политики состоит в удалении (отбрасывании) сообщения электронной почты.|
+|5|Quarantine|Действие политики состоит в помещении сообщения электронной почты на карантин.|
+|6|NoAction| Настройка политики не предполагает действий с сообщением электронной почты.|
+|7|BccMessage|Действие политики состоит в отправке скрытой копии сообщения электронной почты на адрес электронной почты, указанный в политике фильтрации.|
+
+
 ### <a name="url-time-of-click-events"></a>События выбора URL-адреса
 
 |**Параметры**|**Тип**|**Обязательный?**|**Описание**|
@@ -1141,7 +1175,7 @@ ms.locfileid: "35613587"
 |UserIp|Edm.String|Да|IP-адрес пользователя, который щелкнул URL-адрес. IP-адрес отображается в формате адреса IPv4 или IPv6.|
 |||||
 
-### <a name="enum-urlclickaction---type-edmint32"></a>Перечисление: URLClickAction - Type: Edm.Int32
+### <a name="enum-urlclickaction---type-edmint32"></a>Enum: URLClickAction; Type: Edm.Int32
 
 #### <a name="urlclickaction"></a>URLClickAction
 
@@ -1181,7 +1215,7 @@ ms.locfileid: "35613587"
 |FileSize|Edm.String|Да|Размер файла в байтах.|
 |||||
 
-### <a name="enum-sourceworkload---type-edmint32"></a>Enum: SourceWorkload - Type: Edm.Int32
+### <a name="enum-sourceworkload---type-edmint32"></a>Enum: SourceWorkload; Type: Edm.Int32
 
 #### <a name="sourceworkload"></a>SourceWorkload
 
