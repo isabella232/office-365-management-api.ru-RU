@@ -29,5 +29,4 @@ API управления Office 365 представляют собой един
 
 ## <a name="see-also"></a>См. также
 
-- 
-  [Интерфейсы REST API Office 365](https://docs.microsoft.com/ru-RU/previous-versions/office/office-365-api/how-to/platform-development-overview)
+- [Интерфейсы REST API Office 365](https://docs.microsoft.com/ru-RU/previous-versions/office/office-365-api/how-to/platform-development-overview)
