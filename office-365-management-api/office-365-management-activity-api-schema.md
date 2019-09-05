@@ -6,12 +6,12 @@ ms.ContentId: 1c2bf08c-4f3b-26c0-e1b2-90b190f641f5
 ms.topic: reference (API)
 ms.date: ''
 localization_priority: Priority
-ms.openlocfilehash: 175d18dad57bff0939250cd4ae27c02129d7c0ed
-ms.sourcegitcommit: b9439635542de9db8f9fb8e056b8359d4653aa21
+ms.openlocfilehash: 745fbc02a470fdf11ca1460066e7d30322f19752
+ms.sourcegitcommit: 8a0f454ece1924d0b1ca9e20961c2124ccc9b905
 ms.translationtype: HT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 08/27/2019
-ms.locfileid: "36643045"
+ms.lasthandoff: 09/05/2019
+ms.locfileid: "36762377"
 ---
 # <a name="office-365-management-activity-api-schema"></a>Схема API действий управления Office 365
  
@@ -1072,7 +1072,7 @@ ms.locfileid: "36643045"
 
 ## <a name="office-365-advanced-threat-protection-and-threat-investigation-and-response-schema"></a>Схема Office 365 Advanced Threat Protection и Threat Investigation and Response
 
-События Office 365 Advanced Threat Protection и Threat Investigation and Response доступны для клиентов Office 365, у которых есть подписка на Office 365 Advanced Threat Protection (план 1), Office 365 Advanced Threat Protection (план 2) или E5. Каждое событие в веб-канале Office 365 ATP соответствует указанным ниже действиям, которые были расценены как содержащие угрозу:
+События [Office 365 Advanced Threat Protection](https://docs.microsoft.com/office365/securitycompliance/office-365-atp) и Threat Investigation and Response доступны для клиентов Office 365, у которых есть подписка на Office 365 Advanced Threat Protection (план 1), Office 365 Advanced Threat Protection (план 2) или E5. Каждое событие в веб-канале Office 365 ATP соответствует указанным ниже действиям, которые были расценены как содержащие угрозу:
 
 - Пользователь отправил или получил электронное сообщение в пределах организации. Угроза обнаруживается при доставке, а также с помощью функции [Автоматическая очистка](https://support.office.com/ru-RU/article/Zero-hour-auto-purge-protection-against-spam-and-malware-96deb75f-64e8-4c10-b570-84c99c674e15). 
 
@@ -1080,8 +1080,10 @@ ms.locfileid: "36643045"
 
 - Файл в SharePoint Online, OneDrive для бизнеса или Microsoft Teams, который был признан вредоносным защитой [Office 365 ATP](https://docs.microsoft.com/ru-RU/office365/securitycompliance/atp-for-spo-odb-and-teams).
 
+- Активированное оповещение, запускающее [автоматизированный анализ угроз](https://docs.microsoft.com/office365/securitycompliance/automated-investigation-response-office).
+
 > [!NOTE]
-> Службы Office 365 Advanced Threat Protection и Office 365 Threat Invesitgation and Response (прежнее название — Office 365 Threat Intelligence) теперь входят в состав Office 365 Advanced Threat Protection (план 2) с дополнительными возможностями защиты от угроз. Дополнительные сведения см. на страницах [Планы и цены Office 365 ATP](https://products.office.com/exchange/advance-threat-protection) и [Описание службы Office 365 ATP](https://docs.microsoft.com/office365/servicedescriptions/office-365-advanced-threat-protection-service-description).
+> Службы Office 365 Advanced Threat Protection и Office 365 Threat Investigation and Response (прежнее название — Office 365 Threat Intelligence) теперь входят в состав Office 365 Advanced Threat Protection (план 2) с дополнительными возможностями защиты от угроз. Дополнительные сведения см. на страницах [Планы и цены Office 365 ATP](https://products.office.com/exchange/advance-threat-protection) и [Описание службы Office 365 ATP](https://docs.microsoft.com/office365/servicedescriptions/office-365-advanced-threat-protection-service-description).
 
 ### <a name="email-message-events"></a>События, связанные с электронными сообщениями
 
@@ -1225,6 +1227,294 @@ ms.locfileid: "36643045"
 |1|OneDrive для бизнеса|
 |2|Microsoft Teams|
 |||||
+
+### <a name="automated-investigation-and-response-events"></a>События автоматизированного анализа угроз и реагирования на них
+
+События [автоматизированного анализа угроз и реагирования на них (AIR) в Office 365](https://docs.microsoft.com/office365/securitycompliance/automated-investigation-response-office) доступны для пользователей Office 365 с подпиской, включающей Office 365 Advanced Threat Protection (план 2) или Office 365 E5. События анализа регистрируются в журнале на основе изменения в состоянии анализа. Например, если администратор выполняет действие, изменяющее состояние анализа с "Ожидание выполнения действия" на "Завершено", событие записывается в журнал. 
+
+В настоящее время в журнал записываются только события автоматизированного анализа угроз. (События анализа, созданного вручную, ожидаются в ближайшее время.) В журнал записываются следующие значения состояния: 
+- Анализ создан
+- Угрозы не найдены 
+- Прервано системой 
+- Ожидание выполнения действия 
+- Обнаруженные угрозы 
+- Исправлено 
+- Сбой 
+- Прервано механизмом регулирования 
+- Прервано пользователем 
+
+#### <a name="main-investigation-schema"></a>Основная схема анализа 
+
+|Имя   |Тип   |Описание  |
+|----|----|----|
+|InvestigationId    |Edm.String |ИД/GUID анализа |
+|InvestigationName  |Edm.String |Название анализа |
+|InvestigationType  |Edm.String |Тип анализа. Принимается одно из следующих значений:<br/>— Сообщения, о которых уведомили пользователи<br/>— Вредоносные программы, попавшие в автоматическую очистку<br/>— Фишинговые сообщения, попавшие в автоматическую очистку<br/>— Изменение решения для URL-адреса<p>(В настоящее время ручной анализ недоступен, но ожидается в ближайшее время.) |
+|LastUpdateTimeUtc  |Edm.Date   |Время последнего обновления анализа в формате UTC |
+|StartTimeUtc   |Edm.Date   |Время начала анализа |
+|Статус     |Edm.String     |Состояние анализа: выполняется, ожидание выполнения действия и т. д. |
+|DeeplinkURL    |Edm.String |URL-адрес прямой ссылки на анализ в Центре безопасности и соответствия требованиям Office 365 |
+|Действия |Коллекция (Edm.String)   |Коллекция действий, рекомендованных анализом |
+|Данные   |Edm.String |Строка данных с дополнительными сведениями об объектах анализа и сведениями об оповещениях, связанных с анализом. Объекты доступны в отдельном узле в составе большого двоичного объекта. |
+
+#### <a name="actions"></a>Действия
+
+|Поле  |Тип   |Описание |
+|----|----|----|
+|Идентификатор     |Edm.String |Идентификатор действия|
+|ActionType |Edm.String |Тип действия, например исправление сообщения электронной почты |
+|ActionStatus   |Edm.String |Значения: <br/>— Ожидание<br/>— Выполняется<br/>— Ожидание ресурса<br/>— Завершено<br/>— Сбой |
+|ApprovedBy |Edm.String |Значение null, если утверждено автоматически; в противном случае — имя пользователя или идентификатор (ожидается в ближайшее время) |
+|TimestampUtc   |Edm.DateTime   |Метка времени изменения состояния действия |
+|ActionId   |Edm.String |Уникальный идентификатор действия |
+|InvestigationId    |Edm.String |Уникальный идентификатор анализа |
+|RelatedAlertIds    |Collection(Edm.String) |Оповещения, связанные с анализом |
+|StartTimeUtc   |Edm.DateTime   |Метка времени создания действия |
+|EndTimeUtc |Edm.DateTime   |Метка времени последнего обновления состояния действия |
+|Идентификаторы ресурсов   |Edm.String  |Состоит из идентификатора клиента Azure Active Directory.|
+|Объекты   |Collection(Edm.String) |Список из одного или нескольких объектов, затронутых действием |
+|Идентификаторы соответствующих оповещений  |Edm.String |Оповещение, связанное с анализом |
+
+#### <a name="entities"></a>Объекты
+
+##### <a name="mailmessage-email"></a>MailMessage (электронная почта) 
+
+|Поле  |Тип   |Описание  |
+|----|----|----|
+|Type   |Edm.String |"mail-message"  |
+|Files  |Коллекция (Self.File) |Сведения о файлах вложений в сообщение |
+|Recipient  |Edm.String |Получатель почтового сообщения |
+|Urls   |Коллекция(Self.URL) |URL-адреса, содержащиеся в почтовом сообщении  |
+|Sender |Edm.String |Адрес электронной почты отправителя  |
+|SenderIP   |Edm.String |IP-адрес отправителя  |
+|ReceivedDate   |Edm.DateTime   |Дата получения сообщения  |
+|NetworkMessageId   |Edm.Guid   |Идентификатор сетевого сообщения для почтового сообщения  |
+|InternetMessageId  |Edm.String  |Идентификатор интернет-сообщения для почтового сообщения |
+|Subject    |Edm.String |Тема почтового сообщения  |
+
+#### <a name="ip"></a>IP
+
+|Поле  |Тип   |Описание  |
+|----|----|----|
+|Тип   |Edm.String |"ip" |
+|Address    |Edm.String |IP-адрес в виде строки, например `127.0.0.1`
+
+#### <a name="url"></a>URL
+
+|Поле  |Тип   |Описание  |
+|----|----|----|
+|Тип   |Edm.String |"url" |
+|Url    |Edm.String |Полный URL-адрес, на который указывает объект  |
+
+#### <a name="mailbox-also-equivalent-to-the-user"></a>Mailbox (также аналогичен пользователю) 
+
+|Поле  |Тип   |Описание |
+|----|----|----|
+|Тип   |Edm.String |"mailbox"  |
+|MailboxPrimaryAddress  |Edm.String |Основной адрес почтового ящика  |
+|DisplayName    |Edm.String |Отображаемое имя почтового ящика |
+|Upn    |Edm.String |Имя участника-пользователя почтового ящика  |
+
+#### <a name="file"></a>File
+
+|Поле  |Тип   |Описание  |
+|----|----|----|
+|Тип   |Edm.String |"file" |
+|Имя   |Edm.String |Имя файла без пути |
+FileHashes |Коллекция (Edm.String) |Хэши файлов, связанные с файлом |
+
+#### <a name="filehash"></a>FileHash
+
+|Поле  |Тип   |Описание |
+|----|----|----|
+|Тип   |Edm.String |"filehash" |
+|Algorithm  |Edm.String |Тип алгоритма хэширования. Может принимать одно из следующих значений:<br/>— Неизвестно<br/>— MD5<br/>— SHA1<br/>— SHA256<br/>— SHA256AC
+|Value  |Edm.String |Значение хэша  |
+
+#### <a name="mailcluster"></a>MailCluster
+
+|Поле  |Тип   |Описание   |
+|----|----|----|
+|Тип   |Edm.String |"MailCluster" <br/>Определяет тип обсуждаемого объекта |
+|NetworkMessageIds  |Коллекция (Edm.String)    |Список идентификаторов почтовых сообщений, входящих в почтовый кластер |
+|CountByDeliveryStatus  |Коллекции (Edm.String)   |Количество почтовых сообщений в строковом представлении DeliveryStatus |
+|CountByThreatType  |Коллекции (Edm.String) |Количество почтовых сообщений в строковом представлении ThreatType |
+|Threats    |Коллекции (Edm.String)   |Угрозы почтовых сообщений, входящих в почтовый кластер. Угрозы включают такие значения, как фишинг и вредоносные программы. |
+|Query  |Edm.String |Запрос, использованный для определения сообщений в почтовом кластере  |
+|QueryTime  |Edm.DateTime   |Время запроса  |
+|MailCount  |Edm.int    |Число почтовых сообщений, входящих в почтовый кластер  |
+|Source |Строка |Источник почтового кластера; значение источника кластера. |
+
+#### <a name="sample-audit-record"></a>Пример записи аудита
+
+```
+e3d69322-d40b-45c2-b17c-7d6b981d7c7b,af62b4b1-dc2c-46ae-bc33-eab54a1dfd07,2019-07-29T23:13:15.835Z,AirInvestigation," {
+    "" CreationTime "": "" 2019 - 07 - 29T23: 13: 15 "",
+    "" Id "": "" af62b4b1 - dc2c - 46ae - bc33 - eab54a1dfd07 "",
+    "" Operation "": "" AirInvestigationData "",
+    "" OrganizationId "": "" e4d69122 – d22z – 90x1 – c21d - 7d6bx382828"",
+    "" RecordType "": 64,
+    "" UserKey "": "" AirInvestigation "",
+    "" UserType "": 4,
+    "" Version "": 1,
+    "" Workload "": "" AirInvestigation "",
+    "" ObjectId "": "" af62b4b1 - dc2c - 46ae - bc33 - eab54a1dfd07 "",
+    "" UserId "": "" AirInvestigation "",
+    "" Actions "": ["" {
+             \ "" $id \ "":  \ "" 1 \ "",
+             \ "" ActionType \ "":  \ "" EmailRemediation \ "",
+             \ "" ActionStatus \ "":  \ "" Pending \ "",
+             \ "" TimestampUtc \ "":  \ "" 2019 - 07 - 29T23: 12: 25 \ "",
+             \ "" ActionId \ "":  \ "" urn: EmailZapper: f6d885231f84ce9bb5c94378e54a8efc \ "",
+             \ "" InvestigationId \ "":  \ "" urn: ZappedMalwareInvestigati: cc6ba95199bad6dec2c1b003a1a74977 \ "",
+             \ "" Entities \ "": [{
+                     \ "" $id \ "":  \ "" 2 \ "",
+                     \ "" NetworkMessageIds \ "": [ \ "" e7a24527 - 04ea - 4b75 - 91f5 - 08d71477c88d \ "",  \ "" 437490cc - 6a4e - 427d - 59b6 - 08d71477c9fc \ "",  \ "" ce2a3d81 - 371f - 4ffe - 0ff4 - 08d714781717 \ "",  \ "" 4f2cd2c4 - 3e42 - 417f - aac1 - 08d71478171e \ "",  \ "" 640bba79 - 0292 - 4170 - 592a - 08d714781cc9 \ "",  \ "" dc39d271 - 26c4 - 48b9 - 827e-08d714781714 \ "",  \ "" 8a44e6f8 - d808 - 419a - 7a3d - 08d71477c88b \ ""],
+                     \ "" CountByThreatType \ "": {
+                         \ "" Phish \ "": 1,
+                         \ "" Malware \ "": 6
+                    },
+                     \ "" Threats \ "": [ \ "" Phish \ "",  \ "" Malware \ ""],
+                     \ "" Query \ "":  \ ""(AttachmentFileHash:  \\  \ "" w3FRtHaSXkD9BP9UUDrwheZHmzH2pK9PchGxHnIoO1A =  \\  \ "") \ "",
+                     \ "" QueryTime \ "":  \ "" 2019 - 07 - 29T23: 10: 29.5027713Z \ "",
+                     \ "" MailCount \ "": 9,
+                     \ "" Source \ "":  \ "" w3FRtHaSXkD9BP9UUDrwheZHmzH2pK9PchGxHnIoO1A =  \ "",
+                     \ "" Type \ "":  \ "" mailCluster \ ""
+                }
+            ],
+             \ "" RelatedAlertIds \ "": [ \ "" c6d010cf - a900 - af5a - 7000 - 08d714790abd \ ""],
+             \ "" StartTimeUtc \ "":  \ "" 2019 - 07 - 29T23: 12: 25 \ "",
+             \ "" ResourceIdentifiers \ "": [{
+                     \ "" $id \ "":  \ "" 3 \ "",
+                     \ "" AadTenantId \ "":  \ "" e4d69122 – d22z – 90x1 – c21d - 7d6bx382828\ "",
+                     \ "" Type \ "":  \ "" AAD \ ""
+                }
+            ]
+        }
+        ""],
+    "" Data "": "" {
+         \ "" Version \ "":  \ "" 3.0 \ "",
+         \ "" VendorName \ "":  \ "" Microsoft \ "",
+         \ "" ProviderName \ "":  \ "" OATP \ "",
+         \ "" AlertType \ "":  \ "" ThreatManagement \ "",
+         \ "" StartTimeUtc \ "":  \ "" 2019 - 07 - 29T23: 04: 28Z \ "",
+         \ "" EndTimeUtc \ "":  \ "" 2019 - 07 - 29T23: 04: 28Z \ "",
+         \ "" TimeGenerated \ "":  \ "" 2019 - 07 - 29T23: 04: 28Z \ "",
+         \ "" ProcessingEndTime \ "":  \ "" 2019 - 07 - 29T23: 13: 15.8071986Z \ "",
+         \ "" Status \ "": 1,
+         \ "" Severity \ "":  \ "" Informational \ "",
+         \ "" ConfidenceLevel \ "":  \ "" Unknown \ "",
+         \ "" ConfidenceScore \ "": 1.0,
+         \ "" IsIncident \ "": false,
+         \ "" ProviderAlertId \ "":  \ "" c6d010cf - a900 - af5a - 7000 - 08d714790abd \ "",
+         \ "" SystemAlertId \ "": null,
+         \ "" CorrelationKey \ "":  \ "" df1a9e6f - d629 - 4a8f - b0f4 - 8f91cc6df75d \ "",
+         \ "" Intent \ "":  \ "" Probing \ "",
+         \ "" ResourceIdentifiers \ "": [{
+                 \ "" $id \ "":  \ "" 1 \ "",
+                 \ "" AadTenantId \ "":  \ "" e4d69122 – d22z – 90x1 – c21d - 7d6bx382828\ "",
+                 \ "" Type \ "":  \ "" AAD \ ""
+            }
+        ],
+         \ "" AzureResourceId \ "": null,
+         \ "" WorkspaceId \ "": null,
+         \ "" WorkspaceSubscriptionId \ "": null,
+         \ "" WorkspaceResourceGroup \ "": null,
+         \ "" AgentId \ "": null,
+         \ "" AlertDisplayName \ "":  \ "" Email messages containing malware removed after delivery \ "",
+         \ "" Description \ "":  \ "" Emails with malware that were delivered and later removed - V1.0.0.3 \ "",
+         \ "" ExtendedLinks \ "": [{
+                 \ "" Href \ "":  \ "" https:  \  /  \  / protection.office.com \  / viewalerts ? id = c6d010cf - a900 - af5a - 7000 - 08d714790abd \ "",
+                 \ "" Category \ "" : null,
+                 \ "" Label \ "":  \ "" alert \ "",
+                 \ "" Type \ "":  \ "" webLink \ ""
+            }
+        ],
+         \ "" Metadata \ "": {
+             \ "" CustomApps \ "": null,
+             \ "" GenericInfo \ "": null
+        },
+         \ "" Entities \ "": [{
+                 \ "" $id \ "":  \ "" 2 \ "",
+                 \ "" MailboxPrimaryAddress \ "":  \ "" jonathan.wolcott @ o365tisdfv2.onmicrosoft.com \ "",
+                 \ "" Upn \ "":  \ "" jonathan.wolcott @ o365tisdfv2.onmicrosoft.com \ "",
+                 \ "" Type \ "":  \ "" mailbox \ ""
+            }, {
+                 \ "" $id \ "":  \ "" 3 \ "",
+                 \ "" Name \ "":  \ "" annualpass0707.doc \ "",
+                 \ "" FileHashes \ "": [{
+                         \ "" $id \ "":  \ "" 4 \ "",
+                         \ "" Algorithm \ "":  \ "" SHA256 \ "",
+                         \ "" Value \ "":  \ "" C37151B476925E40FD04FF54503AF085E6479B31F6A4AF4F7211B11E72283B50 \ "",
+                         \ "" Type \ "":  \ "" filehash \ ""
+                    }
+                ],
+                 \ "" Type \ "":  \ "" file \ ""
+            }, {
+                 \ "" $id \ "":  \ "" 5 \ "",
+                 \ "" Files \ "": [{
+                         \ "" $id \ "":  \ "" 6 \ "",
+                         \ "" Name \ "":  \ "" annualpass0707.doc \ "",
+                         \ "" FileHashes \ "": [{
+                                 \ "" $id \ "":  \ "" 7 \ "",
+                                 \ "" Algorithm \ "":  \ "" SHA256 \ "",
+                                 \ "" Value \ "":  \ "" C37151B476925E40FD04FF54503AF085E6479B31F6A4AF4F7211B11E72283B50 \ "",
+                                 \ "" Type \ "":  \ "" filehash \ ""
+                            }
+                        ],
+                         \ "" Type \ "":  \ "" file \ ""
+                    }, {
+                         \ "" $id \ "":  \ "" 8 \ "",
+                         \ "" Name \ "":  \ "" contoso.png \ "",
+                         \ "" FileHashes \ "": [{
+                                 \ "" $id \ "":  \ "" 9 \ "",
+                                 \ "" Algorithm \ "":  \ "" SHA256 \ "",
+                                 \ "" Value \ "":  \ "" 4C93FD17298D1D50DEFEB7BDAACF3A43445F08C27D05798916C000E56606D89D \ "",
+                                 \ "" Type \ "":  \ "" filehash \ ""
+                            }
+                        ],
+                         \ "" Type \ "":  \ "" file \ ""
+                    }
+                ],
+                 \ "" Recipient \ "":  \ "" jonathan.wolcott @ o365tisdfv2.onmicrosoft.com \ "",
+                 \ "" Sender \ "":  \ "" greatskiingwhistler @ yahoo.com \ "",
+                 \ "" SenderIP \ "":  \ "" 98.137.64.234 \ "",
+                 \ "" ReceivedDate \ "":  \ "" 2019 - 07 - 29T22: 55: 02 \ "",
+                 \ "" InternetMessageId \ "":  \ "" < 25d2cbea - 6c7d - 4131 - adde - d8d6678e234c @ DM3NAM06FT009.Eop - nam06.prod.protection.outlook.com >  \ "",
+                 \ "" Subject \ "":  \ "" FW: Hi pass holder \ "",
+                 \ "" Type \ "":  \ "" mailMessage \ "",
+                 \ "" NetworkMessageId \ "":  \ "" e7a24527 - 04ea - 4b75 - 91f5 - 08d71477c88d \ ""
+            }, {
+                 \ "" $id \ "":  \ "" 10 \ "",
+                 \ "" NetworkMessageIds \ "": [ \ "" e7a24527 - 04ea - 4b75 - 91f5 - 08d71477c88d \ "",  \ "" 437490cc - 6a4e - 427d - 59b6 - 08d71477c9fc \ "",  \ "" ce2a3d81 - 371f - 4ffe - 0ff4 - 08d714781717 \ "",  \ "" 4f2cd2c4 - 3e42 - 417f - aac1 - 08d71478171e \ "",  \ "" 640bba79 - 0292 - 4170 - 592a - 08d714781cc9 \ "",  \ "" dc39d271 - 26c4 - 48b9 - 827e-08d714781714 \ "",  \ "" 8a44e6f8 - d808 - 419a - 7a3d - 08d71477c88b \ ""],
+                 \ "" CountByThreatType \ "": {
+                     \ "" Phish \ "": 1,
+                     \ "" Malware \ "": 6
+                },
+                 \ "" Threats \ "": [ \ "" Phish \ "",  \ "" Malware \ ""],
+                 \ "" Query \ "":  \ ""(AttachmentFileHash:  \\  \ "" w3FRtHaSXkD9BP9UUDrwheZHmzH2pK9PchGxHnIoO1A =  \\  \ "") \ "",
+                 \ "" QueryTime \ "":  \ "" 2019 - 07 - 29T23: 10: 29.5027713Z \ "",
+                 \ "" MailCount \ "": 9,
+                 \ "" Source \ "":  \ "" w3FRtHaSXkD9BP9UUDrwheZHmzH2pK9PchGxHnIoO1A =  \ "",
+                 \ "" Type \ "":  \ "" mailCluster \ ""
+            }
+        ],
+         \ "" OATPInvestigationId \ "":  \ "" urn: ZappedMalwareInvestigati: cc6ba95199bad6dec2c1b003a1a74977 \ "",
+         \ "" LogCreationTime \ "":  \ "" 2019 - 07 - 29T23: 13: 15.8071986Z \ "",
+         \ "" MachineName \ "":  \ "" BL2NAM06BG401 \ ""
+    }
+    "",
+    "" DeepLinkUrl "": "" https:  \  /  \  / protection.office.com \  / threatinvestigation ? urn = urn : ZappedMalwareInvestigati: cc6ba95199bad6dec2c1b003a1a74977 "",
+    "" EndTimeUtc "": "" 2019 - 07 - 29T23: 13: 15 "",
+    "" InvestigationId "": "" urn: ZappedMalwareInvestigati: cc6ba95199bad6dec2c1b003a1a74977 "",
+    "" InvestigationName "": "" Mail with Malware is zapped - urn: ZappedMalwareInvestigati: cc6ba95199bad6dec2c1b003a1a74977 "",
+    "" InvestigationType "": "" ZappedMalwareInvestigation "",
+    "" LastUpdateTimeUtc "": "" 2019 - 07 - 29T23: 08: 05 "",
+    "" StartTimeUtc "": "" 2019 - 07 - 29T23: 08: 05 "",
+    "" Status "": "" Pending Action ""
+}
+"
+```
 
 ## <a name="power-bi-schema"></a>Схема Power BI
 
