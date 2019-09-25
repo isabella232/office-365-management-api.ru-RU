@@ -1,7 +1,7 @@
 # [API управления Office 365](index.md)
 ## [Обзор API управления](office-365-management-apis-overview.md)
 ## [Начало работы с API управления](get-started-with-office-365-management-apis.md)
-## [API служебных сообщений (предварительная версия)](office-365-service-communications-api-reference.md)
+## [API служебных сообщений](office-365-service-communications-api-reference.md)
 ## [Справочник по API действий управления](office-365-management-activity-api-reference.md)
 ## [Схема API действий управления](office-365-management-activity-api-schema.md)
 ## [Устранение неполадок, связанных с API действий управления](troubleshooting-the-office-365-management-activity-api.md)
