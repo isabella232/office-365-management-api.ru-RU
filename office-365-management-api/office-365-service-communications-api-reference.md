@@ -1,34 +1,31 @@
 ---
-ms.TocTitle: Office 365 Service Communications API reference (Preview)
-title: Справочник по API сообщений о службах Office 365 (предварительная версия)
+ms.TocTitle: Office 365 Service Communications API reference
+title: 'Справочник по API сообщений о службах Office 365 '
 description: 'Этот API используется для доступа к следующим данным: список служб, текущее состояние, изменения состояния, сообщения.'
 ms.ContentId: d0b9341a-b205-5442-1c20-8fb56407351d
 ms.topic: reference (API)
 ms.date: ''
 localization_priority: Priority
-ms.openlocfilehash: 986298b87e2583788dca9b11f288743ce5f96b60
-ms.sourcegitcommit: 784b581a699c6d0ab7939ea621d5ecbea71925ea
+ms.openlocfilehash: 427c741f623f46962c3cd6818adbb64bfc0f1e7a
+ms.sourcegitcommit: 0e6d71ad2375e5d1fc72d6893724511c08840c27
 ms.translationtype: HT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 07/29/2019
-ms.locfileid: "35924814"
+ms.lasthandoff: 09/24/2019
+ms.locfileid: "37131426"
 ---
-# <a name="office-365-service-communications-api-reference-preview"></a>Справочник по API сообщений о службах Office 365 (предварительная версия)
-
-> [!NOTE] 
-> В этой документации рассмотрены функции, доступные в предварительной версии.
+# <a name="office-365-service-communications-api-reference"></a>Справочник по API сообщений о службах Office 365 
 
 С помощью API сообщений о службах Office 365 версии 2 можно получать доступ к следующим данным:
 
 - **Получение служб.** Получение списка подписанных служб.
     
-- **Получение текущего состояния.** Обновляемое в реальном времени представление текущих инцидентов и событий обслуживания.
+- **Получение текущего состояния.** Обновляемое в реальном времени представление текущих инцидентов.
     
-- **Получение сведений об изменении состояния.** Представление журнала работоспособности служб, включающего инциденты и события обслуживания.
+- **Получение сведений об изменении состояния.** Представление инцидентов в хронологическом порядке.
     
-- **Получение сообщений.** Поиск сообщений об инцидентах и плановом обслуживании, а также данных Центра сообщений.
+- **Получение сообщений.** Поиск сообщений об инцидентах, а также данных Центра сообщений.
     
-В настоящее время API сообщений о службах Office 365 содержит данные о следующих службах: Dynamics CRM, Dynamics Marketing, Exchange Online, Exchange Online Protection, служба идентификации, служба управления мобильными устройствами, Центр администратора партнера Office 365, OneDrive для бизнеса, Parature, OneDrive для бизнеса, Power BI для Office 365, служба управления правами, SharePoint Online, служба администратора SHD, Skype для бизнеса, Social Engagement и Yammer корпоративный.
+В настоящий момент API сообщений о службах Office 365 содержит данные для облачных служб Office 365, Yammer, Dynamics CRM и Microsoft Intune.
 
 ## <a name="the-fundamentals"></a>Основные сведения
 

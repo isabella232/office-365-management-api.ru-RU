@@ -6,12 +6,12 @@ ms.ContentId: 1c2bf08c-4f3b-26c0-e1b2-90b190f641f5
 ms.topic: reference (API)
 ms.date: ''
 localization_priority: Priority
-ms.openlocfilehash: 2e2ca6440a0f1ba10eb3d63e889a85efdaa334a0
-ms.sourcegitcommit: 78b79bd215433512fad7437220c7d5ebc1987862
+ms.openlocfilehash: bd37eb32c07e5b8c1feafad39c765d81342b5150
+ms.sourcegitcommit: 0e6d71ad2375e5d1fc72d6893724511c08840c27
 ms.translationtype: HT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 09/05/2019
-ms.locfileid: "36766854"
+ms.lasthandoff: 09/24/2019
+ms.locfileid: "37131440"
 ---
 # <a name="office-365-management-activity-api-schema"></a>Схема API действий управления Office 365
  
@@ -708,7 +708,7 @@ ms.locfileid: "36766854"
 |:-----|:-----|:-----|:-----|
 |ApplicationId|Edm.String|Нет|GUID, который представляет приложение, запрашивающее вход. Отображаемое имя можно просмотреть с помощью API Graph Azure Active Directory.|
 |Client|Edm.String|Нет|Сведения о клиентском устройстве, предоставляемые браузером, с которого выполнен вход.|
-|LogonError|Edm.String|Нет|Содержит сведения о причине неудачной попытки входа.|
+|LogonError|Edm.String|Нет|Содержит сведения о причине неудачной попытки входа. Полное описание LogonErrors см. в списке [кодов ошибок проверки подлинности и авторизации](https://docs.microsoft.com/ru-RU/azure/active-directory/develop/reference-aadsts-error-codes#aadsts-error-codes).
 |||||
 
 ## <a name="dlp-schema"></a>Схема защиты от потери данных
