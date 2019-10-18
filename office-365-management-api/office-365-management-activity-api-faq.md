@@ -17,7 +17,7 @@ ms.locfileid: "35924779"
 
 #### <a name="what-events-are-audited-for-a-specific-office-365-service"></a>В случае каких событий проводится аудит для определенной службы Office 365?
 
-В документации по схеме API действий управления Office 365 приведен полный список событий. Дополнительные сведения см. в статье [Схема API действий управления Office 365](office-365-management-activity-api-schema.md). Кроме того, в статье[Поиск по журналу аудита в Центре безопасности и соответствия требованиям](https://docs.microsoft.com/ru-RU/office365/securitycompliance/search-the-audit-log-in-security-and-compliance#audited-activities) в разделе "Подлежащие аудиту действия" приводится список событий для большинства служб Office 365, которые подлежат аудиту.
+В документации по схеме API действий управления Office 365 приведен полный список событий. Дополнительные сведения см. в статье [Схема API действий управления Office 365](office-365-management-activity-api-schema.md). Кроме того, в статье[Поиск по журналу аудита в Центре безопасности и соответствия требованиям](https://docs.microsoft.com/en-us/office365/securitycompliance/search-the-audit-log-in-security-and-compliance#audited-activities) в разделе "Подлежащие аудиту действия" приводится список событий для большинства служб Office 365, которые подлежат аудиту.
 
 #### <a name="how-do-i-onboard-to-the-management-activity-api"></a>Как подключиться к API действий управления?
 
