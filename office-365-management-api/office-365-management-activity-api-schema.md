@@ -6,12 +6,12 @@ ms.ContentId: 1c2bf08c-4f3b-26c0-e1b2-90b190f641f5
 ms.topic: reference (API)
 ms.date: ''
 localization_priority: Priority
-ms.openlocfilehash: 85e9a62a029a905204d0091d3f0d58824d3c1d9a
-ms.sourcegitcommit: 0db48c00c956935a4a52aa2c2686f160a3efc8f3
+ms.openlocfilehash: ee002772f5d35fefb758d32b6cb015993add0319
+ms.sourcegitcommit: d0bf43ff238f4647dd049672f68b4e1171083203
 ms.translationtype: HT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 10/22/2019
-ms.locfileid: "37636286"
+ms.lasthandoff: 10/29/2019
+ms.locfileid: "37774892"
 ---
 # <a name="office-365-management-activity-api-schema"></a>Схема API действий управления Office 365
  
@@ -1146,6 +1146,13 @@ ms.locfileid: "37636286"
 |5|Anti-phish, DIMP|Действие подмены домена (DIMP) в политике защиты от фишинга.|
 |6|Anti-phish, UIMP|Действие подмены пользователя (DIMP) в политике защиты от фишинга.|
 |7|Anti-phish, SPOOF|Действие подделки в политике защиты от фишинга.|
+|8|Anti-phish, GIMP|Действие аналитики почтового ящика в политике защиты от фишинга.|
+|9|Anti-malware, AMP| Действие в политике защиты от вредоносных программ.|
+|10|Safe attachment, SAP| Действие в политике безопасных вложений ATP Office 365.|
+|11|Exchange transport rule, ETR| Действие политики в правиле транспорта Exchange.|
+|12|Anti-malware, ZAPM| Действие в политике защиты от вредоносных программ, применяемое для автоматической очистки (ZAP).|
+|13|Anti-phish, ZAPP| Действие в политике защиты от фишинга, применяемое для ZAP.|
+|14|Anti-phish, ZAPS| Действие в политике защиты от нежелательной почты, применяемое для ZAP.|
 
 
 ### <a name="enum-policyaction---type-edmint32"></a>Enum: PolicyAction; Type: Edm.Int32
