@@ -6,12 +6,12 @@ ms.ContentId: 1c2bf08c-4f3b-26c0-e1b2-90b190f641f5
 ms.topic: reference (API)
 ms.date: ''
 localization_priority: Priority
-ms.openlocfilehash: 3cd8c5988273d05c85b97faa20903ebc283217dd
-ms.sourcegitcommit: a64c58d52f210c9952666d3e5bd86a0e70e983a2
+ms.openlocfilehash: c97325687967b85b589f4e7b94196ed1a406ef5d
+ms.sourcegitcommit: 3ff573d31612ca08819a37bfc98d43926a4a60e2
 ms.translationtype: HT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 11/18/2019
-ms.locfileid: "38696963"
+ms.lasthandoff: 11/27/2019
+ms.locfileid: "39631993"
 ---
 # <a name="office-365-management-activity-api-schema"></a>Схема API действий управления Office 365
  
@@ -53,6 +53,7 @@ ms.locfileid: "38696963"
 |[Схема Office 365 Advanced Threat Protection и Threat Investigation and Response](#office-365-advanced-threat-protection-and-threat-investigation-and-response-schema)|Дополняет общую схему свойствами, характерными для данных Office 365 Advanced Threat Protection и Threat Investigation and Response.|
 |[Схема Power BI](#power-bi-schema)|Дополняет общую схему свойствами, характерными для всех событий Power BI.|
 |[Рабочая аналитика](#workplace-analytics-schema)|Дополняет общую схему свойствами, характерными для всех событий службы "Рабочая аналитика (Майкрософт)".|
+|[Схема Microsoft Forms](#microsoft-forms-schema)|Дополняет общую схему свойствами, характерными для всех событий Microsoft Forms.|
 |||
 
 ## <a name="common-schema"></a>Общая схема
@@ -116,6 +117,7 @@ ms.locfileid: "38696963"
 |47|ThreatIntelligenceAtpContent|События фишинга и вредоносных программ для файлов в SharePoint, OneDrive для бизнеса и Microsoft Teams из Office 365 Advanced Threat Protection.|
 |54|SharePointListItemOperation|События списка SharePoint.|
 |55|SharePointContentTypeOperation|События типа контента списка SharePoint.|
+|66|MicrosoftForms|События Microsoft Forms.|
 ||||
 
 ### <a name="enum-user-type---type-edmint32"></a>Enum: User Type; Type: Edm.Int32
@@ -1240,7 +1242,8 @@ ms.locfileid: "38696963"
 
 События [автоматизированного анализа угроз и реагирования на них (AIR) в Office 365](https://docs.microsoft.com/office365/securitycompliance/automated-investigation-response-office) доступны для пользователей Office 365 с подпиской, включающей Office 365 Advanced Threat Protection (план 2) или Office 365 E5. События анализа регистрируются в журнале на основе изменения в состоянии анализа. Например, если администратор выполняет действие, изменяющее состояние анализа с "Ожидание выполнения действия" на "Завершено", событие записывается в журнал. 
 
-В настоящее время в журнал записываются только события автоматизированного анализа угроз. (События анализа, созданного вручную, ожидаются в ближайшее время.) В журнал записываются следующие значения состояния: 
+В настоящее время в журнал записываются только события автоматизированного анализа угроз. (События анализа, созданного вручную, ожидаются в ближайшее время.) В журнал записываются следующие значения состояния:
+
 - Исследование начато
 - Угрозы не найдены 
 - Прервано системой
@@ -1265,6 +1268,7 @@ ms.locfileid: "38696963"
 |DeeplinkURL    |Edm.String |URL-адрес прямой ссылки на анализ в Центре безопасности и соответствия требованиям Office 365 |
 |Действия |Коллекция (Edm.String)   |Коллекция действий, рекомендованных анализом |
 |Данные   |Edm.String |Строка данных с дополнительными сведениями об объектах анализа и сведениями об оповещениях, связанных с анализом. Объекты доступны в отдельном узле в составе большого двоичного объекта. |
+||||
 
 #### <a name="actions"></a>Действия
 
@@ -1283,6 +1287,7 @@ ms.locfileid: "38696963"
 |Идентификаторы ресурсов   |Edm.String  |Состоит из идентификатора клиента Azure Active Directory.|
 |Объекты   |Collection(Edm.String) |Список из одного или нескольких объектов, затронутых действием |
 |Идентификаторы соответствующих оповещений  |Edm.String |Оповещение, связанное с анализом |
+||||
 
 #### <a name="entities"></a>Объекты
 
@@ -1300,6 +1305,7 @@ ms.locfileid: "38696963"
 |NetworkMessageId   |Edm.Guid   |Идентификатор сетевого сообщения для почтового сообщения  |
 |InternetMessageId  |Edm.String  |Идентификатор интернет-сообщения для почтового сообщения |
 |Subject    |Edm.String |Тема почтового сообщения  |
+||||
 
 #### <a name="ip"></a>IP
 
@@ -1307,6 +1313,7 @@ ms.locfileid: "38696963"
 |----|----|----|
 |Type   |Edm.String |"ip" |
 |Address    |Edm.String |IP-адрес в виде строки, например `127.0.0.1`
+||||
 
 #### <a name="url"></a>URL
 
@@ -1314,6 +1321,7 @@ ms.locfileid: "38696963"
 |----|----|----|
 |Type   |Edm.String |"url" |
 |Url    |Edm.String |Полный URL-адрес, на который указывает объект  |
+||||
 
 #### <a name="mailbox-also-equivalent-to-the-user"></a>Mailbox (также аналогичен пользователю) 
 
@@ -1323,6 +1331,7 @@ ms.locfileid: "38696963"
 |MailboxPrimaryAddress  |Edm.String |Основной адрес почтового ящика  |
 |DisplayName    |Edm.String |Отображаемое имя почтового ящика |
 |Upn    |Edm.String |Имя участника-пользователя почтового ящика  |
+||||
 
 #### <a name="file"></a>File
 
@@ -1331,6 +1340,7 @@ ms.locfileid: "38696963"
 |Type   |Edm.String |"file" |
 |Имя   |Edm.String |Имя файла без пути |
 FileHashes |Коллекция (Edm.String) |Хэши файлов, связанные с файлом |
+||||
 
 #### <a name="filehash"></a>FileHash
 
@@ -1339,6 +1349,7 @@ FileHashes |Коллекция (Edm.String) |Хэши файлов, связан
 |Type   |Edm.String |"filehash" |
 |Algorithm  |Edm.String |Тип алгоритма хэширования. Может принимать одно из следующих значений:<br/>— Неизвестно<br/>— MD5<br/>— SHA1<br/>— SHA256<br/>— SHA256AC
 |Value  |Edm.String |Значение хэша  |
+||||
 
 #### <a name="mailcluster"></a>MailCluster
 
@@ -1353,6 +1364,7 @@ FileHashes |Коллекция (Edm.String) |Хэши файлов, связан
 |QueryTime  |Edm.DateTime   |Время запроса  |
 |MailCount  |Edm.int    |Число почтовых сообщений, входящих в почтовый кластер  |
 |Source |Строка |Источник почтового кластера; значение источника кластера. |
+||||
 
 ## <a name="power-bi-schema"></a>Схема Power BI
 
@@ -1391,11 +1403,48 @@ FileHashes |Коллекция (Edm.String) |Хэши файлов, связан
 
 ## <a name="workplace-analytics-schema"></a>Схема службы "Рабочая аналитика"
 
-Эта схема используется в событиях службы "Рабочая аналитика", перечисленных в статье [Поиск в журнале аудита в Центре безопасности и соответствия требованиям Office 365](https://docs.microsoft.com/office365/securitycompliance/search-the-audit-log-in-security-and-compliance#microsoft-workplace-analytics-activities).
+Эта схема используется в событиях службы "Рабочая аналитика", перечисленных в статье [Поиск в журнале аудита в Центре безопасности и соответствия требованиям Office 365](https://docs.microsoft.com/microsoft-365/compliance/search-the-audit-log-in-security-and-compliance#microsoft-workplace-analytics-activities).
 
 | **Параметры**     | **Тип**            | **Обязательный?** | **Описание**|
 |:------------------ | :------------------ | :--------------|:--------------|
 | WpaUserRole        | Edm.String | Нет     | Роль пользователя, выполнившего действие, в службе "Рабочая аналитика".                                                                                            |
 | ModifiedProperties | Коллекция (Common.ModifiedProperty) | Нет | Это свойство включает имя, а также новое и предыдущее значения измененного свойства.|
 | OperationDetails   | Коллекция (Common.NameValuePair)    | Нет | Список расширенных свойств для измененного параметра. Каждое свойство будет включать значения **Name** и **Value**.|
+||||
+
+## <a name="microsoft-forms-schema"></a>Схема Microsoft Forms
+
+Эта схема используется в событиях службы Micorosft Forms, перечисленных в статье [Поиск в журнале аудита в Центре безопасности и соответствия требованиям Office 365](https://docs.microsoft.com/microsoft-365/compliance/search-the-audit-log-in-security-and-compliance#microsoft-forms-activities).
+
+|**Параметры**|**Тип**|**Обязательный?**|**Описание**|
+|:-----|:-----|:-----|:-----|
+|FormsUserTypes|Collection(Self.[FormsUserTypes](#formsusertypes))|Да|Роль пользователя, выполнившего действие.  Значения этого параметра — "Администратор", "Владелец", "Ответчик" или "Совместное редактирование".|
+|SourceApp|Edm.String|Да|Указывает, относится ли действие к веб-сайту Forms или к другому приложению.|
+|FormName|Edm.String|Нет|Название текущей формы.|
+|FormId |Edm.String|Нет|Идентификатор целевой формы.|
+|FormTypes|Collection(Self.[FormTypes](#formtypes))|Нет|Указывает на то, является ли это формой, тестом или опросом.|
+|ActivityParameters|Edm.String|Нет|Строка JSON, содержащая параметры действия. Дополнительные сведения см. в статье [Поиск журнала аудита в Центре безопасности и соответствия требованиям Office 365](https://docs.microsoft.com/microsoft-365/compliance/search-the-audit-log-in-security-and-compliance#microsoft-forms-activities).|
+||||
+
+### <a name="enum-formsusertypes---type-edmint32"></a>Enum: FormsUserTypes - Тип: Edm.Int32
+
+#### <a name="formsusertypes"></a>FormsUserTypes
+
+|**Значение**|**Тип пользователя формы**|**Описание**|
+|:-----|:-----|:-----|
+|0|Администратор|Администратор —это лицо, имеющее доступ к форме.|
+|1|Владелец|Пользователь, являющийся владельцем формы.|
+|2|Ответчик|Пользователь, отправивший ответ в форму.|
+|3|Совместное редактирование|Пользователь, который использует ссылку для совместной работы, предоставленную владельцем формы для входа и редактирования формы.|
+||||
+
+### <a name="enum-formtypes---type-edmint32"></a>Enum: FormTypes - Тип: Edm.Int32
+
+#### <a name="formtypes"></a>FormTypes
+
+|**Значение**|**Типы форм**|**Описание**|
+|:-----|:-----|:-----|
+|0|Форма|Формы, созданные при помощи параметра "Новая форма".|
+|1|Тест|Тесты, созданные при помощи параметра "Новый тест".  Тест — это особый тип форм, включающий дополнительные функции, такие как оценки, автоматическое и ручное оценивание и комментирование.|
+|2|Опрос|Опросы, созданные при помощи параметра "Новый опрос".  Опрос — это особый тип форм, включающий дополнительные функции, такие как интеграция CMS и поддержка правил Flow.|
 ||||
