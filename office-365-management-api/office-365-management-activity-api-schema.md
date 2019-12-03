@@ -6,12 +6,12 @@ ms.ContentId: 1c2bf08c-4f3b-26c0-e1b2-90b190f641f5
 ms.topic: reference (API)
 ms.date: ''
 localization_priority: Priority
-ms.openlocfilehash: c97325687967b85b589f4e7b94196ed1a406ef5d
-ms.sourcegitcommit: 3ff573d31612ca08819a37bfc98d43926a4a60e2
+ms.openlocfilehash: 1762bed1a970215b3fc8c45f3ef807caaf93ace8
+ms.sourcegitcommit: e45b168705f36e12ceae02c77244d17d5ce01310
 ms.translationtype: HT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 11/27/2019
-ms.locfileid: "39631993"
+ms.lasthandoff: 12/02/2019
+ms.locfileid: "39665466"
 ---
 # <a name="office-365-management-activity-api-schema"></a>Схема API действий управления Office 365
  
@@ -51,6 +51,7 @@ ms.locfileid: "39631993"
 |[Схема командлетов для обеспечения безопасности центра обработки данных](#data-center-security-cmdlet-schema)|Дополняет базовую схему безопасности центра обработки данных свойствами, характерными для всех данных аудита командлетов для обеспечения безопасности центра обработки данных.|
 |[Схема Microsoft Teams](#microsoft-teams-schema)|Дополняет общую схему свойствами, характерными для всех событий Microsoft Teams.|
 |[Схема Office 365 Advanced Threat Protection и Threat Investigation and Response](#office-365-advanced-threat-protection-and-threat-investigation-and-response-schema)|Дополняет общую схему свойствами, характерными для данных Office 365 Advanced Threat Protection и Threat Investigation and Response.|
+|[События автоматизированного анализа угроз и реагирования на них](#automated-investigation-and-response-events-in-office-365)|Дополняет общую схему свойствами, характерными для событий автоматизированного анализа угроз и реагирования на них (AIR) в Office 365.|
 |[Схема Power BI](#power-bi-schema)|Дополняет общую схему свойствами, характерными для всех событий Power BI.|
 |[Рабочая аналитика](#workplace-analytics-schema)|Дополняет общую схему свойствами, характерными для всех событий службы "Рабочая аналитика (Майкрософт)".|
 |[Схема Microsoft Forms](#microsoft-forms-schema)|Дополняет общую схему свойствами, характерными для всех событий Microsoft Forms.|
@@ -117,6 +118,7 @@ ms.locfileid: "39631993"
 |47|ThreatIntelligenceAtpContent|События фишинга и вредоносных программ для файлов в SharePoint, OneDrive для бизнеса и Microsoft Teams из Office 365 Advanced Threat Protection.|
 |54|SharePointListItemOperation|События списка SharePoint.|
 |55|SharePointContentTypeOperation|События типа контента списка SharePoint.|
+|64|AirInvestigation|События автоматизированного реагирования на инциденты (AIR).|
 |66|MicrosoftForms|События Microsoft Forms.|
 ||||
 
@@ -1238,7 +1240,7 @@ ms.locfileid: "39631993"
 |2|Microsoft Teams|
 |||||
 
-### <a name="automated-investigation-and-response-events"></a>События автоматизированного анализа угроз и реагирования на них
+## <a name="automated-investigation-and-response-events-in-office-365"></a>События автоматизированного анализа угроз и реагирования на них в Office 365
 
 События [автоматизированного анализа угроз и реагирования на них (AIR) в Office 365](https://docs.microsoft.com/office365/securitycompliance/automated-investigation-response-office) доступны для пользователей Office 365 с подпиской, включающей Office 365 Advanced Threat Protection (план 2) или Office 365 E5. События анализа регистрируются в журнале на основе изменения в состоянии анализа. Например, если администратор выполняет действие, изменяющее состояние анализа с "Ожидание выполнения действия" на "Завершено", событие записывается в журнал. 
 
@@ -1255,7 +1257,7 @@ ms.locfileid: "39631993"
 - Прервано пользователем
 - Работает
 
-#### <a name="main-investigation-schema"></a>Основная схема анализа 
+### <a name="main-investigation-schema"></a>Основная схема анализа 
 
 |Имя   |Тип   |Описание  |
 |----|----|----|
@@ -1270,7 +1272,7 @@ ms.locfileid: "39631993"
 |Данные   |Edm.String |Строка данных с дополнительными сведениями об объектах анализа и сведениями об оповещениях, связанных с анализом. Объекты доступны в отдельном узле в составе большого двоичного объекта. |
 ||||
 
-#### <a name="actions"></a>Действия
+### <a name="actions"></a>Действия
 
 |Поле  |Тип   |Описание |
 |----|----|----|
@@ -1289,9 +1291,9 @@ ms.locfileid: "39631993"
 |Идентификаторы соответствующих оповещений  |Edm.String |Оповещение, связанное с анализом |
 ||||
 
-#### <a name="entities"></a>Объекты
+### <a name="entities"></a>Объекты
 
-##### <a name="mailmessage-email"></a>MailMessage (электронная почта) 
+#### <a name="mailmessage-email"></a>MailMessage (электронная почта) 
 
 |Поле  |Тип   |Описание  |
 |----|----|----|
