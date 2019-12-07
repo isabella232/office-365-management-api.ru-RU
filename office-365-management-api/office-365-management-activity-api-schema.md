@@ -6,12 +6,12 @@ ms.ContentId: 1c2bf08c-4f3b-26c0-e1b2-90b190f641f5
 ms.topic: reference (API)
 ms.date: ''
 localization_priority: Priority
-ms.openlocfilehash: 1762bed1a970215b3fc8c45f3ef807caaf93ace8
-ms.sourcegitcommit: e45b168705f36e12ceae02c77244d17d5ce01310
+ms.openlocfilehash: f05cf59e720c56b1b43db153519ea0fbee548895
+ms.sourcegitcommit: f959ebd84b3df57171f8d8ca2485adc1b69b4008
 ms.translationtype: HT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 12/02/2019
-ms.locfileid: "39665466"
+ms.lasthandoff: 12/06/2019
+ms.locfileid: "39872227"
 ---
 # <a name="office-365-management-activity-api-schema"></a>Схема API действий управления Office 365
  
@@ -108,16 +108,21 @@ ms.locfileid: "39665466"
 |30|MicrosoftFlow|События Microsoft Flow.|
 |31|AeD|События Advanced eDiscovery.|
 |32|MicrosoftStream|События Microsoft Stream.|
+|33|ComplianceDLPSharePointClassification|События, связанные с классификацией защиты от потери данных в SharePoint.|
 |35|Project|События Microsoft Project.|
-|36|SharepointListOperation|События списка SharePoint.|
+|36|SharePointListOperation|События списка SharePoint.|
 |38|DataGovernance|Событиях, связанные с политиками хранения и метками хранения в Центре безопасности и соответствия требованиям|
 |40|SecurityComplianceAlerts|Сигналы оповещений по безопасности и соответствию требованиям.|
 |41|ThreatIntelligenceUrl|События времени блокировки безопасных ссылок и переопределения блокировки из Office 365 Advanced Threat Protection.|
+|42|SecurityComplianceInsights|События, связанные с аналитикой и отчетами в Центре безопасности и соответствия требованиям Office 365.|
 |44|WorkplaceAnalytics|События Workplace Analytics|
 |45|PowerAppsApp|События приложения PowerApps.|
 |47|ThreatIntelligenceAtpContent|События фишинга и вредоносных программ для файлов в SharePoint, OneDrive для бизнеса и Microsoft Teams из Office 365 Advanced Threat Protection.|
-|54|SharePointListItemOperation|События списка SharePoint.|
+|49|TeamsHealthcare|События, связанные с [приложением "Пациенты"](https://docs.microsoft.com/MicrosoftTeams/expand-teams-across-your-org/healthcare/patients-audit) в Microsoft Teams для сферы здравоохранения.|
+|52|DataInsightsRestApiAudit|События REST API аналитики данных.|
+|54|SharePointListItemOperation|События элемента списка SharePoint.|
 |55|SharePointContentTypeOperation|События типа контента списка SharePoint.|
+|56|SharePointFieldOperation|События поля списка SharePoint.|
 |64|AirInvestigation|События автоматизированного реагирования на инциденты (AIR).|
 |66|MicrosoftForms|События Microsoft Forms.|
 ||||
@@ -135,10 +140,9 @@ ms.locfileid: "39665466"
 |4|System|Системная учетная запись.|
 |5|Application|Приложение.|
 |6|ServicePrincipal|Субъект-служба.|
+|7|CustomPolicy|Настраиваемая политика.|
+|8|SystemPolicy|Системная политика.|
 ||||
-
-> [!NOTE] 
-> Тип пользователя указывается только для операций Exchange. Он не задается для операций SharePoint. 
 
 ### <a name="enum-auditlogscope---type-edmint32"></a>Enum: AuditLogScope; Type: Edm.Int32
 
