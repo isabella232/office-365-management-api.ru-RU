@@ -6,12 +6,12 @@ ms.ContentId: 1c2bf08c-4f3b-26c0-e1b2-90b190f641f5
 ms.topic: reference (API)
 ms.date: ''
 localization_priority: Priority
-ms.openlocfilehash: f05cf59e720c56b1b43db153519ea0fbee548895
-ms.sourcegitcommit: f959ebd84b3df57171f8d8ca2485adc1b69b4008
+ms.openlocfilehash: 7a12fc60894742ebdcc41457930225a4dd9bfc02
+ms.sourcegitcommit: 36d0167805d24bbb3e2cf1a02d0f011270cc31cb
 ms.translationtype: HT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 12/06/2019
-ms.locfileid: "39872227"
+ms.lasthandoff: 01/22/2020
+ms.locfileid: "41263277"
 ---
 # <a name="office-365-management-activity-api-schema"></a>Схема API действий управления Office 365
  
@@ -105,7 +105,7 @@ ms.locfileid: "39872227"
 |24|Discovery|События для действий обнаружения электронных данных, выполняемых при поиске контента и управлении обращениями для обнаружения электронных данных в Центре безопасности и соответствия требованиям.|
 |25|MicrosoftTeams|События из Microsoft Teams.|
 |28|ThreatIntelligence|События фишинга и вредоносных программ из Exchange Online Protection и Office 365 Advanced Threat Protection.|
-|30|MicrosoftFlow|События Microsoft Flow.|
+|30|MicrosoftFlow|События Microsoft Power Automate (ранее Microsoft Flow).|
 |31|AeD|События Advanced eDiscovery.|
 |32|MicrosoftStream|События Microsoft Stream.|
 |33|ComplianceDLPSharePointClassification|События, связанные с классификацией защиты от потери данных в SharePoint.|
@@ -116,7 +116,7 @@ ms.locfileid: "39872227"
 |41|ThreatIntelligenceUrl|События времени блокировки безопасных ссылок и переопределения блокировки из Office 365 Advanced Threat Protection.|
 |42|SecurityComplianceInsights|События, связанные с аналитикой и отчетами в Центре безопасности и соответствия требованиям Office 365.|
 |44|WorkplaceAnalytics|События Workplace Analytics|
-|45|PowerAppsApp|События приложения PowerApps.|
+|45|PowerAppsApp|События Power Apps.|
 |47|ThreatIntelligenceAtpContent|События фишинга и вредоносных программ для файлов в SharePoint, OneDrive для бизнеса и Microsoft Teams из Office 365 Advanced Threat Protection.|
 |49|TeamsHealthcare|События, связанные с [приложением "Пациенты"](https://docs.microsoft.com/MicrosoftTeams/expand-teams-across-your-org/healthcare/patients-audit) в Microsoft Teams для сферы здравоохранения.|
 |52|DataInsightsRestApiAudit|События REST API аналитики данных.|
@@ -359,7 +359,7 @@ ms.locfileid: "39872227"
 
 ## <a name="sharepoint-file-operations"></a>Операции с файлами SharePoint
 
-Эта схема используется в связанных с файлами событиях SharePoint, перечисленных в разделе "Действия с файлами и папками" статьи [Поиск в журнале аудита в Центре защиты Office 365](https://support.office.com/en-us/article/Search-the-audit-log-in-the-Office-365-Security-Compliance-Center-0d4d0f35-390b-4518-800e-0c7ec95e946c?ui=en-US&amp;rs=en-US&amp;ad=US).
+Эта схема используется в связанных с файлами событиях SharePoint, перечисленных в разделе "Действия с файлами и папками" статьи [Поиск в журнале аудита в Центре безопасности и соответствия требованиям](https://docs.microsoft.com/microsoft-365/compliance/search-the-audit-log-in-security-and-compliance).
 
 
 
@@ -379,7 +379,8 @@ ms.locfileid: "39872227"
 
 ## <a name="sharepoint-sharing-schema"></a>Схема общего доступа SharePoint
 
- События SharePoint, связанные с общим доступом к файлам. Они отличаются от событий, связанных с файлами и папками, так как пользователь выполняет действие, которое определенным образом влияет на другого пользователя. Дополнительные сведения о схеме общего доступа в SharePoint см. в статье [Использование аудита общего доступа в журнале аудита Office 365](https://support.office.com/en-us/article/Use-sharing-auditing-in-the-Office-365-audit-log-50bbf89f-7870-4c2a-ae14-42635e0cfc01?ui=en-US&amp;rs=en-US&amp;ad=US).
+ События SharePoint, связанные с общим доступом к файлам. Они отличаются от событий, связанных с файлами и папками, так как пользователь выполняет действие, которое определенным образом влияет на другого пользователя. Дополнительные сведения о схеме общего доступа в SharePoint см. в статье [Использование аудита общего доступа в журнале аудита Office 365](https://docs.microsoft.com/microsoft-365/compliance/use-sharing-auditing
+).
 
 
 
@@ -393,7 +394,7 @@ ms.locfileid: "39872227"
 
 ## <a name="sharepoint-schema"></a>Схема SharePoint
 
-Эта схема используется в событиях SharePoint, перечисленных в статье [Поиск в журнале аудита в Центре защиты Office 365](https://support.office.com/en-us/article/Search-the-audit-log-in-the-Office-365-Security-Compliance-Center-0d4d0f35-390b-4518-800e-0c7ec95e946c?ui=en-US&amp;rs=en-US&amp;ad=US) (за исключением событий, связанных с файлами и папками).
+Эта схема используется в событиях SharePoint, перечисленных в статье [Поиск в журнале аудита в Центре безопасности и соответствия требованиям](https://docs.microsoft.com/microsoft-365/compliance/search-the-audit-log-in-security-and-compliance) (за исключением событий, связанных с файлами и папками).
 
 
 |**Параметр**|**Тип**|**Обязательный?**|**Описание**|
@@ -897,7 +898,7 @@ ms.locfileid: "39872227"
 
 ## <a name="sway-schema"></a>Схема Sway
 
-Эта схема используется в событиях Sway, перечисленных в статье [Поиск в журнале аудита в Центре защиты Office 365](https://support.office.com/en-us/article/Search-the-audit-log-in-the-Office-365-Security-Compliance-Center-0d4d0f35-390b-4518-800e-0c7ec95e946c?ui=en-US&amp;rs=en-US&amp;ad=US) (за исключением событий, связанных с файлами и папками).
+Эта схема используется в событиях Sway, перечисленных в статье [Поиск в журнале аудита в Центре защиты Office 365](https://support.office.com/article/Search-the-audit-log-in-the-Office-365-Security-Compliance-Center-0d4d0f35-390b-4518-800e-0c7ec95e946c?ui=en-US&amp;rs=en-US&amp;ad=US) (за исключением событий, связанных с файлами и папками).
 
 |**Параметр**|**Тип**|**Обязательный?**|**Описание**|
 |:-----|:-----|:-----|:-----|
@@ -1082,7 +1083,7 @@ ms.locfileid: "39872227"
 
 События [Office 365 Advanced Threat Protection](https://docs.microsoft.com/office365/securitycompliance/office-365-atp) и Threat Investigation and Response доступны для клиентов Office 365, у которых есть подписка на Office 365 Advanced Threat Protection (план 1), Office 365 Advanced Threat Protection (план 2) или E5. Каждое событие в веб-канале Office 365 ATP соответствует указанным ниже действиям, которые были расценены как содержащие угрозу:
 
-- Пользователь отправил или получил электронное сообщение в пределах организации. Угроза обнаруживается при доставке, а также с помощью функции [Автоматическая очистка](https://support.office.com/ru-RU/article/Zero-hour-auto-purge-protection-against-spam-and-malware-96deb75f-64e8-4c10-b570-84c99c674e15). 
+- Пользователь отправил или получил электронное сообщение в пределах организации. Угроза обнаруживается при доставке, а также с помощью функции [Автоматическая очистка](https://support.office.com/article/Zero-hour-auto-purge-protection-against-spam-and-malware-96deb75f-64e8-4c10-b570-84c99c674e15). 
 
 - Пользователь щелкнул URL-адреса в пределах организации, которые были расценены как вредоносные функцией защиты [Безопасные ссылки Office 365 ATP](https://docs.microsoft.com/office365/securitycompliance/atp-safe-links) в момент выбора.  
 
@@ -1098,7 +1099,7 @@ ms.locfileid: "39872227"
 |**Параметры**|**Тип**|**Обязательный?**|**Описание**|
 |:-----|:-----|:-----|:-----|
 |AttachmentData|Collection(Self.[AttachmentData](#attachmentdata))|Нет|Данные о вложениях в сообщение, активировавшее событие.|
-|DetectionType|Edm.String|Да|Тип обнаружения (например, **В тексте** — обнаружены во время доставки; **Отложенный** — обнаружены после доставки; **ZAP** — сообщения, удаленные с помощью функции [автоматическая защита](https://support.office.com/ru-RU/article/Zero-hour-auto-purge-protection-against-spam-and-malware-96deb75f-64e8-4c10-b570-84c99c674e15)). Как правило, события для типа обнаружения ZAP предшествуют сообщению с типом обнаружения **Отложенный**.|
+|DetectionType|Edm.String|Да|Тип обнаружения (например, **В тексте** — обнаружены во время доставки; **Отложенный** — обнаружены после доставки; **ZAP** — сообщения, удаленные с помощью функции [автоматическая защита](https://support.office.com/article/Zero-hour-auto-purge-protection-against-spam-and-malware-96deb75f-64e8-4c10-b570-84c99c674e15)). Как правило, события для типа обнаружения ZAP предшествуют сообщению с типом обнаружения **Отложенный**.|
 |DetectionMethod|Edm.String|Да|Метод или технология, используемая Office 365 ATP для обнаружения.|
 |InternetMessageId|Edm.String|Да|Идентификатор интернет-сообщения.|
 |NetworkMessageId|Edm.String|Да|Идентификатор сетевого сообщения Exchange Online.|

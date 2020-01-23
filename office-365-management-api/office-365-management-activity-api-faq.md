@@ -6,18 +6,18 @@ ms.ContentId: ''
 ms.topic: reference (API)
 ms.date: ''
 localization_priority: Priority
-ms.openlocfilehash: 9083127d1fd3ecf82e5fe778ba1727d22d91017c
-ms.sourcegitcommit: 784b581a699c6d0ab7939ea621d5ecbea71925ea
+ms.openlocfilehash: 19603e9f22d65c51ee01c9b410c61cb46ca97434
+ms.sourcegitcommit: 36d0167805d24bbb3e2cf1a02d0f011270cc31cb
 ms.translationtype: HT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 07/29/2019
-ms.locfileid: "35924779"
+ms.lasthandoff: 01/22/2020
+ms.locfileid: "41263235"
 ---
 # <a name="office-365-management-activity-api-frequently-asked-questions"></a>Вопросы и ответы: API действий управления Office 365
 
 #### <a name="what-events-are-audited-for-a-specific-office-365-service"></a>В случае каких событий проводится аудит для определенной службы Office 365?
 
-В документации по схеме API действий управления Office 365 приведен полный список событий. Дополнительные сведения см. в статье [Схема API действий управления Office 365](office-365-management-activity-api-schema.md). Кроме того, в статье[Поиск по журналу аудита в Центре безопасности и соответствия требованиям](https://docs.microsoft.com/en-us/office365/securitycompliance/search-the-audit-log-in-security-and-compliance#audited-activities) в разделе "Подлежащие аудиту действия" приводится список событий для большинства служб Office 365, которые подлежат аудиту.
+В документации по схеме API действий управления Office 365 приведен полный список событий. Дополнительные сведения см. в статье [Схема API действий управления Office 365](office-365-management-activity-api-schema.md). Кроме того, в статье[Поиск по журналу аудита в Центре безопасности и соответствия требованиям](https://docs.microsoft.com/office365/securitycompliance/search-the-audit-log-in-security-and-compliance#audited-activities) в разделе "Подлежащие аудиту действия" приводится список событий для большинства служб Office 365, которые подлежат аудиту.
 
 #### <a name="how-do-i-onboard-to-the-management-activity-api"></a>Как подключиться к API действий управления?
 

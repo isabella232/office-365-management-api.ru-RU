@@ -6,12 +6,12 @@ ms.ContentId: 50822603-a1ec-a754-e7dc-67afe36bb1b0
 ms.topic: reference (API)
 ms.date: ''
 localization_priority: Priority
-ms.openlocfilehash: f02088f557a10414539952c78542e09b2dc2d90b
-ms.sourcegitcommit: 37737b849f1b2d0484e626002978b1d4ece2c742
+ms.openlocfilehash: b751c89194407e57c8654a9317b8070ab2918b03
+ms.sourcegitcommit: 36d0167805d24bbb3e2cf1a02d0f011270cc31cb
 ms.translationtype: HT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 07/30/2019
-ms.locfileid: "35936231"
+ms.lasthandoff: 01/22/2020
+ms.locfileid: "41263291"
 ---
 # <a name="troubleshooting-the-office-365-management-activity-api"></a>Устранение неполадок, связанных с API действий управления Office 365
 
@@ -40,7 +40,7 @@ API действий управления не следует путать с AP
 
 ## <a name="connecting-to-the-api"></a>Подключение к API
 
-Большинство приложений подключаются к API с помощью обычного потока OAuth2 учетных данных клиента. Следовательно, для начала необходимо создать приложение Azure AD с разрешениями, необходимыми для доступа к данным API действий управления. В этой статье не представлены инструкции по регистрации приложения Azure AD. Дополнительные сведения см. в статье [Краткое руководство. Регистрация приложения в конечной точке Azure Active Directory](https://docs.microsoft.com/ru-RU/azure/active-directory/develop/active-directory-integrating-applications).
+Большинство приложений подключаются к API с помощью обычного потока OAuth2 учетных данных клиента. Следовательно, для начала необходимо создать приложение Azure AD с разрешениями, необходимыми для доступа к данным API действий управления. В этой статье не представлены инструкции по регистрации приложения Azure AD. Дополнительные сведения см. в статье [Краткое руководство. Регистрация приложения в конечной точке Azure Active Directory](https://docs.microsoft.com/azure/active-directory/develop/active-directory-integrating-applications).
 
 ### <a name="azure-application-permissions"></a>Разрешения приложений Azure
 
