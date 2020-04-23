@@ -6,12 +6,12 @@ ms.ContentId: 1c2bf08c-4f3b-26c0-e1b2-90b190f641f5
 ms.topic: reference (API)
 ms.date: ''
 localization_priority: Priority
-ms.openlocfilehash: 9349640ed08182883e115e548ffe2480e141aa89
-ms.sourcegitcommit: a9a865f5500183dad00598bf372fc991a95f8d61
+ms.openlocfilehash: 7a636bcdf86dd4513d7ea7809066b5becb68de83
+ms.sourcegitcommit: 9d32000d9b9af3f008d93745379697bc74e4703c
 ms.translationtype: HT
 ms.contentlocale: ru-RU
 ms.lasthandoff: 04/22/2020
-ms.locfileid: "43721290"
+ms.locfileid: "43785567"
 ---
 # <a name="office-365-management-activity-api-schema"></a>Схема API действий управления Office 365
 
@@ -122,7 +122,7 @@ ms.locfileid: "43721290"
 |47|ThreatIntelligenceAtpContent|События фишинга и вредоносных программ для файлов в SharePoint, OneDrive для бизнеса и Microsoft Teams из Office 365 Advanced Threat Protection.|
 |48|LabelContentExplorer|События, связанные с [обозревателем содержимого с классификацией данных](https://docs.microsoft.com/microsoft-365/compliance/data-classification-content-explorer).|
 |49|TeamsHealthcare|События, связанные с [приложением "Пациенты"](https://docs.microsoft.com/MicrosoftTeams/expand-teams-across-your-org/healthcare/patients-audit) в Microsoft Teams для сферы здравоохранения.|
-|51|HygieneEvent|События, связанные с [Microsoft Cloud App Security](https://docs.microsoft.com/cloud-app-security/what-is-cloud-app-security).|
+|51|HygieneEvent|События, связанные с защитой от нежелательной почты и с санацией почты.|
 |52|DataInsightsRestApiAudit|События REST API аналитики данных.|
 |54|SharePointListItemOperation|События элемента списка SharePoint.|
 |55|SharePointContentTypeOperation|События типа контента списка SharePoint.|
@@ -1487,7 +1487,7 @@ FileHashes |Коллекция (Edm.String)    |Хэши файлов, связ�
 
 #### <a name="formtypes"></a>FormTypes
 
-|**Value** (Значение)|**Типы форм**|**Описание**|
+|**Значение**|**Типы форм**|**Описание**|
 |:-----|:-----|:-----|
 |0|Форма|Формы, созданные при помощи параметра "Новая форма".|
 |1|Тест|Тесты, созданные при помощи параметра "Новый тест".  Тест — это особый тип форм, включающий дополнительные функции, такие как оценки, автоматическое и ручное оценивание и комментирование.|
