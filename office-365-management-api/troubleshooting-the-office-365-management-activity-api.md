@@ -6,12 +6,12 @@ ms.ContentId: 50822603-a1ec-a754-e7dc-67afe36bb1b0
 ms.topic: reference (API)
 ms.date: ''
 localization_priority: Priority
-ms.openlocfilehash: b751c89194407e57c8654a9317b8070ab2918b03
-ms.sourcegitcommit: 2c592abf7005b4c73311ea9a4d1804994084bca4
+ms.openlocfilehash: 0552456c2340ad170355953e274a455ff681e2c9
+ms.sourcegitcommit: d55928a0d535090fa2dbe94f38c7316d0e52e9a9
 ms.translationtype: HT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "42941558"
+ms.lasthandoff: 05/09/2020
+ms.locfileid: "44173136"
 ---
 # <a name="troubleshooting-the-office-365-management-activity-api"></a>Устранение неполадок, связанных с API действий управления Office 365
 
@@ -55,7 +55,13 @@ API действий управления не следует путать с AP
 
 ### <a name="getting-an-access-token"></a>Получение маркера доступа
 
-В приведенном ниже скрипте PowerShell используются идентификатор приложения и секрет клиента, чтобы получить токен OAuth2 из конечной точки проверки подлинности для API действий управления. Затем маркер доступа помещается в переменную массива `$headerParams`, которую вы вложите в свой HTTP-запрос: 
+В приведенном ниже скрипте PowerShell используются идентификатор приложения и секрет клиента, чтобы получить токен OAuth2 из конечной точки проверки подлинности для API действий управления. Затем маркер доступа помещается в переменную массива `$headerParams`, которую вы вложите в свой HTTP-запрос. В качестве значения конечной точки API (в переменной $resource) используйте одно из указанных ниже значений в зависимости от плана подписки на Microsoft 365 или Office 365:
+
+- План Enterprise и план для государственных организаций (GCC): `manage.office.com`
+
+- План для государственных организаций (GCC High): `manage.office365.us`
+
+- План для государственных организаций (DoD): `manage.protection.apps.mil`
 
 ```powershell
 # Create app of type Web app / API in Azure AD, generate a Client Secret, and update the client id and client secret here
@@ -63,9 +69,9 @@ $ClientID = "<YOUR_APPLICATION_ID"
 $ClientSecret = "<YOUR_CLIENT_SECRET>"
 $loginURL = "https://login.microsoftonline.com/"
 $tenantdomain = "<YOUR_DOMAIN>.onmicrosoft.com"
-# Get the tenant GUID from Properties | Directory ID under the Azure Active Directory section
+# Get the tenant GUID from Properties | Directory ID under the Azure Active Directory section. For $resource, use one of these endpoint values based on your subscription plan: Enterprise and GCC - manage.office.com; GCC High: manage.office365.us; DoD: manage.protection.apps.mil
 $TenantGUID = "<YOUR_TENANT_GUID>"
-$resource = "https://manage.office.com"
+$resource = "https://<YOUR_API_ENDPOINT>"
 # auth
 $body = @{grant_type="client_credentials";resource=$resource;client_id=$ClientID;client_secret=$ClientSecret}
 $oauth = Invoke-RestMethod -Method Post -Uri $loginURL/$tenantdomain/oauth2/token?api-version=1.0 -Body $body
@@ -89,7 +95,7 @@ access_token   : eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6IjJLVmN1enFBaWRPTHF
 Если произойдет перебой потока данных в имеющиеся клиент или решение, использующие API действий управления, вы можете подумать, что с вашей подпиской что-то не так. Чтобы проверить активные подписки, добавьте к предыдущему скрипту следующий код:
 
 ```powershell
-Invoke-WebRequest -Headers $headerParams -Uri "https://manage.office.com/api/v1.0/$tenantGUID/activity/feed/subscriptions/list" 
+Invoke-WebRequest -Headers $headerParams -Uri "$resource/api/v1.0/$tenantGUID/activity/feed/subscriptions/list" 
 ```
 
 #### <a name="sample-response"></a>Пример отклика 
@@ -119,10 +125,16 @@ RawContentLength  : 266
 
 ## <a name="creating-a-new-subscription"></a>Создание новой подписки
 
-Чтобы создать новую подписку, используйте операцию /start:
+Чтобы создать новую подписку, используйте операцию /start. Для конечной точки API используйте одно из указанных ниже значений в зависимости от плана подписки:
+
+- План Enterprise и план для государственных организаций (GCC): `manage.office.com`
+
+- План для государственных организаций (GCC High): `manage.office365.us`
+
+- План для государственных организаций (DoD): `manage.protection.apps.mil`
 
 ```powershell
-Invoke-WebRequest -Method Post -Headers $headerParams -Uri "https://manage.office.com/api/v1.0/$tenantGUID/activity/feed/subscriptions/start?contentType=Audit.AzureActiveDirectory"
+Invoke-WebRequest -Method Post -Headers $headerParams -Uri "https://<YOUR_API_ENDPOINT>/api/v1.0/$tenantGUID/activity/feed/subscriptions/start?contentType=Audit.AzureActiveDirectory"
 ```
 
 > [!NOTE] 
@@ -132,25 +144,25 @@ Invoke-WebRequest -Method Post -Headers $headerParams -Uri "https://manage.offic
 
 ## <a name="checking-content-availability"></a>Проверка доступности контента
 
-Чтобы проверить, какие большие двоичные объекты с контентом были созданы за определенный период, вы можете добавить следующую строку в скрипт из раздела "Подключение к API":
+Чтобы проверить, какие большие двоичные объекты с контентом были созданы за определенный период, вы можете добавить следующую строку в скрипт из раздела "Подключение к API".
 
 ```powershell
-Invoke-WebRequest -Method GET -Headers $headerParams -Uri "https://manage.office.com/api/v1.0/$tenantGUID/activity/feed/subscriptions/content?contentType=Audit.SharePoint"
+Invoke-WebRequest -Method GET -Headers $headerParams -Uri "$resource/api/v1.0/$tenantGUID/activity/feed/subscriptions/content?contentType=Audit.SharePoint"
 ```
 
 В приведенном выше примере показано, как получить все уведомления о контенте, который стал доступен сегодня, то есть с 12:00 (в формате UTC) по текущее время. Если вы хотите указать другой временной период (учитывая, что максимальный период запроса составляет 24 часа), добавьте параметры *starttime* и *endtime* к URI. Пример:
 
 ```powershell
-Invoke-WebRequest -Method GET -Headers $headerParams -Uri "https://manage.office.com/api/v1.0/$tenantGUID/activity/feed/subscriptions/content?contentType=Audit.SharePoint&startTime=2017-10-13T00:00&endTime=2017-10-13T11:59"
+Invoke-WebRequest -Method GET -Headers $headerParams -Uri "$resource/api/v1.0/$tenantGUID/activity/feed/subscriptions/content?contentType=Audit.SharePoint&startTime=2017-10-13T00:00&endTime=2017-10-13T11:59"
 ```
 
-> [!NOTE] 
+> [!NOTE]
 > Необходимо либо указать параметры *starttime* и *endtime*, либо не указывать ни одного из них.
 
 Приведенный выше запрос вернет объект JSON с коллекцией уведомлений, которые стали доступны в указанный период времени. Отклик будет выглядеть так:
 
 ```json
-[{      "contentUri" : "https://manage.office.com/api/v1.0/<<your_tenant_guid>>/activity/feed/audit/20171014180051748005825$20171014180051748005825$audit_sharepoint$Audit_SharePoint",
+[{      "contentUri" : "https://<your_API_endpoint>/api/v1.0/<your_tenant_guid>/activity/feed/audit/20171014180051748005825$20171014180051748005825$audit_sharepoint$Audit_SharePoint",
         "contentId" : "20171014180051748005825$20171014180051748005825$audit_sharepoint$Audit_SharePoint",
         "contentType" : "Audit.SharePoint",
         "contentCreated" : "2017-10-13T18:00:51.748Z",
@@ -158,8 +170,10 @@ Invoke-WebRequest -Method GET -Headers $headerParams -Uri "https://manage.office
 }]
 ```
 
-> [!IMPORTANT] 
+> [!IMPORTANT]
+>
 > - Свойство *contentUri* — это URI, из которого можно получить большой двоичный объект с контентом. Сам объект содержит сведения о 1–N событиях. Коллекция может содержать до 30 объектов JSON, но в этих 30 URI контента может быть указано намного больше событий.
+>
 > - Свойство *contentCreated* — это не дата создания события, соответствующего уведомлению. Это дата создания уведомления. События, описываемые в большом двоичном объекте, могли быть созданы задолго до создания самого объекта. Следовательно, из API невозможно напрямую запрашивать события, произошедшие за тот или иной период.
 
 ### <a name="paging-contents-for-busy-tenants"></a>Разбиение контента на страницы для нагруженных клиентов
@@ -211,7 +225,7 @@ Invoke-RestMethod -Method Post -uri $uri -Headers $headerParams -Body $body
 
 ## <a name="requesting-content-blobs-and-throttling"></a>Запрос больших двоичных объектов с контентом и регулирование
 
-Получив список URI контента, необходимо запросить объекты, указанные этими URI. Ниже представлен пример запроса большого двоичного объекта с контентом при помощи PowerShell. В этом примере предполагается, что вы уже использовали предыдущий пример из раздела [Получение маркера доступа](#getting-an-access-token) этой статьи, чтобы получить маркер доступа, и заполнили переменную `$headerParams` должным образом.
+Получив список URI контента, необходимо запросить объекты, указанные этими URI. Ниже приведен пример запроса большого двоичного объекта с контентом (с использованием конечной точки API manage.office.com для организаций с планом Enterprise или GCC) с помощью PowerShell. В этом примере предполагается, что вы уже использовали предыдущий пример из раздела [Получение маркера доступа](#getting-an-access-token) этой статьи, чтобы получить маркер доступа, и заполнили переменную `$headerParams` должным образом.
 
 ```powershell
 # Get a content blob
