@@ -6,12 +6,12 @@ ms.ContentId: 52749845-37f8-6076-7ea5-49d9a4055445
 ms.topic: reference (API)
 ms.date: ''
 localization_priority: Priority
-ms.openlocfilehash: 858829d304c85e3c6658b3f6a1215d923871283a
-ms.sourcegitcommit: 967a95b214c620ca58875af6b5a96e28482c85aa
+ms.openlocfilehash: 48065e1770e485ffa04778d662a170ae14916354
+ms.sourcegitcommit: d55928a0d535090fa2dbe94f38c7316d0e52e9a9
 ms.translationtype: HT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 02/08/2020
-ms.locfileid: "41857288"
+ms.lasthandoff: 05/09/2020
+ms.locfileid: "44173143"
 ---
 # <a name="office-365-management-activity-api-reference"></a>Справочник по API действий управления Office 365
 
@@ -57,14 +57,29 @@ API действий управления Office 365 собирает дейст
 
 ## <a name="activity-api-operations"></a>Операции с API действий
 
-Все операции с API выполняются в рамках одного клиента, а корневой URL-адрес API включает ИД клиента, который задает контекст. ИД клиента представляет собой GUID. Сведения о том, как получить GUID, см. в статье [Начало работы с интерфейсами API управления Office 365](get-started-with-office-365-management-apis.md).
+Все операции с API выполняются в рамках одного клиента, а корневой URL-адрес API включает ИД клиента, который задает контекст. ИД клиента представляет собой GUID. Сведения о том, как получить GUID, см. в статье [Начало работы с интерфейсами API управления Office 365](get-started-with-office-365-management-apis.md). 
 
+Так как уведомления, отправляемые веб-перехватчику, включают ИД клиента, вы можете получать уведомления для всех клиентов с помощью одного веб-перехватчика.
+
+URL-адрес конечной точки API зависит от плана подписки на Microsoft 365 или Office 365 для вашей организации.
+
+**План Enterprise и план для государственных организаций (GCC)**
 
 ```http
 https://manage.office.com/api/v1.0/{tenant_id}/activity/feed/{operation}
 ```
 
-Так как уведомления, отправляемые веб-перехватчику, включают **ИД клиента**, вы можете получать уведомления для всех клиентов с помощью одного веб-перехватчика.
+**План для государственных организаций (GCC High)**
+
+```http
+https://manage.office365.us/api/v1.0/{tenant_id}/activity/feed/{operation}
+```
+
+**План для государственных организаций (DoD)**
+
+```http
+https://manage.protection.apps.mil/api/v1.0/{tenant_id}/activity/feed/{operation}
+```
 
 Для всех операций с API необходим заголовок HTTP Authorization с маркером доступа, полученным из Azure AD. ИД клиента в маркере доступа должен совпадать с ИД клиента в корневом URL-адресе API, а маркер доступа должен содержать утверждение ActivityFeed.Read (оно соответствует разрешению [Чтение данных о действиях для организации], настроенному для приложения в Azure AD).
 
