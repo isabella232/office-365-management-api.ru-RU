@@ -6,12 +6,12 @@ ms.ContentId: 50822603-a1ec-a754-e7dc-67afe36bb1b0
 ms.topic: reference (API)
 ms.date: ''
 localization_priority: Priority
-ms.openlocfilehash: 0552456c2340ad170355953e274a455ff681e2c9
-ms.sourcegitcommit: d55928a0d535090fa2dbe94f38c7316d0e52e9a9
+ms.openlocfilehash: 459143049732df246edf4877551ca2dd8f7cbafe
+ms.sourcegitcommit: 745a6e43dc3a9849897a5b57eadb3e7c57511c6f
 ms.translationtype: HT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 05/09/2020
-ms.locfileid: "44173136"
+ms.lasthandoff: 07/08/2020
+ms.locfileid: "45083717"
 ---
 # <a name="troubleshooting-the-office-365-management-activity-api"></a>Устранение неполадок, связанных с API действий управления Office 365
 
@@ -288,15 +288,3 @@ $contents = Invoke-WebRequest -Method GET -Headers $headerParams -Uri $uri
 #### <a name="if-there-is-a-24-hour-delay-in-getting-a-notification-doesnt-that-mean-i-will-have-only-6-days-to-retrieve-the-content-blob"></a>Если уведомления приходят с 24-часовой задержкой, не значит ли это, что у меня остается только 6 дней, чтобы получить объект с контентом?
 
 Нет. Даже если уведомление задерживается на непривычно долгое время (например, при перебоях в работе службы), у вас все равно останется 7 дней после появления уведомления, чтобы скачать объект, связанный с первоначальным событием.
-
-
-
-
-
-
-
-
-
-
-
-
