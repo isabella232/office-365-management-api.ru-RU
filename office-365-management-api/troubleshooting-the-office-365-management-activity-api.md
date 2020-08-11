@@ -6,12 +6,12 @@ ms.ContentId: 50822603-a1ec-a754-e7dc-67afe36bb1b0
 ms.topic: reference (API)
 ms.date: ''
 localization_priority: Priority
-ms.openlocfilehash: 459143049732df246edf4877551ca2dd8f7cbafe
-ms.sourcegitcommit: 745a6e43dc3a9849897a5b57eadb3e7c57511c6f
+ms.openlocfilehash: 84a24a2f803a95d2cadaf804f35a358f10ba49be
+ms.sourcegitcommit: a85b79e8586ae83ecbf30de808c4df90e839536b
 ms.translationtype: HT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 07/08/2020
-ms.locfileid: "45083717"
+ms.lasthandoff: 08/10/2020
+ms.locfileid: "46612311"
 ---
 # <a name="troubleshooting-the-office-365-management-activity-api"></a>Устранение неполадок, связанных с API действий управления Office 365
 
@@ -57,7 +57,9 @@ API действий управления не следует путать с AP
 
 В приведенном ниже скрипте PowerShell используются идентификатор приложения и секрет клиента, чтобы получить токен OAuth2 из конечной точки проверки подлинности для API действий управления. Затем маркер доступа помещается в переменную массива `$headerParams`, которую вы вложите в свой HTTP-запрос. В качестве значения конечной точки API (в переменной $resource) используйте одно из указанных ниже значений в зависимости от плана подписки на Microsoft 365 или Office 365:
 
-- План Enterprise и план для государственных организаций (GCC): `manage.office.com`
+- План для предприятий: `manage.office.com`
+
+- План для государственных организаций (GCC): `manage-gcc.office.com`
 
 - План для государственных организаций (GCC High): `manage.office365.us`
 
@@ -69,7 +71,7 @@ $ClientID = "<YOUR_APPLICATION_ID"
 $ClientSecret = "<YOUR_CLIENT_SECRET>"
 $loginURL = "https://login.microsoftonline.com/"
 $tenantdomain = "<YOUR_DOMAIN>.onmicrosoft.com"
-# Get the tenant GUID from Properties | Directory ID under the Azure Active Directory section. For $resource, use one of these endpoint values based on your subscription plan: Enterprise and GCC - manage.office.com; GCC High: manage.office365.us; DoD: manage.protection.apps.mil
+# Get the tenant GUID from Properties | Directory ID under the Azure Active Directory section. For $resource, use one of these endpoint values based on your subscription plan: Enterprise - manage.office.com; GCC - manage-gcc.office.com; GCC High: manage.office365.us; DoD: manage.protection.apps.mil
 $TenantGUID = "<YOUR_TENANT_GUID>"
 $resource = "https://<YOUR_API_ENDPOINT>"
 # auth
@@ -127,7 +129,9 @@ RawContentLength  : 266
 
 Чтобы создать новую подписку, используйте операцию /start. Для конечной точки API используйте одно из указанных ниже значений в зависимости от плана подписки:
 
-- План Enterprise и план для государственных организаций (GCC): `manage.office.com`
+- План для предприятий: `manage.office.com`
+
+- План для государственных организаций (GCC): `manage-gcc.office.com`
 
 - План для государственных организаций (GCC High): `manage.office365.us`
 
@@ -137,7 +141,7 @@ RawContentLength  : 266
 Invoke-WebRequest -Method Post -Headers $headerParams -Uri "https://<YOUR_API_ENDPOINT>/api/v1.0/$tenantGUID/activity/feed/subscriptions/start?contentType=Audit.AzureActiveDirectory"
 ```
 
-> [!NOTE] 
+> [!NOTE]
 > Помните, что заголовок `$headerParams` был заполнен в первой части скрипта в разделе [Подключение к API](#connecting-to-the-api) этой статьи.
 
 Приведенный выше код создаст новую подписку на тип контента Audit.AzureActiveDirectory, где для параметра webhook задано значение null. Затем вы можете проверить свои подписки, используя код из раздела [Проверка подписок](#checking-your-subscriptions) этой статьи.
@@ -225,7 +229,7 @@ Invoke-RestMethod -Method Post -uri $uri -Headers $headerParams -Body $body
 
 ## <a name="requesting-content-blobs-and-throttling"></a>Запрос больших двоичных объектов с контентом и регулирование
 
-Получив список URI контента, необходимо запросить объекты, указанные этими URI. Ниже приведен пример запроса большого двоичного объекта с контентом (с использованием конечной точки API manage.office.com для организаций с планом Enterprise или GCC) с помощью PowerShell. В этом примере предполагается, что вы уже использовали предыдущий пример из раздела [Получение маркера доступа](#getting-an-access-token) этой статьи, чтобы получить маркер доступа, и заполнили переменную `$headerParams` должным образом.
+Получив список URI контента, необходимо запросить объекты, указанные этими URI. Ниже приведен пример запроса большого двоичного объекта с контентом (с использованием конечной точки API manage.office.com для организаций с планом для предприятий) с помощью PowerShell. В этом примере предполагается, что вы уже использовали предыдущий пример из раздела [Получение маркера доступа](#getting-an-access-token) этой статьи, чтобы получить маркер доступа, и заполнили переменную `$headerParams` должным образом.
 
 ```powershell
 # Get a content blob

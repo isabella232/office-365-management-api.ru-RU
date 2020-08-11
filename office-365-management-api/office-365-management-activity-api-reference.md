@@ -6,12 +6,12 @@ ms.ContentId: 52749845-37f8-6076-7ea5-49d9a4055445
 ms.topic: reference (API)
 ms.date: ''
 localization_priority: Priority
-ms.openlocfilehash: 48065e1770e485ffa04778d662a170ae14916354
-ms.sourcegitcommit: d55928a0d535090fa2dbe94f38c7316d0e52e9a9
+ms.openlocfilehash: 892dff36a9a7320bdfda4ba908581cb1e000c2b0
+ms.sourcegitcommit: a85b79e8586ae83ecbf30de808c4df90e839536b
 ms.translationtype: HT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 05/09/2020
-ms.locfileid: "44173143"
+ms.lasthandoff: 08/10/2020
+ms.locfileid: "46612304"
 ---
 # <a name="office-365-management-activity-api-reference"></a>Справочник по API действий управления Office 365
 
@@ -63,10 +63,16 @@ API действий управления Office 365 собирает дейст
 
 URL-адрес конечной точки API зависит от плана подписки на Microsoft 365 или Office 365 для вашей организации.
 
-**План Enterprise и план для государственных организаций (GCC)**
+**План для предприятий**
 
 ```http
 https://manage.office.com/api/v1.0/{tenant_id}/activity/feed/{operation}
+```
+
+**План для государственных организаций (GCC)**
+
+```http
+https://manage-gcc.office.com/api/v1.0/{tenant_id}/activity/feed/{operation}
 ```
 
 **План для государственных организаций (GCC High)**
