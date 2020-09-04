@@ -6,25 +6,25 @@ ms.ContentId: d0b9341a-b205-5442-1c20-8fb56407351d
 ms.topic: reference (API)
 ms.date: ''
 localization_priority: Priority
-ms.openlocfilehash: 36ef8e548b535fc97f2b1b6d4347184fa18d6ceb
-ms.sourcegitcommit: 78e76d5d1c3e40907ea0936a7c3f016eed4ebd3c
+ms.openlocfilehash: e6024c19457796fb6f3fb94a62a013cc86a95072
+ms.sourcegitcommit: a4ba198b7417e49880905e49a38d0bd1f4ad8802
 ms.translationtype: HT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 02/01/2020
-ms.locfileid: "41650852"
+ms.lasthandoff: 09/02/2020
+ms.locfileid: "47334890"
 ---
 # <a name="office-365-service-communications-api-reference"></a>Справочник по API сообщений о службах Office 365 
 
 С помощью API сообщений о службах Office 365 версии 2 можно получать доступ к следующим данным:
 
 - **Получение служб.** Получение списка подписанных служб.
-    
+
 - **Получение текущего состояния.** Обновляемое в реальном времени представление текущих инцидентов.
-    
+
 - **Получение сведений об изменении состояния.** Представление инцидентов в хронологическом порядке.
-    
+
 - **Получение сообщений.** Поиск сообщений об инцидентах, а также данных Центра сообщений.
-    
+
 В настоящий момент API сообщений о службах Office 365 содержит данные для облачных служб Office 365, Yammer, Dynamics CRM и Microsoft Intune.
 
 ## <a name="the-fundamentals"></a>Основные сведения
@@ -52,7 +52,6 @@ Authorization: Bearer {OAuth2 token}
 |**Accept (необязательный)**|Ниже показаны допустимые представления отклика.<br/>**application/json;odata.metadata=full**<br/>**application/json;odata.metadata=minimal**<br/>**application/json;odata.metadata=none** [используется по умолчанию, если заголовок не указан]|
 |**Authorization (обязательный)**|Маркер авторизации (токен носителя JWT Azure AD) для запроса.|
 
-
 <br/>
 
 ### <a name="response-headers"></a>Заголовки откликов
@@ -79,7 +78,6 @@ Authorization: Bearer {OAuth2 token}
 <br/>
 
 Ниже представлены операции API сообщений о службах Office 365.
-
 
 ## <a name="get-services"></a>Получение служб
 
@@ -135,7 +133,6 @@ Authorization: Bearer {AAD_Bearer_JWT_Token}
     ]
 }
 ```
-
 
 ## <a name="get-current-status"></a>Получение текущего состояния
 
@@ -267,21 +264,21 @@ Authorization: Bearer {AAD_Bearer_JWT_Token}
 
 ### <a name="status-definitions"></a>Определения состояний
 
-Определения состояний включают следующие значения: 
+Определения состояний включают следующие значения:
 
 - Investigating
 - ServiceDegradation
-- ServiceInterruption 
+- ServiceInterruption
 - RestoringService
 - ExtendedRecovery
+- InvestigationSuspended
 - ServiceRestored
-- PostIncidentReportPublished 
+- FalsePositive
+- PostIncidentReportPublished
 - VerifyingService
 - ServiceOperational
-- FalsePositive
 
 Актуальный список и описание этих определений состояния см. в статье [Проверка работоспособности служб Office 365](https://docs.microsoft.com/office365/enterprise/view-service-health#status-definitions).
-
 
 ## <a name="get-historical-status"></a>Получение сведений об изменении состояния
 
@@ -483,4 +480,3 @@ Authorization: Bearer {AAD_Bearer_JWT_Token}
     } 
 }
 ```
-
