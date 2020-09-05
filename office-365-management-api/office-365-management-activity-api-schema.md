@@ -6,12 +6,12 @@ ms.ContentId: 1c2bf08c-4f3b-26c0-e1b2-90b190f641f5
 ms.topic: reference (API)
 ms.date: ''
 localization_priority: Priority
-ms.openlocfilehash: f4c35fc343593c0d61ae29b43a58db66ebf2185f
-ms.sourcegitcommit: 1047f1e1d17d873918790ff1fc6d7adcc75ab2bc
+ms.openlocfilehash: 01ca346835edc94007d90db0a85d20a9bc5b945e
+ms.sourcegitcommit: a4ba198b7417e49880905e49a38d0bd1f4ad8802
 ms.translationtype: HT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 08/14/2020
-ms.locfileid: "46672894"
+ms.lasthandoff: 09/02/2020
+ms.locfileid: "47334883"
 ---
 # <a name="office-365-management-activity-api-schema"></a>Схема API действий управления Office 365
 
@@ -49,8 +49,8 @@ ms.locfileid: "46672894"
 |[Базовая схема безопасности центра обработки данных](#data-center-security-base-schema)|Дополняет общую схему свойствами, характерными для всех данных аудита безопасности центра обработки данных.|
 |[Схема командлетов для обеспечения безопасности центра обработки данных](#data-center-security-cmdlet-schema)|Дополняет базовую схему безопасности центра обработки данных свойствами, характерными для всех данных аудита командлетов для обеспечения безопасности центра обработки данных.|
 |[Схема Microsoft Teams](#microsoft-teams-schema)|Дополняет общую схему свойствами, характерными для всех событий Microsoft Teams.|
-|[Схема Office 365 Advanced Threat Protection и Threat Investigation and Response](#office-365-advanced-threat-protection-and-threat-investigation-and-response-schema)|Дополняет общую схему свойствами, характерными для данных Office 365 Advanced Threat Protection и Threat Investigation and Response.|
-|[Схема автоматизированного анализа событий и реагирования на них](#automated-investigation-and-response-events-in-office-365)|Дополняет общую схему свойствами, характерными для событий автоматизированного анализа угроз и реагирования на них (AIR) в Office 365.|
+|[Схема Office 365 Advanced Threat Protection и Threat Investigation and Response](#office-365-advanced-threat-protection-and-threat-investigation-and-response-schema)|Дополняет общую схему свойствами, характерными для данных Office 365 Advanced Threat Protection и анализа угроз и реагирования на них.|
+|[Схема автоматизированного анализа событий и реагирования на них](#automated-investigation-and-response-events-in-office-365)|Дополняет общую схему свойствами, характерными для событий автоматизированного анализа угроз и реагирования на них (AIR) в Office 365. Примеры см. в статье [Блог Tech Community: повышение эффективности SOC с помощью Office 365 ATP и API управления O365](https://techcommunity.microsoft.com/t5/microsoft-security-and/improve-the-effectiveness-of-your-soc-with-office-365-atp-and/ba-p/1525185).|
 |[Схема гигиенических событий](#hygiene-events-schema)|Расширяет общую схему со свойствами, относящимися к событиям в Exchange Online Protection и Advanced Threat Protection.|
 |[Схема Power BI](#power-bi-schema)|Дополняет общую схему свойствами, характерными для всех событий Power BI.|
 |[Схема Dynamics 365](#dynamics-365-schema)|Дополняет общую схему свойствами, характерными для событий Dynamics 365.|
@@ -481,7 +481,7 @@ ms.locfileid: "46672894"
 |**Параметры**|**Тип**|**Обязательный**|**Описание**|
 |:-----|:-----|:-----|:-----|
 |ModifiedObjectResolvedName|Edm.String|Нет|Это понятное имя объекта, измененного командлетом. Оно записывается в журнал, только если командлет изменяет объект.|
-|Parameters|Collection(Common.NameValuePair)|Нет|Имя и значения всех параметров, которые использовались с командлетом, указанным в свойстве Operations.|
+|Параметры|Collection(Common.NameValuePair)|Нет|Имя и значения всех параметров, которые использовались с командлетом, указанным в свойстве Operations.|
 |ModifiedProperties|Collection(Common.ModifiedProperty)|Нет|Это свойство включается для событий администрирования. Оно включает имя и новое значение измененного свойства, а также предыдущее значение измененного объекта.|
 |ExternalAccess|Edm.Boolean|Да|Указывает, кто запустил командлет: пользователь в вашей организации, сотрудник центра данных Майкрософт, учетная запись службы центра данных или полномочный администратор. Значение **False** означает, что командлет был запущен пользователем в вашей организации. Значение **True** значит, что командлет запустили сотрудник центра данных Майкрософт, учетная запись службы центра данных или полномочный администратор.|
 |OriginatingServer|Edm.String|Нет|Имя сервера, с которого выполнен командлет.|
