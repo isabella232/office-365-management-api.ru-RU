@@ -1,4 +1,5 @@
 ---
+ms.technology: o365-service-communications
 ms.TocTitle: Office 365 Management Activity API schema
 title: Схема API действий управления Office 365
 description: 'Схема API действий управления Office 365 предоставляется в качестве службы данных на двух уровнях: общая схема и схема для конкретного продукта.'
@@ -6,12 +7,12 @@ ms.ContentId: 1c2bf08c-4f3b-26c0-e1b2-90b190f641f5
 ms.topic: reference (API)
 ms.date: ''
 localization_priority: Priority
-ms.openlocfilehash: 01ca346835edc94007d90db0a85d20a9bc5b945e
-ms.sourcegitcommit: a4ba198b7417e49880905e49a38d0bd1f4ad8802
+ms.openlocfilehash: c800a099dc102b36f938607599bd0c66ac007ccd
+ms.sourcegitcommit: ec60dbd5990cfc61b8c000b423e7ade25fa613a8
 ms.translationtype: HT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 09/02/2020
-ms.locfileid: "47334883"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "48397470"
 ---
 # <a name="office-365-management-activity-api-schema"></a>Схема API действий управления Office 365
 
@@ -481,7 +482,7 @@ ms.locfileid: "47334883"
 |**Параметры**|**Тип**|**Обязательный**|**Описание**|
 |:-----|:-----|:-----|:-----|
 |ModifiedObjectResolvedName|Edm.String|Нет|Это понятное имя объекта, измененного командлетом. Оно записывается в журнал, только если командлет изменяет объект.|
-|Параметры|Collection(Common.NameValuePair)|Нет|Имя и значения всех параметров, которые использовались с командлетом, указанным в свойстве Operations.|
+|Parameters|Collection(Common.NameValuePair)|Нет|Имя и значения всех параметров, которые использовались с командлетом, указанным в свойстве Operations.|
 |ModifiedProperties|Collection(Common.ModifiedProperty)|Нет|Это свойство включается для событий администрирования. Оно включает имя и новое значение измененного свойства, а также предыдущее значение измененного объекта.|
 |ExternalAccess|Edm.Boolean|Да|Указывает, кто запустил командлет: пользователь в вашей организации, сотрудник центра данных Майкрософт, учетная запись службы центра данных или полномочный администратор. Значение **False** означает, что командлет был запущен пользователем в вашей организации. Значение **True** значит, что командлет запустили сотрудник центра данных Майкрософт, учетная запись службы центра данных или полномочный администратор.|
 |OriginatingServer|Edm.String|Нет|Имя сервера, с которого выполнен командлет.|
