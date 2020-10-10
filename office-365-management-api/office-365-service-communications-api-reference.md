@@ -1,4 +1,5 @@
 ---
+ms.technology: o365-service-communications
 ms.TocTitle: Office 365 Service Communications API reference
 title: 'Справочник по API сообщений о службах Office 365 '
 description: 'Этот API используется для доступа к следующим данным: список служб, текущее состояние, изменения состояния, сообщения.'
@@ -6,12 +7,12 @@ ms.ContentId: d0b9341a-b205-5442-1c20-8fb56407351d
 ms.topic: reference (API)
 ms.date: ''
 localization_priority: Priority
-ms.openlocfilehash: a7e99a5920afa03891ac3f48982cdaf40a660e2a
-ms.sourcegitcommit: e9de9dea24789e64be9e7161e5e5de9cb4f9797d
+ms.openlocfilehash: 9845fb5f422160a658b45bd7dd9a5bc6d4635914
+ms.sourcegitcommit: ec60dbd5990cfc61b8c000b423e7ade25fa613a8
 ms.translationtype: HT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 09/04/2020
-ms.locfileid: "47399538"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "48397442"
 ---
 # <a name="office-365-service-communications-api-reference"></a>Справочник по API сообщений о службах Office 365 
 
@@ -83,7 +84,7 @@ Authorization: Bearer {OAuth2 token}
 
 Возвращает список подписанных служб.
 
-||Служба|Описание|
+|Сведения|Служба|Описание|
 |:-----|:-----|:-----|
 |**Путь**| `/Services`||
 |**Параметр запроса**|$select|Выбор подмножества свойств.|
@@ -143,7 +144,7 @@ Authorization: Bearer {AAD_Bearer_JWT_Token}
 
 <br/>
 
-||Служба|Описание|
+|Сведения|Служба|Описание|
 |:-----|:-----|:-----|
 |**Путь**| `/CurrentStatus`||
 |**Фильтр**|Workload|Фильтрация по рабочей нагрузке (String, значение по умолчанию: all).|
@@ -283,7 +284,7 @@ Authorization: Bearer {AAD_Bearer_JWT_Token}
 
 Возвращает сведения об изменении состояния службы по дням за определенный диапазон времени.
 
-||Служба|Описание|
+|Сведения|Служба|Описание|
 |:-----|:-----|:-----|
 |**Путь**| `/HistoricalStatus`||
 |**Фильтры**|Workload|Фильтрация по рабочей нагрузке (String, значение по умолчанию: all).|
@@ -384,7 +385,7 @@ Authorization: Bearer {AAD_Bearer_JWT_Token}
 
 Возвращает сообщения о службе за определенный диапазон времени. Используйте фильтр по типу, чтобы просмотреть сообщения об инцидентах обслуживания, плановом обслуживании или из Центра сообщений.
 
-||Служба|Описание|
+|Сведения|Служба|Описание|
 |:-----|:-----|:-----|
 |**Путь**| `/Messages`||
 |**Фильтры**|Workload|Фильтрация по рабочей нагрузке (String, значение по умолчанию: all).|
@@ -409,7 +410,6 @@ Authorization: Bearer {AAD_Bearer_JWT_Token}
 
 ```json
 {
- {
     "value": [
         {
             "Id": "EX20119",
@@ -453,7 +453,7 @@ Authorization: Bearer {AAD_Bearer_JWT_Token}
                 {
                     "PublishedTime": "2015-04-07T23:26:44.643Z",
                     "MessageText": "Final Status: Engineers have validated that the deployed fix has resolved the issue and that service is restored.\r\n\r\nUser Experience: Affected users were unable to send or receive email while using Exchange Web Services (EWS) on their mobile devices.\r\n\r\nCustomer Impact: Customer impact appeared to be limited during this event. This issue was only affecting customers that use third-party Mobile Device Management software from Good Technology. As a workaround to provide immediate relief from impact, engineers implemented a configuration change for customers who reported this issue to Microsoft Support.\r\n\r\nIncident Start Time: Wednesday, April 1, 2015, at 2:00 PM UTC\r\n\r\nIncident End Time: Tuesday, April 7, 2015, at 10:00 PM UTC\r\n\r\nPreliminary Root Cause: As part of our ongoing efforts to improve service resiliency, an update was deployed to the infrastructure that facilitates connections from multiple Exchange Online protocols to mailbox databases. The update, however, contained a code issue that caused connectivity issues in some scenarios. \r\n\r\nNext Steps: The following is a list of known action item(s) associated with this incident. As part of the Office 365 problem management process, additional engineering actions may be identified to improve the overall service.\r\n- Action: Review the infrastructure update process to prevent reoccurrences of this scenario.\r\n\r\nPlease consider this service notification the final update on the event."
-               }
+                }
             ],
             "LastUpdatedTime": "2015-04-07T23:26:45.08Z",
             "Workload": "Exchange Online",
