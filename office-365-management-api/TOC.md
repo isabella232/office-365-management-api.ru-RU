@@ -4,5 +4,4 @@
 ## [API служебных сообщений](office-365-service-communications-api-reference.md)
 ## [Справочник по API действий управления](office-365-management-activity-api-reference.md)
 ## [Схема API действий управления](office-365-management-activity-api-schema.md)
-## [Устранение неполадок, связанных с API действий управления](troubleshooting-the-office-365-management-activity-api.md)
-## [Вопросы и ответы: API действий управления](office-365-management-activity-api-faq.md)
+## [Вопросы и ответы, а также устранение неполадок API действий управления ](troubleshooting-the-office-365-management-activity-api.md)
