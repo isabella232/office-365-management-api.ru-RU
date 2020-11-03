@@ -7,12 +7,12 @@ ms.ContentId: d0b9341a-b205-5442-1c20-8fb56407351d
 ms.topic: reference (API)
 ms.date: ''
 localization_priority: Priority
-ms.openlocfilehash: 9845fb5f422160a658b45bd7dd9a5bc6d4635914
-ms.sourcegitcommit: ec60dbd5990cfc61b8c000b423e7ade25fa613a8
+ms.openlocfilehash: 7cd91d9a43090b4731a11df701e0bf1aa340800e
+ms.sourcegitcommit: e7f345710dc63003704399419f784c4a9b5fc529
 ms.translationtype: HT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 10/09/2020
-ms.locfileid: "48397442"
+ms.lasthandoff: 11/02/2020
+ms.locfileid: "48830471"
 ---
 # <a name="office-365-service-communications-api-reference"></a>Справочник по API сообщений о службах Office 365 
 
@@ -392,7 +392,7 @@ Authorization: Bearer {AAD_Bearer_JWT_Token}
 ||StartTime|Фильтрация по времени начала (DateTimeOffset, значение по умолчанию: 7 дней для ge CurrentTime).|
 ||EndTime|Фильтрация по времени окончания (DateTimeOffset, значение по умолчанию: le CurrentTime).|
 ||MessageType|Фильтрация по MessageType (String, значение по умолчанию: all).|
-||ID|Фильтрация по идентификатору (String, значение по умолчанию: all).|
+||Id|Фильтрация по идентификатору (String, значение по умолчанию: all).|
 |**Параметр запроса**|$select|Выбор подмножества свойств.|
 ||$top|Выбор максимального количества результатов (используемое по умолчанию и максимальное значение: $top=100).|
 ||$skip|Пропуск определенного количества результатов (значение по умолчанию: $skip=0).|
