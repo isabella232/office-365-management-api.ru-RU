@@ -7,12 +7,12 @@ ms.ContentId: 50822603-a1ec-a754-e7dc-67afe36bb1b0
 ms.topic: reference (API)
 ms.date: ''
 localization_priority: Priority
-ms.openlocfilehash: a65c8dff39d80b57b1c885639be2e228e8119cb7
-ms.sourcegitcommit: 263cfbc04033ea8a1d765215e8777739587818e0
+ms.openlocfilehash: 9c909220d660e0202c3ebda2777b2d8922da45a3
+ms.sourcegitcommit: c3bb30b86a4569e9f18891f1cdc30cbffc8c8db4
 ms.translationtype: HT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 11/13/2020
-ms.locfileid: "49021011"
+ms.lasthandoff: 01/08/2021
+ms.locfileid: "49784209"
 ---
 # <a name="office-365-management-activity-api-faqs-and-troubleshooting"></a>Вопросы и ответы по API действий управления Office 365, а также устранение неполадок, связанных с ним
 
@@ -79,6 +79,10 @@ API действий управления не следует путать с AP
 **Почему TargetUpdatedProperties больше не находятся в свойстве ExtendedProperties в журналах аудита для действий Azure Active Directory?**
 
 TargetUpdatedProperties отображались в объекте ExtendedProperties. Однако они были удалены из свойства ExtendedProperties и теперь отображаются в свойстве ModifiedProperties.
+
+**Почему журналы аудита с ошибками UserAccountNotFound для действий при входе в Azure Active Directory (Azure AD) недоступны через API действий управления?**
+
+Начиная с ноября 2020 г., журналы аудита для действий при входе в Azure AD включаются в единый журнал аудита из Центров событий Azure AD. Так как ошибки входа UserAccountNotFound недоступны в Центрах событий, журналы аудита с ошибками UserAccountNotFound больше не возвращаются API действий управления.
 
 ## <a name="troubleshooting-the-office-365-management-activity-api"></a>Устранение неполадок, связанных с API действий управления Office 365
 
