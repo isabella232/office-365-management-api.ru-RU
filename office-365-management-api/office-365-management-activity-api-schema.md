@@ -7,12 +7,12 @@ ms.ContentId: 1c2bf08c-4f3b-26c0-e1b2-90b190f641f5
 ms.topic: reference (API)
 ms.date: ''
 localization_priority: Priority
-ms.openlocfilehash: c71536ad05afe50e675661cebbfe1826cf6af3fa
-ms.sourcegitcommit: 3a6a64742924b9fbc1ffd6826b5651eb5583f70c
+ms.openlocfilehash: c0e253532abd43779cb624d5b63b907600e0f5b5
+ms.sourcegitcommit: bd92bba316c564fd7c09d5202ce46c1f9276f5ee
 ms.translationtype: HT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 02/03/2021
-ms.locfileid: "50096957"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "50726900"
 ---
 # <a name="office-365-management-activity-api-schema"></a>Схема API действий управления Office 365
 
@@ -837,10 +837,23 @@ ms.locfileid: "50096957"
 
 |**Параметры**|**Тип**|**Обязательный?**|**Описание**|
 |:-----|:-----|:-----|:-----|
-|Confidence|Edm.Int|Да|Доверительный уровень шаблона, который соответствует обнаруженному условию.|
-|Count|Edm.Int|Да|Количество обнаруженных экземпляров конфиденциальных сведений.|
+|Confidence|Edm.Int|Да|Общий доверительный уровень всех сопоставлений шаблонов для типа конфиденциальной информации.|
+|Count|Edm.Int|Да|Общее количество обнаруженных экземпляров конфиденциальных сведений.|
+|Location|Edm.String|Нет||
 |SensitiveType|Edm.Guid|Да|GUID, определяющий тип обнаруженных конфиденциальных данных.|
 |SensitiveInformationDetections|Self.SensitiveInformationDetections|Нет|Массив объектов, которые содержат конфиденциальные данные, с сопоставленным значением и его контекстом.|
+|SensitiveInformationDetailedClassificationAttributes|Collection(SensitiveInformationDetailedConfidenceLevelResult)|Да|Сведения о количестве обнаруженных типов конфиденциальной информации для каждого из трех доверительных уровней (высокий, средний и низкий) и соответствии правилу DLP|
+|SensitiveInformationTypeName|Edm.String|Нет|Имя типа конфиденциальной информации.|
+|UniqueCount|Edm.Int32|Да|Количество обнаруженных уникальных экземпляров конфиденциальных сведений.|
+|||||
+
+### <a name="sensitiveinformationdetailedclassificationattributes-complex-type"></a>Сложный тип SensitiveInformationDetailedClassificationAttributes
+
+|**Параметры**|**Тип**|**Обязательный?**|**Описание**|
+|:-----|:-----|:-----|:-----|
+|Confidence|Edm.int32|Да|Доверительный уровень шаблона, который был обнаружен.|
+|Count|Edm.Int32|Да|Количество экземпляров конфиденциальных сведений, обнаруженных для определенного доверительного уровня.|
+|IsMatch|Edm.Boolean|Да|Указывает, соответствует ли данное количество доверительному уровню обнаруженного типа конфиденциальной информации в правиле DLP.|
 |||||
 
 ### <a name="sensitiveinformationdetections-complex-type"></a>Сложный тип SensitiveInformationDetections
@@ -849,7 +862,7 @@ ms.locfileid: "50096957"
 
 |**Параметры**|**Тип**|**Обязательный?**|**Описание**|
 |:-----|:-----|:-----|:-----|
-|Detections|Collection(Self.Detections)|Да|Массив обнаруженных конфиденциальных сведений. Они включают пары "ключ-значение", где значение соответствует сопоставленному значению (например, значение кредитной карты SSN), и контекст, который представляет собой выдержку из исходного контента, содержащего сопоставленное значение. |
+|DetectedValues|Collection(Common.NameValuePair)|Да|Массив обнаруженных конфиденциальных сведений. Они включают пары "ключ-значение", где значение соответствует сопоставленному значению (например, значение кредитной карты), и контекст, который представляет собой выдержку из исходного контента, содержащего сопоставленное значение. |
 |ResultsTruncated|Edm.Boolean|Да|Указывает, усекались ли журналы из-за большого количества результатов. |
 |||||
 
