@@ -7,12 +7,12 @@ ms.ContentId: 1c2bf08c-4f3b-26c0-e1b2-90b190f641f5
 ms.topic: reference (API)
 ms.date: ''
 localization_priority: Priority
-ms.openlocfilehash: 9ce20bd1fd8f0b6e706df46a5d8b63540962ffaf
-ms.sourcegitcommit: dfdacf2cdee3ad0f305167ba0c8a9bf9df8af356
+ms.openlocfilehash: 5e2274dd3d5050a0db433fd93aa8ea1514744549
+ms.sourcegitcommit: c3786c4bfacf3c1187f1269c162946288b45c967
 ms.translationtype: HT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 04/14/2021
-ms.locfileid: "51761999"
+ms.lasthandoff: 04/27/2021
+ms.locfileid: "52059943"
 ---
 # <a name="office-365-management-activity-api-schema"></a>Схема API действий управления Office 365
 
@@ -743,6 +743,7 @@ ms.locfileid: "51761999"
 |:-----|:-----|:-----|:-----|
 |ApplicationId|Edm.String|Нет|GUID, который представляет приложение, запрашивающее вход. Отображаемое имя можно просмотреть с помощью API Graph Azure Active Directory.|
 |Client|Edm.String|Нет|Сведения о клиентском устройстве, предоставляемые браузером, с которого выполнен вход.|
+|DeviceProperties|Collection(Common.NameValuePair)|Нет|Это свойство включает различные сведения об устройстве, в том числе: Id, Display name, OS, Browser, IsCompliant, IsCompliantAndManaged, SessionId и DeviceTrustType. Свойство DeviceTrustType может принимать следующие значения:<br/><br/>**0** — зарегистрировано в Azure AD<br/> **1** — с присоединением к Azure AD<br/> **2** — с гибридным присоединением к Azure AD|
 |ErrorCode|Edm.String|Нет|Для неудачных попыток входа (если значением свойства Operation является UserLoginFailed) это свойство содержит код ошибки Azure Active Directory STS (AADSTS). Описания этих кодов ошибок см. в статье [Коды ошибок проверки подлинности и авторизации](https://docs.microsoft.com/azure/active-directory/develop/reference-aadsts-error-codes#aadsts-error-codes). Значение `0` указывает на успешный вход.|
 |LogonError|Edm.String|Нет|Для неудачных попыток входа это свойство содержит понятное пользователю описание причины неудачного входа.|
 |||||
@@ -988,6 +989,7 @@ ms.locfileid: "51761999"
 |Имя|Edm.String|Нет|Присутствует только для событий параметров. Имя измененного параметра.|
 |OldValue|Edm.String|Нет|Присутствует только для событий параметров. Старое значение параметра.|
 |NewValue|Edm.String|Нет|Присутствует только для событий параметров. Новое значение параметра.|
+|MessageURLs|Edm.String|Нет|Присутствует для любого URL-адреса, отправленного в сообщениях Teams.|
 ||||
 
 ### <a name="microsoftteamsmember-complex-type"></a>Сложный тип MicrosoftTeamsMember
@@ -1236,7 +1238,7 @@ ms.locfileid: "51761999"
 
 События [автоматического исследования и реагирования (AIR) в Office 365](https://docs.microsoft.com/office365/securitycompliance/automated-investigation-response-office) доступны для пользователей Office 365 с подпиской, включающей Microsoft Defender для Office 365 (план 2) или Office 365 E5. События анализа регистрируются в журнале на основе изменения в состоянии анализа. Например, если администратор выполняет действие, изменяющее состояние анализа с "Ожидание выполнения действия" на "Завершено", событие записывается в журнал.
 
-В настоящее время в журнал записываются только события автоматизированного анализа угроз. (События анализа, созданного вручную, ожидаются в ближайшее время.) В журнал записываются следующие значения состояния:
+В настоящее время в журнал записываются только события автоматического исследования. (События исследований, созданных вручную, ожидаются в ближайшее время.) В журнал записываются следующие значения состояния:
 
 - Исследование начато
 - Угрозы не найдены
