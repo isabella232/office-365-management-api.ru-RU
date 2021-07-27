@@ -7,12 +7,12 @@ ms.ContentId: 1c2bf08c-4f3b-26c0-e1b2-90b190f641f5
 ms.topic: reference (API)
 ms.date: ''
 localization_priority: Priority
-ms.openlocfilehash: 8ee293d2e82fc2a4cc5cce04289c7428f39339d5
-ms.sourcegitcommit: 1c2efaeeeb4942591cf37f16edb64b3b41b9e83c
+ms.openlocfilehash: 6bb8d836281ebb4e98ef90957ab98d24e0c1342d
+ms.sourcegitcommit: f08ff7cfd17aedd9d2ca85b5df0666ca986c9aed
 ms.translationtype: HT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 07/07/2021
-ms.locfileid: "53326604"
+ms.lasthandoff: 07/15/2021
+ms.locfileid: "53447907"
 ---
 # <a name="office-365-management-activity-api-schema"></a>Схема API действий управления Office 365
 
@@ -976,22 +976,26 @@ ms.locfileid: "53326604"
 
 |**Параметры**|**Тип**|**Обязательный?**|**Описание**|
 |:-----|:-----|:-----|:-----|
-|MessageId|Edm.String|Нет|Идентификатор сообщения чата или канала.|
-|Members|Collection(Self.[MicrosoftTeamsMember](#microsoftteamsmember-complex-type))|Нет|Список пользователей в группе.|
-|TeamName|Edm.String|Нет|Имя группы, для которой выполняется аудит.|
-|TeamGuid|Edm.Guid|Нет|Уникальный идентификатор группы, для которой выполняется аудит.|
-|ChannelType|Edm.String|Нет|Тип проверяемого канала (стандартный или закрытый).|
-|ChannelName|Edm.String|Нет|Имя канала, для которого выполняется аудит.|
-|ChannelGuid|Edm.Guid|Нет|Уникальный идентификатор канала, для которого выполняется аудит.|
-|ExtraProperties|Collection(Self.[KeyValuePair](#keyvaluepair-complex-type))|Нет|Список дополнительных свойств.|
-|AddOnType|Self.[AddOnType](#addontype)|Нет|Тип надстройки, создавшей это событие.|
-|AddonName|Edm.String|Нет|Имя надстройки, создавшей событие.|
 |AddOnGuid|Edm.Guid|Нет|Уникальный идентификатор надстройки, создавшей событие.|
-|TabType|Edm.String|Нет|Присутствует только для событий вкладок. Тип вкладки, создавшей событие.|
-|Имя|Edm.String|Нет|Присутствует только для событий параметров. Имя измененного параметра.|
-|OldValue|Edm.String|Нет|Присутствует только для событий параметров. Старое значение параметра.|
-|NewValue|Edm.String|Нет|Присутствует только для событий параметров. Новое значение параметра.|
+|AddOnName|Edm.String|Нет|Имя надстройки, создавшей событие.|
+|AddOnType|Self.[AddOnType](#addontype)|Нет|Тип надстройки, создавшей это событие.|
+|ChannelGuid|Edm.Guid|Нет|Уникальный идентификатор канала, для которого выполняется аудит.|
+|ChannelName|Edm.String|Нет|Имя канала, для которого выполняется аудит.|
+|ChannelType|Edm.String|Нет|Тип проверяемого канала (стандартный или закрытый).|
+|ExtraProperties|Collection(Self.[KeyValuePair](#keyvaluepair-complex-type))|Нет|Список дополнительных свойств.|
+|HostedContents|Collection(Self.[HostedContent](#hostedcontent-complex-type))|Нет|Коллекция размещенного содержимого сообщений чата или канала.|
+|Members|Collection(Self.[MicrosoftTeamsMember](#microsoftteamsmember-complex-type))|Нет|Список пользователей в группе.|
+|MessageId|Edm.String|Нет|Идентификатор сообщения чата или канала.|
 |MessageURLs|Edm.String|Нет|Присутствует для любого URL-адреса, отправленного в сообщениях Teams.|
+|Сообщения|Collection(Self.[Message](#message-complex-type))|Нет|Коллекция сообщений чата или канала.|
+|MessageSizeInBytes|Edm.Int64|Нет|Размер сообщения чата или канала в байтах с кодированием UTF-16.|
+|Имя|Edm.String|Нет|Присутствует только для событий параметров. Имя измененного параметра.|
+|NewValue|Edm.String|Нет|Присутствует только для событий параметров. Новое значение параметра.|
+|OldValue|Edm.String|Нет|Присутствует только для событий параметров. Старое значение параметра.|
+|SubscriptionId|Edm.String|Нет|Уникальный идентификатор подписки на уведомления об изменениях Microsoft Graph.|
+|TabType|Edm.String|Нет|Присутствует только для событий вкладок. Тип вкладки, создавшей событие.|
+|TeamGuid|Edm.Guid|Нет|Уникальный идентификатор группы, для которой выполняется аудит.|
+|TeamName|Edm.String|Нет|Имя группы, для которой выполняется аудит.|
 ||||
 
 ### <a name="microsoftteamsmember-complex-type"></a>Сложный тип MicrosoftTeamsMember
@@ -1033,6 +1037,32 @@ ms.locfileid: "53326604"
 |3|Tab|Вкладка Microsoft Teams.|
 ||||
 
+### <a name="hostedcontent-complex-type"></a>Сложный тип HostedContent
+
+|**Параметры**|**Тип**|**Обязательный?**|**Описание**|
+|:-----|:-----|:-----|:-----|
+|Id|Edm.String|Да|Уникальный идентификатор размещенного содержимого сообщения.|
+|SizeInBytes|Edm.Int64|Нет|Размер размещенного содержимого сообщения в байтах.|
+|||||
+
+### <a name="message-complex-type"></a>Сложный тип сообщения
+
+|**Параметры**|**Тип**|**Обязательный?**|**Описание**|
+|:-----|:-----|:-----|:-----|
+|AADGroupId|Edm.String|Нет|Уникальный идентификатор группы в Azure Active Directory, к которой относится сообщение.|
+|Id|Edm.String|Да|Уникальный идентификатор сообщения чата или канала.|
+|ChannelGuid|Edm.String|Нет|Уникальный идентификатор канала, к которому относится сообщение.|
+|ChannelName|Edm.String|Нет|Название канала, к которому относится сообщение.|
+|ChannelType|Edm.String|Нет|Тип канала, к которому относится сообщение.|
+|ChatName|Edm.String|Нет|Имя чата, к которому относится сообщение.|
+|ChatThreadId|Edm.String|Нет|Уникальный идентификатор чата, к которому относится сообщение.|
+|ParentMessageId|Edm.String|Нет|Уникальный идентификатор родительского сообщения чата или канала.|
+|SizeInBytes|Edm.Int64|Нет|Размер сообщения в байтах с кодированием UTF-16.|
+|TeamGuid|Edm.String|Нет|Уникальный идентификатор команды, к которой относится сообщение.|
+|TeamName|Edm.String|Нет|Имя команды, к которой относится сообщение.|
+|Версия|Edm.String|Нет|Версия сообщения чата или канала.|
+|||||
+ 
 ## <a name="microsoft-defender-for-office-365-and-threat-investigation-and-response-schema"></a>Схема Microsoft Defender для Office 365 с анализом угроз и реагированием на них
 
 События [Microsoft Defender для Office 365](/office365/securitycompliance/office-365-atp) и исследования угроз с реагированием на них доступны для клиентов Office 365, у которых есть подписка на Defender для Office 365 (план 1), Defender для Office 365 (план 2) или E5.  Каждое событие в веб-канале Defender для Office 365 соответствует следующим действиям, которые были расценены как содержащие угрозу:
