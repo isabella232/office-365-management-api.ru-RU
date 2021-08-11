@@ -7,12 +7,12 @@ ms.ContentId: 74137c9a-29e0-b588-6122-26f4d2c5e3fc
 ms.topic: reference (API)
 ms.date: ''
 localization_priority: Priority
-ms.openlocfilehash: d11644a4a9985096c14ad4ae265471159243b65b
-ms.sourcegitcommit: ec60dbd5990cfc61b8c000b423e7ade25fa613a8
+ms.openlocfilehash: 64406bc52070f89223142fbf06313c9357d97a79311a2f00c95bfa4c829147e1
+ms.sourcegitcommit: 88ef5f75a9e2a25760a2caa2cef1f51f9afba90c
 ms.translationtype: HT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 10/09/2020
-ms.locfileid: "48397449"
+ms.lasthandoff: 08/05/2021
+ms.locfileid: "54274272"
 ---
 # <a name="get-started-with-office-365-management-apis"></a>Начало работы с API управления Office 365
 
@@ -33,7 +33,7 @@ ms.locfileid: "48397449"
 ![Поток автоматизации запуска API-интерфейсов управления](images/authorization-flow.png)
 
 > [!IMPORTANT]
-> Чтобы получить доступ к данным с помощью API действий управления Office 365, требуется включить ведение единого журнала аудита для организации Office 365. Это выполняется путем включения журнала аудита Office 365. Инструкции см. в статье [Включение и отключение поиска в журнале аудита Office 365](https://docs.microsoft.com/office365/securitycompliance/turn-audit-log-search-on-or-off). <br/><br/>Включение ведения единого журнала аудита не требуется, если вы используете только API служебных сообщений Office 365.
+> Чтобы получить доступ к данным с помощью API действий управления Office 365, требуется включить ведение единого журнала аудита для организации Office 365. Это выполняется путем включения журнала аудита Office 365. Инструкции см. в статье [Включение и отключение поиска в журнале аудита Office 365](https://docs.microsoft.com/office365/securitycompliance/turn-audit-log-search-on-or-off). <br/><br/>Включение ведения единого журнала аудита не требуется, если вы используете только API служебных сообщений Office 365.
 
 ## <a name="register-your-application-in-azure-ad"></a>Регистрация приложения в Azure AD
 

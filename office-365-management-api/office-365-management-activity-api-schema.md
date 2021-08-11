@@ -7,12 +7,12 @@ ms.ContentId: 1c2bf08c-4f3b-26c0-e1b2-90b190f641f5
 ms.topic: reference (API)
 ms.date: ''
 localization_priority: Priority
-ms.openlocfilehash: 6bb8d836281ebb4e98ef90957ab98d24e0c1342d
-ms.sourcegitcommit: f08ff7cfd17aedd9d2ca85b5df0666ca986c9aed
+ms.openlocfilehash: 696b624beaff188d51313ce248ffabbbad421a1b5014e5b61da1cb86c8e18dbd
+ms.sourcegitcommit: 88ef5f75a9e2a25760a2caa2cef1f51f9afba90c
 ms.translationtype: HT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 07/15/2021
-ms.locfileid: "53447907"
+ms.lasthandoff: 08/05/2021
+ms.locfileid: "54274343"
 ---
 # <a name="office-365-management-activity-api-schema"></a>Схема API действий управления Office 365
 
@@ -1600,7 +1600,7 @@ FileHashes |Коллекция (Edm.String)    |Хэши файлов, связ�
 
 #### <a name="formtypes"></a>FormTypes
 
-|**Значение**|**Типы форм**|**Описание**|
+|**Value** (Значение)|**Типы форм**|**Описание**|
 |:-----|:-----|:-----|
 |0|Форма|Формы, созданные при помощи параметра "Новая форма".|
 |1|Тест|Тесты, созданные при помощи параметра "Новый тест".  Тест — это особый тип форм, включающий дополнительные функции, такие как оценки, автоматическое и ручное оценивание и комментирование.|

@@ -7,14 +7,17 @@ ms.ContentId: d0b9341a-b205-5442-1c20-8fb56407351d
 ms.topic: reference (API)
 ms.date: ''
 localization_priority: Priority
-ms.openlocfilehash: 7cd91d9a43090b4731a11df701e0bf1aa340800e
-ms.sourcegitcommit: e7f345710dc63003704399419f784c4a9b5fc529
+ms.openlocfilehash: 883c7026ea41794e290208bed73b8da4f8ce90861cd2a1f8193e731e5dd1a4ef
+ms.sourcegitcommit: 88ef5f75a9e2a25760a2caa2cef1f51f9afba90c
 ms.translationtype: HT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 11/02/2020
-ms.locfileid: "48830471"
+ms.lasthandoff: 08/05/2021
+ms.locfileid: "54274344"
 ---
 # <a name="office-365-service-communications-api-reference"></a>Справочник по API сообщений о службах Office 365 
+
+> [!IMPORTANT]
+> Теперь в Microsoft Graph доступен API работоспособности и взаимодействия служб. API Microsoft Graph заменяет API взаимодействия служб, описанный в этой статье. 17 декабря 2021 г. устаревшая версия API взаимодействия служб будет удалена. Дополнительные сведения о новом API Microsoft Graph см. в статье [Обзор доступа к сведениям о работоспособности и взаимодействии служб в Microsoft Graph](/graph/service-communications-concept-overview).
 
 С помощью API сообщений о службах Office 365 версии 2 можно получать доступ к следующим данным:
 
@@ -137,10 +140,10 @@ Authorization: Bearer {AAD_Bearer_JWT_Token}
 
 ## <a name="get-current-status"></a>Получение текущего состояния
 
-Возвращает состояние службы за предыдущие 24 часа.
+Возвращает состояние службы за предыдущие 24 часа.
 
 > [!NOTE] 
-> Отклик службы будет содержать состояние и все инциденты за предыдущие 24 часа. Возвращаемое значение StatusDate или StatusTime точно соответствует моменту времени 24 часа назад. Чтобы получить последнее обновление для конкретного инцидента, используйте функцию получения сообщений и прочтите значение LastUpdatedTime из записи отклика, соответствующего идентификатору инцидента. <br/>
+> Отклик службы будет содержать состояние и все инциденты за предыдущие 24 часа. Возвращаемое значение StatusDate или StatusTime точно соответствует моменту времени 24 часа назад. Чтобы получить последнее обновление для конкретного инцидента, используйте функцию получения сообщений и прочтите значение LastUpdatedTime из записи отклика, соответствующего идентификатору инцидента. <br/>
 
 <br/>
 
@@ -278,7 +281,7 @@ Authorization: Bearer {AAD_Bearer_JWT_Token}
 - PostIncidentReportPublished
 - ServiceOperational
 
-Описание этих определений состояния см. в статье [Проверка работоспособности служб Microsoft 365](https://docs.microsoft.com/microsoft-365/enterprise/view-service-health#status-definitions).
+Описание этих определений состояния см. в статье [Проверка работоспособности служб Microsoft 365](/enterprise/view-service-health#status-definitions).
 
 ## <a name="get-historical-status"></a>Получение сведений об изменении состояния
 
@@ -464,7 +467,6 @@ Authorization: Bearer {AAD_Bearer_JWT_Token}
     ]
 }
 ```
-
 
 ## <a name="errors"></a>Ошибки
 

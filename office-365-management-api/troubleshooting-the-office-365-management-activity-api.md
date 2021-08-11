@@ -7,12 +7,12 @@ ms.ContentId: 50822603-a1ec-a754-e7dc-67afe36bb1b0
 ms.topic: reference (API)
 ms.date: ''
 localization_priority: Priority
-ms.openlocfilehash: d954cc97320953ed35d6e46cb118395469c93394
-ms.sourcegitcommit: 24ef06fd001f273d16be72733509b5ec202d3ebb
+ms.openlocfilehash: 086b40d0207fba761db66d918d74dc872ae66c9471ceced91d2b4b6dfe73ac1e
+ms.sourcegitcommit: 88ef5f75a9e2a25760a2caa2cef1f51f9afba90c
 ms.translationtype: HT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 03/03/2021
-ms.locfileid: "50418190"
+ms.lasthandoff: 08/05/2021
+ms.locfileid: "54274352"
 ---
 # <a name="office-365-management-activity-api-faqs-and-troubleshooting"></a>Вопросы и ответы по API действий управления Office 365, а также устранение неполадок, связанных с ним
 
@@ -82,7 +82,7 @@ TargetUpdatedProperties отображались в объекте ExtendedPrope
 
 **Почему журналы аудита со значением UserAccountNotFound свойства LogonError для действий при входе в Azure Active Directory (Azure AD) недоступны через API действий управления?**
 
-Начиная с ноября 2020 г. журналы аудита для действий при входе в Azure AD включаются в единый журнал аудита из Центров событий Azure AD. В результате этого изменения заполнение свойства LogonError значением UserAccountNotFound невозможно. С первой недели февраля 2021 г. [свойство ErrorCode в схеме аудита входа в Azure AD](https://docs.microsoft.com/office/office-365-management-api/office-365-management-activity-api-schema#azure-active-directory-secure-token-service-sts-logon-schema) соответствует [кодам ошибок AADSTS](https://docs.microsoft.com/azure/active-directory/develop/reference-aadsts-error-codes#lookup-current-error-code-information). Кроме того, параметр UserId не будет заполняться именем пользователя из попытки входа для ошибок UserAccountNotFound, так как это имя пользователя не существует в каталоге Azure AD организации.
+Начиная с ноября 2020 г. журналы аудита для действий при входе в Azure AD включаются в единый журнал аудита из Центров событий Azure AD. В результате этого изменения заполнение свойства LogonError значением UserAccountNotFound невозможно. С первой недели февраля 2021 г. [свойство ErrorCode в схеме аудита входа в Azure AD](https://docs.microsoft.com/office/office-365-management-api/office-365-management-activity-api-schema#azure-active-directory-secure-token-service-sts-logon-schema) соответствует [кодам ошибок AADSTS](https://docs.microsoft.com/azure/active-directory/develop/reference-aadsts-error-codes#lookup-current-error-code-information). Кроме того, параметр UserId не будет заполняться именем пользователя из попытки входа для ошибок UserAccountNotFound, так как это имя пользователя не существует в каталоге Azure AD организации.
 
 ## <a name="troubleshooting-the-office-365-management-activity-api"></a>Устранение неполадок, связанных с API действий управления Office 365
 
@@ -112,7 +112,7 @@ TargetUpdatedProperties отображались в объекте ExtendedPrope
 
 ### <a name="enabling-unified-audit-logging-in-office-365"></a>Включение ведения единого журнала аудита в Office 365
 
-Если вы только что настроили приложение, пытающееся использовать API действий управления, но оно не работает, убедитесь, что включено ведение единого журнала аудита для организации Office 365. Это выполняется путем включения журнала аудита Office 365. Инструкции см. в статье [Включение и отключение поиска в журнале аудита Office 365](https://docs.microsoft.com/office365/securitycompliance/turn-audit-log-search-on-or-off).
+Если вы только что настроили приложение, пытающееся использовать API действий управления, но оно не работает, убедитесь, что включено ведение единого журнала аудита для организации Office 365. Это выполняется путем включения журнала аудита Office 365. Инструкции см. в статье [Включение и отключение поиска в журнале аудита Office 365](https://docs.microsoft.com/office365/securitycompliance/turn-audit-log-search-on-or-off).
 
 Если единый аудит не включен, как правило, вы будете получать сообщение об ошибке со следующей строкой: `Microsoft.Office.Compliance.Audit``.DataServiceException: Tenant <tenantID> does not exist.`
 
