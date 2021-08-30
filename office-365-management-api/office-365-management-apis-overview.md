@@ -6,13 +6,13 @@ description: Представляет собой единую платформу
 ms.ContentId: 4fca85f9-efa6-3b4b-b10d-a07cb31f803f
 ms.topic: reference (API)
 ms.date: 09/28/2016
-localization_priority: Priority
-ms.openlocfilehash: 21c252bcd0fe422536dd8dc5a81b7a7c79fd2d04215a8f4c125af3116947b982
-ms.sourcegitcommit: 88ef5f75a9e2a25760a2caa2cef1f51f9afba90c
+ms.localizationpriority: high
+ms.openlocfilehash: 52924d518dd74f822a61977d96c5edbb7fc1e888
+ms.sourcegitcommit: 13b50617b1a73f5890414087d8eabe6b2240cfb4
 ms.translationtype: HT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 08/05/2021
-ms.locfileid: "54274212"
+ms.lasthandoff: 08/25/2021
+ms.locfileid: "58510113"
 ---
 # <a name="office-365-management-apis-overview"></a>Обзор API управления Office 365
 
@@ -40,5 +40,4 @@ API действий управления Office 365 обеспечивает п
 - [Начало работы с API управления Office 365](get-started-with-office-365-management-apis.md)
 - [Схема API действий управления Office 365](office-365-management-activity-api-schema.md)
 - [Устранение неполадок, связанных с API действий управления Office 365](troubleshooting-the-office-365-management-activity-api.md)
-- [Интерфейсы REST API Office 365](https://docs.microsoft.com/previous-versions/office/office-365-api/how-to/platform-development-overview)
-
+- [Интерфейсы REST API Office 365](/previous-versions/office/office-365-api/how-to/platform-development-overview)

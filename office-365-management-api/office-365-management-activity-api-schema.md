@@ -6,13 +6,13 @@ description: 'Схема API действий управления Office 365 п
 ms.ContentId: 1c2bf08c-4f3b-26c0-e1b2-90b190f641f5
 ms.topic: reference (API)
 ms.date: ''
-localization_priority: Priority
-ms.openlocfilehash: 696b624beaff188d51313ce248ffabbbad421a1b5014e5b61da1cb86c8e18dbd
-ms.sourcegitcommit: 88ef5f75a9e2a25760a2caa2cef1f51f9afba90c
+ms.localizationpriority: high
+ms.openlocfilehash: 57c9fb5adcb92d2fd04c6377b7f9a320bbcc8a83
+ms.sourcegitcommit: 13b50617b1a73f5890414087d8eabe6b2240cfb4
 ms.translationtype: HT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 08/05/2021
-ms.locfileid: "54274343"
+ms.lasthandoff: 08/25/2021
+ms.locfileid: "58510162"
 ---
 # <a name="office-365-management-activity-api-schema"></a>Схема API действий управления Office 365
 
@@ -908,17 +908,17 @@ ms.locfileid: "54274343"
 |**Параметры**|**Тип**|**Обязательный**|**Описание**|
 |:-----|:-----|:-----|:-----|
 |AlertId|Edm.Guid|Да|GUID оповещения.|
-|AlertType|Self.String|Да|Тип оповещения. Типы оповещений: <ul xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:mtps="http://msdn2.microsoft.com/mtps" xmlns:mshelp="http://msdn.microsoft.com/mshelp" xmlns:ddue="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:msxsl="urn:schemas-microsoft-com:xslt"><li><p>Системные</p></li><li><p>Пользовательские</p></li>|
+|AlertType|Self.String|Да|Тип оповещения. Типы оповещений: <ul><li>Системные</li><li>Пользовательские|
 |Name|Edm.String|Да|Имя оповещения.|
 |PolicyId|Edm.Guid|Нет|GUID политики, вызвавшей оповещение.|
-|Status|Edm.String|Нет|Состояние оповещения. Состояния: <ul xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:mtps="http://msdn2.microsoft.com/mtps" xmlns:mshelp="http://msdn.microsoft.com/mshelp" xmlns:ddue="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:msxsl="urn:schemas-microsoft-com:xslt"><li><p>Активное</p></li><li><p>Изучается</p></li><li><p>Устранено</p></li><li><p>Закрыто</p></li></ul>|
-|Severity|Edm.String|Нет|Степень серьезности оповещения. Степени серьезности: <ul xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:mtps="http://msdn2.microsoft.com/mtps" xmlns:mshelp="http://msdn.microsoft.com/mshelp" xmlns:ddue="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:msxsl="urn:schemas-microsoft-com:xslt"><li><p>Низкая</p></li><li><p>Средняя</p></li><li><p>Высокая</p></li></ul>|
-|Category|Edm.String|Нет|Категория оповещения. Категории: <ul xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:mtps="http://msdn2.microsoft.com/mtps" xmlns:mshelp="http://msdn.microsoft.com/mshelp" xmlns:ddue="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:msxsl="urn:schemas-microsoft-com:xslt"><li><p>AccessGovernance</p></li><li><p>DataGovernance</p></li><li><p>DataLossPrevention</p></li><li><p>InsiderRiskManagement</p></li><li><p>MailFlow</p></li><li><p>ThreatManagement</p></li><li><p>Другое</p></li></ul>|
-|Source|Edm.String|Нет|Источник оповещения. Источники: <ul xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:mtps="http://msdn2.microsoft.com/mtps" xmlns:mshelp="http://msdn.microsoft.com/mshelp" xmlns:ddue="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:msxsl="urn:schemas-microsoft-com:xslt"><li><p>Безопасность и соответствие требованиям Office 365</p></li><li><p>Cloud App Security</p></li></ul>|
+|Status|Edm.String|Нет|Состояние оповещения. Состояния: <ul><li><p>Активное</li><li>Изучается</li><li>Устранено</li><li>Закрыто|
+|Severity|Edm.String|Нет|Степень серьезности оповещения. Степени серьезности: <ul><li>Низкая</li><li>Средняя</li><li>Высокая</li></ul>|
+|Category|Edm.String|Нет|Категория оповещения. Категории: <ul><li>AccessGovernance</li><li>DataGovernance</li><li>DataLossPrevention</li><li>InsiderRiskManagement</li><li>MailFlow</li><li>ThreatManagement</li><li>Другое|
+|Source|Edm.String|Нет|Источник оповещения. Источники: <ul><li>Безопасность и соответствие требованиям Office 365</li><li>Cloud App Security|
 |Comments|Edm.String|Нет|Примечания, оставленные пользователями, которые просмотрели оповещение. Это "Новое оповещение" по умолчанию.|
 |Data|Edm.String|Нет|Большой двоичный объект с подробными данными оповещения или сущности оповещения.|
 |AlertEntityId|Edm.String|Нет|Идентификатор для сущности оповещения. Этот параметр применяется только для событий AlertEntityGenerated.|
-|EntityType|Edm.String|Нет|Тип оповещения или сущности оповещения. Типы сущностей: <ul xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:mtps="http://msdn2.microsoft.com/mtps" xmlns:mshelp="http://msdn.microsoft.com/mshelp" xmlns:ddue="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:msxsl="urn:schemas-microsoft-com:xslt"><li><p>User</p></li><li><p>Recipients</p></li><li><p>Sender</p></li><li><p>MalwareFamily</p></li></ul>Этот параметр применяется только для событий AlertEntityGenerated.|
+|EntityType|Edm.String|Нет|Тип оповещения или сущности оповещения. Типы сущностей: <ul><li>User</li><li>Recipients</li><li>Sender</li><li>MalwareFamily</li></ul>Этот параметр применяется только для событий AlertEntityGenerated.|
 |||||
 
 ## <a name="yammer-schema"></a>Схема Yammer
@@ -1600,7 +1600,7 @@ FileHashes |Коллекция (Edm.String)    |Хэши файлов, связ�
 
 #### <a name="formtypes"></a>FormTypes
 
-|**Value** (Значение)|**Типы форм**|**Описание**|
+|**Значение**|**Типы форм**|**Описание**|
 |:-----|:-----|:-----|
 |0|Форма|Формы, созданные при помощи параметра "Новая форма".|
 |1|Тест|Тесты, созданные при помощи параметра "Новый тест".  Тест — это особый тип форм, включающий дополнительные функции, такие как оценки, автоматическое и ручное оценивание и комментирование.|

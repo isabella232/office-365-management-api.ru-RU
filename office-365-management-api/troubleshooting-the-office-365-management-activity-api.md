@@ -6,13 +6,13 @@ description: Сводка по наиболее распространенным
 ms.ContentId: 50822603-a1ec-a754-e7dc-67afe36bb1b0
 ms.topic: reference (API)
 ms.date: ''
-localization_priority: Priority
-ms.openlocfilehash: 086b40d0207fba761db66d918d74dc872ae66c9471ceced91d2b4b6dfe73ac1e
-ms.sourcegitcommit: 88ef5f75a9e2a25760a2caa2cef1f51f9afba90c
+ms.localizationpriority: high
+ms.openlocfilehash: a5bceab7d18553824b604609d71c50a05f4d65d6
+ms.sourcegitcommit: 13b50617b1a73f5890414087d8eabe6b2240cfb4
 ms.translationtype: HT
 ms.contentlocale: ru-RU
-ms.lasthandoff: 08/05/2021
-ms.locfileid: "54274352"
+ms.lasthandoff: 08/25/2021
+ms.locfileid: "58510155"
 ---
 # <a name="office-365-management-activity-api-faqs-and-troubleshooting"></a>Вопросы и ответы по API действий управления Office 365, а также устранение неполадок, связанных с ним
 
@@ -35,11 +35,11 @@ API действий управления не следует путать с AP
 
 **Что произойдет, если я отключу аудит для своей организации Office 365? Буду ли я по-прежнему получать события через API действий управления?**
 
-Нет. Чтобы получать записи через API действий управления, необходимо включить единый аудит Office 365 для своей организации. Инструкции см. в статье [Включение и отключение поиска в журнале аудита](https://docs.microsoft.com/microsoft-365/compliance/turn-audit-log-search-on-or-off).
+Нет. Чтобы получать записи через API действий управления, необходимо включить единый аудит Office 365 для своей организации. Инструкции см. в статье [Включение и отключение поиска в журнале аудита](/microsoft-365/compliance/turn-audit-log-search-on-or-off).
 
 **В случае каких событий проводится аудит для определенной службы Office 365?**
 
-В документации по схеме API действий управления Office 365 приведен полный список событий. Дополнительные сведения см. в статье "Схема API действий управления Office 365". Кроме того, в статье[Поиск по журналу аудита в Центре безопасности и соответствия требованиям](https://docs.microsoft.com/microsoft-365/compliance/search-the-audit-log-in-security-and-compliance#audited-activities) в разделе "Подлежащие аудиту действия" приводится список событий для большинства служб Office 365, которые подлежат аудиту.
+В документации по схеме API действий управления Office 365 приведен полный список событий. Дополнительные сведения см. в статье "Схема API действий управления Office 365". Кроме того, в статье[Поиск по журналу аудита в Центре безопасности и соответствия требованиям](/microsoft-365/compliance/search-the-audit-log-in-security-and-compliance#audited-activities) в разделе "Подлежащие аудиту действия" приводится список событий для большинства служб Office 365, которые подлежат аудиту.
 
 **Есть ли разница между записями, которые получены API действий управления, и записями, которые возвращены средством поиска в журналах аудита, доступным в Центре соответствия требованиям Microsoft 365?**
 
@@ -82,7 +82,7 @@ TargetUpdatedProperties отображались в объекте ExtendedPrope
 
 **Почему журналы аудита со значением UserAccountNotFound свойства LogonError для действий при входе в Azure Active Directory (Azure AD) недоступны через API действий управления?**
 
-Начиная с ноября 2020 г. журналы аудита для действий при входе в Azure AD включаются в единый журнал аудита из Центров событий Azure AD. В результате этого изменения заполнение свойства LogonError значением UserAccountNotFound невозможно. С первой недели февраля 2021 г. [свойство ErrorCode в схеме аудита входа в Azure AD](https://docs.microsoft.com/office/office-365-management-api/office-365-management-activity-api-schema#azure-active-directory-secure-token-service-sts-logon-schema) соответствует [кодам ошибок AADSTS](https://docs.microsoft.com/azure/active-directory/develop/reference-aadsts-error-codes#lookup-current-error-code-information). Кроме того, параметр UserId не будет заполняться именем пользователя из попытки входа для ошибок UserAccountNotFound, так как это имя пользователя не существует в каталоге Azure AD организации.
+Начиная с ноября 2020 г. журналы аудита для действий при входе в Azure AD включаются в единый журнал аудита из Центров событий Azure AD. В результате этого изменения заполнение свойства LogonError значением UserAccountNotFound невозможно. С первой недели февраля 2021 г. [свойство ErrorCode в схеме аудита входа в Azure AD](/office/office-365-management-api/office-365-management-activity-api-schema#azure-active-directory-secure-token-service-sts-logon-schema) соответствует [кодам ошибок AADSTS](/azure/active-directory/develop/reference-aadsts-error-codes#lookup-current-error-code-information). Кроме того, параметр UserId не будет заполняться именем пользователя из попытки входа для ошибок UserAccountNotFound, так как это имя пользователя не существует в каталоге Azure AD организации.
 
 ## <a name="troubleshooting-the-office-365-management-activity-api"></a>Устранение неполадок, связанных с API действий управления Office 365
 
@@ -112,13 +112,13 @@ TargetUpdatedProperties отображались в объекте ExtendedPrope
 
 ### <a name="enabling-unified-audit-logging-in-office-365"></a>Включение ведения единого журнала аудита в Office 365
 
-Если вы только что настроили приложение, пытающееся использовать API действий управления, но оно не работает, убедитесь, что включено ведение единого журнала аудита для организации Office 365. Это выполняется путем включения журнала аудита Office 365. Инструкции см. в статье [Включение и отключение поиска в журнале аудита Office 365](https://docs.microsoft.com/office365/securitycompliance/turn-audit-log-search-on-or-off).
+Если вы только что настроили приложение, пытающееся использовать API действий управления, но оно не работает, убедитесь, что включено ведение единого журнала аудита для организации Office 365. Это выполняется путем включения журнала аудита Office 365. Инструкции см. в статье [Включение и отключение поиска в журнале аудита Office 365](/microsoft-365/compliance/turn-audit-log-search-on-or-off).
 
 Если единый аудит не включен, как правило, вы будете получать сообщение об ошибке со следующей строкой: `Microsoft.Office.Compliance.Audit``.DataServiceException: Tenant <tenantID> does not exist.`
 
 ### <a name="connecting-to-the-api"></a>Подключение к API
 
-Большинство приложений подключаются к API с помощью обычного потока OAuth2 учетных данных клиента. Следовательно, для начала необходимо создать приложение Azure AD с разрешениями, необходимыми для доступа к данным API действий управления. В этой статье не представлены инструкции по регистрации приложения Azure AD. Дополнительные сведения см. в статье [Краткое руководство. Регистрация приложения в конечной точке Azure Active Directory](https://docs.microsoft.com/azure/active-directory/develop/active-directory-integrating-applications).
+Большинство приложений подключаются к API с помощью обычного потока OAuth2 учетных данных клиента. Следовательно, для начала необходимо создать приложение Azure AD с разрешениями, необходимыми для доступа к данным API действий управления. В этой статье не представлены инструкции по регистрации приложения Azure AD. Дополнительные сведения см. в статье [Краткое руководство. Регистрация приложения в конечной точке Azure Active Directory](/azure/active-directory/develop/active-directory-integrating-applications).
 
 #### <a name="azure-application-permissions"></a>Разрешения приложений Azure
 
